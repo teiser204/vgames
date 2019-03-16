@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">vgames</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_home">HOME PAGE</string>
+    <string name="tab_genre">GENRE</string>
+    <string name="tab_features">FEATURES</string>
+    <string name="tab_companies">COMPANIES</string>
+    <string name="tab_platforms">PLATFORMS</string>
+    <string name="tab_languages">LANGUAGES</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
