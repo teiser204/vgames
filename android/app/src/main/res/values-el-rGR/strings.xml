@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">vgames</string>
     <string name="tab_features">ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ</string>
-    <string name="tab_genre">ΚΑΤΗΓΟΡΙΕΣ</string>
+    <string name="tab_genre">ΕΙΔΗ</string>
     <string name="tab_home">ΑΡΧΙΚΗ ΣΕΛΙΔΑ</string>
     <string name="tab_companies">ΕΤΑΙΡΙΕΣ</string>
     <string name="tab_platforms">ΠΛΑΤΦΟΡΜΕΣ</string>
