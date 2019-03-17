@@ -7,4 +7,7 @@
     <string name="tab_companies">ΕΤΑΙΡΙΕΣ</string>
     <string name="tab_platforms">ΠΛΑΤΦΟΡΜΕΣ</string>
     <string name="tab_languages">ΓΛΩΣΣΕΣ</string>
+    <string name="app_label">vgames</string>
+    <string name="search_hint">Αναζήτηση παιχνιδιών</string>
+    <string name="search_results">Αποτελέσματα αναζήτησης</string>
 </resources>

@@ -1,10 +1,14 @@
 package gr.artibet.vgames;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -17,7 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentHome.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,8 +43,9 @@ public class MainActivity extends AppCompatActivity implements FragmentHome.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.action_bar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -68,8 +73,17 @@ public class MainActivity extends AppCompatActivity implements FragmentHome.OnFr
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        // Assumes current activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchableActivity.class)));
+        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
         return true;
     }
 
@@ -88,10 +102,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHome.OnFr
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -108,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements FragmentHome.OnFr
             Fragment fragment = null;
             switch(position) {
                 case 0: // Home fragment
-                    fragment = new FragmentHome.newInstance("Param1", "Param2");
+                    fragment = FragmentHome.newInstance("Param1", "Param2");
                     break;
 
                 case 1: // Genre
-                    fragment = new FragmentGenre();
+                    fragment = FragmentGenre.newInstance("Param1", "Param2");
                     break;
 
                 case 2: // Features
