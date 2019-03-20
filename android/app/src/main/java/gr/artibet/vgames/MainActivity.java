@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case 1: // Genre
-                    fragment = FragmentGenre.newInstance("Param1", "Param2");
+                    fragment = FragmentGenre.newInstance();
                     break;
 
                 case 2: // Features
