@@ -2,14 +2,17 @@ package gr.artibet.vgames;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.api.GenreAPI;
+import gr.artibet.vgames.api.adapters.GenreAdapter;
 import gr.artibet.vgames.models.Genre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class FragmentGenre extends Fragment {
 
-    private TextView textView;
+    MainActivity mainActivity;
+
+    private RecyclerView recyclerView;
+    private GenreAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private List<Genre> genreList = new ArrayList<>();
 
     public FragmentGenre() {
         // Required empty public constructor
@@ -39,13 +48,30 @@ public class FragmentGenre extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Hold a reference to main activity
+        mainActivity = (MainActivity)getActivity();
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_genre, container, false);
-        textView = view.findViewById(R.id.textView);
+
+        recyclerView = view.findViewById(R.id.genreRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new GenreAdapter(this.genreList);
+        recyclerView.setAdapter(adapter);
+        fetchGenres();
+
+        return view;
+    }
+
+
+    // Fetch genres from API
+    private void fetchGenres() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
@@ -60,33 +86,25 @@ public class FragmentGenre extends Fragment {
             @Override
             public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
                 if (!response.isSuccessful()) {
-                    textView.setText("Code: " + response.code());
+
+                    // Toast failure message
+                    mainActivity.showErrorToast(getString(R.string.genre_fetch_error));
                     return;
                 }
 
-                List<Genre> genres = response.body();
-
-                // TODO: Add to RecycleView
-
-                for (Genre genre : genres) {
-                    String content = "";
-                    content += "id: " + genre.getId() + "\n";
-                    content += "Description: " + genre.getDesc() + "\n\n";
-
-                    textView.append(content);
-                }
-
+                // Change adapters data
+                genreList = response.body();
+                adapter.setGenreList(genreList);
             }
 
             @Override
             public void onFailure(Call<List<Genre>> call, Throwable t) {
-                textView.setText(t.getMessage());
+
+                // Toast failure message
+                mainActivity.showErrorToast(getString(R.string.genre_fetch_error));
             }
         });
-
-        return view;
     }
-
 
 
 
