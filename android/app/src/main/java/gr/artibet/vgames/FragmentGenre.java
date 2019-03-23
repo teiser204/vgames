@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.api.GenreAPI;
-import gr.artibet.vgames.api.adapters.GenreAdapter;
+import gr.artibet.vgames.adapters.GenreAdapter;
 import gr.artibet.vgames.models.Genre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,8 +77,6 @@ public class FragmentGenre extends Fragment {
         adapter = new GenreAdapter(this.genreList);
         recyclerView.setAdapter(adapter);
         fetchGenres();
-
-
 
         return view;
     }

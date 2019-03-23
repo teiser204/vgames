@@ -1,4 +1,4 @@
-package gr.artibet.vgames.api.adapters;
+package gr.artibet.vgames.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +24,7 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         public GenreViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewDesc = itemView.findViewById(R.id.textViewDesc);
+            textViewDesc = itemView.findViewById(R.id.tvGenreDesc);
         }
     }
 
