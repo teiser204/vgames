@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class FragmentGenre extends Fragment {
 
-    MainActivity mainActivity;
+    private MainActivity mainActivity;
+    private ImageView refreshButton;
 
     private RecyclerView recyclerView;
     private GenreAdapter adapter;
@@ -58,6 +60,16 @@ public class FragmentGenre extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_genre, container, false);
 
+        // Set refresh button click listener
+        refreshButton = view.findViewById(R.id.refreshGenreListButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fetchGenres();
+            }
+        });
+
+        // Initialize recycler view
         recyclerView = view.findViewById(R.id.genreRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -65,6 +77,8 @@ public class FragmentGenre extends Fragment {
         adapter = new GenreAdapter(this.genreList);
         recyclerView.setAdapter(adapter);
         fetchGenres();
+
+
 
         return view;
     }

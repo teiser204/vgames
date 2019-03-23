@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "desc": "Role-playing"
+    },
+    {
+        "id": "2",
+        "desc": "Simulation"
+    },
+    {
+        "id": "3",
+        "desc": "Indie"
+    },
+    {
+        "id": "4",
+        "desc": "Racing"
+    },
+    {
+        "id": "5",
+        "desc": "Sports"
+    },
+    {
+        "id": "6",
+        "desc": "Action"
+    },
+    {
+        "id": "7",
+        "desc": "Strategy"
+    },
+    {
+        "id": "8",
+        "desc": "Shooter"
+    },
+    {
+        "id": "9",
+        "desc": "Adventure"
+    }
+]

@@ -1,0 +1,83 @@
+[
+    {
+        "id": "1",
+        "desc": "English"
+    },
+    {
+        "id": "2",
+        "desc": "Deutsch"
+    },
+    {
+        "id": "3",
+        "desc": "français"
+    },
+    {
+        "id": "4",
+        "desc": "español"
+    },
+    {
+        "id": "5",
+        "desc": "italiano"
+    },
+    {
+        "id": "6",
+        "desc": "Português do Brasil"
+    },
+    {
+        "id": "7",
+        "desc": "Português"
+    },
+    {
+        "id": "8",
+        "desc": "русский"
+    },
+    {
+        "id": "9",
+        "desc": "polski"
+    },
+    {
+        "id": "10",
+        "desc": "日本語"
+    },
+    {
+        "id": "11",
+        "desc": "český"
+    },
+    {
+        "id": "12",
+        "desc": "nederlands"
+    },
+    {
+        "id": "13",
+        "desc": "中文(简体)"
+    },
+    {
+        "id": "14",
+        "desc": "한국어"
+    },
+    {
+        "id": "15",
+        "desc": "Türkçe"
+    },
+    {
+        "id": "16",
+        "desc": "magyar"
+    },
+    {
+        "id": "17",
+        "desc": "svenska"
+    },
+    {
+        "id": "18",
+        "desc": "Suomi"
+    },
+    {
+        "id": "19",
+        "desc": "norsk"
+    },
+    {
+        "id": "20",
+        "desc": "Dansk"
+    }
+
+]

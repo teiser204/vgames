@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "desc": "Single-player"
+    },
+    {
+        "id": "2",
+        "desc": "Multi-player"
+    },
+    {
+        "id": "3",
+        "desc": "Co-op"
+    },
+    {
+        "id": "4",
+        "desc": "Achievements"
+    },
+    {
+        "id": "5",
+        "desc": "Leaderboards"
+    },
+    {
+        "id": "6",
+        "desc": "Controller support"
+    },
+    {
+        "id": "7",
+        "desc": "In development"
+    },
+    {
+        "id": "8",
+        "desc": "Cloud saves"
+    },
+    {
+        "id": "9",
+        "desc": "Overlay"
+    }
+]

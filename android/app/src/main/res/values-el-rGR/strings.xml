@@ -11,4 +11,5 @@
     <string name="search_hint">Αναζήτηση παιχνιδιών</string>
     <string name="search_results">Αποτελέσματα αναζήτησης</string>
     <string name="genre_fetch_error">Αδυναμία ανάκτησης της λίστας των ειδών!</string>
+    <string name="genre_list">Είδη παιχνιδιών</string>
 </resources>
