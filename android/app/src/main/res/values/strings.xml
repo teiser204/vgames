@@ -18,6 +18,8 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="genre_fetch_error">Error fetching genre list</string>
     <string name="genre_list">Genre List</string>
-    <string name="company_list">Company List</string>
+    <string name="company_list">Game companies</string>
     <string name="company_fetch_error">Error fetching company list</string>
+    <string name="feature_list">Game features</string>
+    <string name="feature_fetch_error">Error fetching feature list</string>
 </resources>
