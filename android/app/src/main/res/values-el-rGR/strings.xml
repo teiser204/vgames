@@ -16,4 +16,8 @@
     <string name="company_list">Εταιρίες παιχνιδιών</string>
     <string name="feature_list">Χαρακτηριστικά παιχνιδιών</string>
     <string name="feature_fetch_error">Αδυναμία ανάκτησης της λίστας των χαρακτηριστικών</string>
+    <string name="platform_list">Πλατφόρμες παιχνιδιών</string>
+    <string name="platform_fetch_error">Αδυναμία ανάκτησης της λίστας των πλατφορμών</string>
+    <string name="language_list">Γλώσσες παιχνιδιών</string>
+    <string name="language_fetch_error">Αδυναμία ανάκτησης της λίστας των γλωσσών</string>
 </resources>

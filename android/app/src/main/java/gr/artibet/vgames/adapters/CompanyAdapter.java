@@ -11,7 +11,6 @@ import java.util.List;
 
 import gr.artibet.vgames.R;
 import gr.artibet.vgames.models.Company;
-import gr.artibet.vgames.models.Genre;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder> {
 

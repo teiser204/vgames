@@ -5,11 +5,11 @@ public class Platform {
     // Class members
 
     private int id;
-    private int desc;
+    private String desc;
 
     // Constructors
 
-    public Platform(int id, int desc) {
+    public Platform(int id, String desc) {
         this.id = id;
         this.desc = desc;
     }
@@ -19,7 +19,7 @@ public class Platform {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public int getDesc() { return desc; }
-    public void setDesc(int desc) { this.desc = desc; }
+    public String getDesc() { return desc; }
+    public void setDesc(String desc) { this.desc = desc; }
 
 }

@@ -22,4 +22,8 @@
     <string name="company_fetch_error">Error fetching company list</string>
     <string name="feature_list">Game features</string>
     <string name="feature_fetch_error">Error fetching feature list</string>
+    <string name="platform_list">Game platforms</string>
+    <string name="platform_fetch_error">Error fetching platform list</string>
+    <string name="language_list">Game languages</string>
+    <string name="language_fetch_error">Error fetching language list</string>
 </resources>
