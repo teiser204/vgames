@@ -1,5 +1,6 @@
 package gr.artibet.vgames;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,12 +71,7 @@ public class FragmentLanguages extends Fragment {
         });
 
         // Initialize recycler view
-        recyclerView = view.findViewById(R.id.languageRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new LanguageAdapter(this.languageList);
-        recyclerView.setAdapter(adapter);
+        buildRecyclerView(view);
         fetchLanguages();
 
         return view;
@@ -119,5 +115,28 @@ public class FragmentLanguages extends Fragment {
     }
 
 
+    // Build recycler view
+    private void buildRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.languageRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new LanguageAdapter(this.languageList);
+        recyclerView.setAdapter(adapter);
+
+        // Set item click listener
+        adapter.setOnItemClickListener(new LanguageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Language language = languageList.get(position);
+
+                // Build filter part of url
+                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                intent.putExtra("ID", language.getId());
+                intent.putExtra("DESC", language.getDesc());
+                startActivity(intent);
+            }
+        });
+    }
 
 }

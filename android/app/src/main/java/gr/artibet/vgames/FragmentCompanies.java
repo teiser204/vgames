@@ -1,5 +1,6 @@
 package gr.artibet.vgames;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,12 +71,7 @@ public class FragmentCompanies extends Fragment {
         });
 
         // Initialize recycler view
-        recyclerView = view.findViewById(R.id.companyRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new CompanyAdapter(this.companyList);
-        recyclerView.setAdapter(adapter);
+        buildRecyclerView(view);
         fetchCompanies();
 
         return view;
@@ -118,6 +114,30 @@ public class FragmentCompanies extends Fragment {
         });
     }
 
+    // Build recycler view
+    private void buildRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.companyRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new CompanyAdapter(this.companyList);
+        recyclerView.setAdapter(adapter);
+
+        // Set item click listener
+        adapter.setOnItemClickListener(new CompanyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Company company = companyList.get(position);
+
+                // Build filter part of url
+                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                intent.putExtra("ID", company.getId());
+                intent.putExtra("DESC", company.getDesc());
+                startActivity(intent);
+
+            }
+        });
+    }
 
 
 }

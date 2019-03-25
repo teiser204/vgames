@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class SearchableActivity extends AppCompatActivity {
 
@@ -28,8 +29,12 @@ public class SearchableActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             searchGames(query);
-
         }
+        TextView tvTest = findViewById(R.id.testTextView);
+        int id = intent.getIntExtra("ID", 0);
+        String desc = intent.getStringExtra("DESC");
+        tvTest.setText("id = " + id + "\nDescription = " + desc);
+
     }
 
 //    public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,5 +1,6 @@
 package gr.artibet.vgames;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,13 +70,8 @@ public class FragmentGenre extends Fragment {
             }
         });
 
-        // Initialize recycler view
-        recyclerView = view.findViewById(R.id.genreRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new GenreAdapter(this.genreList);
-        recyclerView.setAdapter(adapter);
+        // Initialize recycler view and fetch genres
+        buildRecyclerView(view);
         fetchGenres();
 
         return view;
@@ -118,6 +114,30 @@ public class FragmentGenre extends Fragment {
         });
     }
 
+    // Build recycler view
+    private void buildRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.genreRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new GenreAdapter(this.genreList);
+        recyclerView.setAdapter(adapter);
+
+        // Set item click listener
+        adapter.setOnItemClickListener(new GenreAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Genre genre = genreList.get(position);
+
+                // Build filter part of url
+                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                intent.putExtra("ID", genre.getId());
+                intent.putExtra("DESC", genre.getDesc());
+                startActivity(intent);
+
+            }
+        });
+    }
 
 
 }

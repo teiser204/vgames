@@ -1,5 +1,6 @@
 package gr.artibet.vgames;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,12 +71,7 @@ public class FragmentFeatures extends Fragment {
         });
 
         // Initialize recycler view
-        recyclerView = view.findViewById(R.id.featureRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new FeatureAdapter(featureList);
-        recyclerView.setAdapter(adapter);
+        buildRecyclerView(view);
         fetchFeatures();
 
         return view;
@@ -118,6 +114,29 @@ public class FragmentFeatures extends Fragment {
         });
     }
 
+    // Build recycler view
+    private void buildRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.featureRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new FeatureAdapter(featureList);
+        recyclerView.setAdapter(adapter);
+
+        // Set item click listener
+        adapter.setOnItemClickListener(new FeatureAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Feature feature = featureList.get(position);
+
+                // Build filter part of url
+                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                intent.putExtra("ID", feature.getId());
+                intent.putExtra("DESC", feature.getDesc());
+                startActivity(intent);
+            }
+        });
+    }
 
 
 }
