@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "title": "Grim Dawn - Forgotten Gods",
+        "ryear": "2019",
+        "rating": "4.8",
+        "price": "14.99",
+        "image": "image_1"
+    },
+    {
+        "id": "2",
+        "title": "Diablo",
+        "ryear": "1996",
+        "rating": "4.5",
+        "price": "",
+        "image": "image_2"
+    },
+    {
+        "id": "3",
+        "title": "The Witcher 2: Assassins Of Kings - Enhanced Edition",
+        "ryear": "2012",
+        "rating": "4.7",
+        "price": "17.69",
+        "image": "image_3"
+    },
+    {
+        "id": "4",
+        "title": "Elder Scrolls IV: Oblivion",
+        "ryear": "2007",
+        "rating": "4.3",
+        "price": "10.00",
+        "image": "image_4"
+    },
+    {
+        "id": "5",
+        "title": "Monkey Island 2 Special Edition: LeChuck’s Revenge",
+        "ryear": "2010",
+        "rating": "4.6",
+        "price": "8.89",
+        "image": "image_5"
+    }
+]

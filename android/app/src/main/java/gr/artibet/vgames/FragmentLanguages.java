@@ -138,9 +138,9 @@ public class FragmentLanguages extends Fragment {
                 Language language = languageList.get(position);
 
                 // Build filter part of url
-                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("ID", language.getId());
-                intent.putExtra("DESC", language.getDesc());
+                intent.putExtra("TITLE", getResources().getString(R.string.language_title) + ": " + language.getDesc());
                 startActivity(intent);
             }
         });

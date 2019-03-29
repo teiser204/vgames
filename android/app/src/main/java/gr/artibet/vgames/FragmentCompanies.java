@@ -138,9 +138,9 @@ public class FragmentCompanies extends Fragment {
                 Company company = companyList.get(position);
 
                 // Build filter part of url
-                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("ID", company.getId());
-                intent.putExtra("DESC", company.getDesc());
+                intent.putExtra("TITLE", getResources().getString(R.string.company_title) + ": " + company.getDesc());
                 startActivity(intent);
 
             }

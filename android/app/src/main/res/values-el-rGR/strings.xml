@@ -20,4 +20,10 @@
     <string name="platform_fetch_error">Αδυναμία ανάκτησης της λίστας των πλατφορμών</string>
     <string name="language_list">Γλώσσες παιχνιδιών</string>
     <string name="language_fetch_error">Αδυναμία ανάκτησης της λίστας των γλωσσών</string>
+    <string name="no_results_text">Δεν βρέθηκαν παιχνίδια που να ικανοποιούν τα κριτήρια αναζήτησης!</string>
+    <string name="genre_title">Είδος</string>
+    <string name="feature_title">Χαρακτηριστικό</string>
+    <string name="company_title">Εταιρία</string>
+    <string name="platform_title">Πλατφόρμα</string>
+    <string name="language_title">Γλώσσα</string>
 </resources>

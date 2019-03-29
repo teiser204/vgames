@@ -137,9 +137,9 @@ public class FragmentFeatures extends Fragment {
                 Feature feature = featureList.get(position);
 
                 // Build filter part of url
-                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("ID", feature.getId());
-                intent.putExtra("DESC", feature.getDesc());
+                intent.putExtra("TITLE", getResources().getString(R.string.feature_title) + ": " + feature.getDesc());
                 startActivity(intent);
             }
         });

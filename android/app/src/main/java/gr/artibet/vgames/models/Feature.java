@@ -3,12 +3,10 @@ package gr.artibet.vgames.models;
 public class Feature {
 
     // Class members
-
     private int id;
     private String desc;
 
-    // Constructors
-
+    // Constructor
     public Feature(int id, String desc) {
         this.id = id;
         this.desc = desc;

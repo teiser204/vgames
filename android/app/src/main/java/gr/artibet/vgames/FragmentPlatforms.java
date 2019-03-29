@@ -136,12 +136,12 @@ public class FragmentPlatforms extends Fragment {
         adapter.setOnItemClickListener(new PlatformAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Platform feature = platformList.get(position);
+                Platform platform = platformList.get(position);
 
                 // Build filter part of url
-                Intent intent = new Intent(getActivity(), SearchableActivity.class);
-                intent.putExtra("ID", feature.getId());
-                intent.putExtra("DESC", feature.getDesc());
+                Intent intent = new Intent(getActivity(), ResultsActivity.class);
+                intent.putExtra("ID", platform.getId());
+                intent.putExtra("TITLE", getResources().getString(R.string.platform_title) + ": " + platform.getDesc());
                 startActivity(intent);
             }
         });

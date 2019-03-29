@@ -26,4 +26,10 @@
     <string name="platform_fetch_error">Error fetching platform list</string>
     <string name="language_list">Game languages</string>
     <string name="language_fetch_error">Error fetching language list</string>
+    <string name="no_results_text">No games found to meet search criteria!</string>
+    <string name="genre_title">Genre</string>
+    <string name="feature_title">Feature</string>
+    <string name="company_title">Company</string>
+    <string name="platform_title">Platform</string>
+    <string name="language_title">Language</string>
 </resources>

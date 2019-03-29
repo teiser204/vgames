@@ -129,19 +129,19 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case 2: // Features
-                    fragment = new FragmentFeatures();
+                    fragment = FragmentFeatures.newInstance();
                     break;
 
                 case 3: // Companies
-                    fragment = new FragmentCompanies();
+                    fragment = FragmentCompanies.newInstance();
                     break;
 
                 case 4: // Platforms
-                    fragment = new FragmentPlatforms();
+                    fragment = FragmentPlatforms.newInstance();
                     break;
 
                 case 5: // Languages
-                    fragment = new FragmentLanguages();
+                    fragment = FragmentLanguages.newInstance();
                     break;
             }
 

@@ -138,9 +138,9 @@ public class FragmentGenre extends Fragment {
                 Genre genre = genreList.get(position);
 
                 // Build filter part of url
-                Intent intent = new Intent(getActivity(), SearchableActivity.class);
+                Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("ID", genre.getId());
-                intent.putExtra("DESC", genre.getDesc());
+                intent.putExtra("TITLE", getResources().getString(R.string.genre_title) + ": " + genre.getDesc());
                 startActivity(intent);
 
             }
