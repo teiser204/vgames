@@ -139,10 +139,9 @@ public class FragmentGenre extends Fragment {
 
                 // Build filter part of url
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                intent.putExtra("ID", genre.getId());
-                intent.putExtra("TITLE", getResources().getString(R.string.genre_title) + ": " + genre.getDesc());
+                intent.putExtra("TITLE", genre.getDesc());
+                intent.putExtra("QUERY", "games.json?genre=" + genre.getId());
                 startActivity(intent);
-
             }
         });
     }

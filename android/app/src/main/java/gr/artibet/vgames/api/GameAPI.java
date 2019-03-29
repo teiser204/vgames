@@ -5,9 +5,10 @@ import java.util.List;
 import gr.artibet.vgames.models.Game;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 public interface GameAPI {
 
-    @GET("games.json")
-    Call<List<Game>> getGames();
+    @GET
+    Call<List<Game>> getGames(@Url String query);
 }

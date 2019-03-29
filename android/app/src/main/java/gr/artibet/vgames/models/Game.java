@@ -11,8 +11,8 @@ public class Game {
     private int ryear;
     private int rmonth;
     private int rday;
-    private double price;
-    private double rating;
+    private float price;
+    private float rating;
     private String url;
     private String image;
 
@@ -78,19 +78,19 @@ public class Game {
         this.rday = rday;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

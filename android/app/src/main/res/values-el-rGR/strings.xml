@@ -26,4 +26,5 @@
     <string name="company_title">Εταιρία</string>
     <string name="platform_title">Πλατφόρμα</string>
     <string name="language_title">Γλώσσα</string>
+    <string name="games_fetch_error">Αδυναμία ανάκτησης της λίστας παιχνιδιών</string>
 </resources>
