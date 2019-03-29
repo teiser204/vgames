@@ -54,6 +54,9 @@ public class FragmentCompanies extends Fragment {
         // Hold a reference to main activity
         mainActivity = (MainActivity)getActivity();
 
+        // Fetch companies
+        fetchCompanies();
+
     }
 
     @Override
@@ -72,7 +75,6 @@ public class FragmentCompanies extends Fragment {
 
         // Initialize recycler view
         buildRecyclerView(view);
-        fetchCompanies();
 
         return view;
     }
@@ -101,8 +103,14 @@ public class FragmentCompanies extends Fragment {
                 }
 
                 // Change adapters data
-                companyList = response.body();
-                adapter.setCompanyList(companyList);
+                companyList.clear();
+                for (Company company : response.body()) {
+                    companyList.add(company);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override

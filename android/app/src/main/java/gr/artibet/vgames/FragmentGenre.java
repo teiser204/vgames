@@ -54,6 +54,9 @@ public class FragmentGenre extends Fragment {
         // Hold a reference to main activity
         mainActivity = (MainActivity)getActivity();
 
+        // Fetch genres
+        fetchGenres();
+
     }
 
     @Override
@@ -70,9 +73,8 @@ public class FragmentGenre extends Fragment {
             }
         });
 
-        // Initialize recycler view and fetch genres
+        // Initialize recycler view
         buildRecyclerView(view);
-        fetchGenres();
 
         return view;
     }
@@ -101,8 +103,14 @@ public class FragmentGenre extends Fragment {
                 }
 
                 // Change adapters data
-                genreList = response.body();
-                adapter.setGenreList(genreList);
+                genreList.clear();
+                for (Genre genre : response.body()) {
+                    genreList.add(genre);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override

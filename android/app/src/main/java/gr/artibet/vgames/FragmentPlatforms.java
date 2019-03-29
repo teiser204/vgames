@@ -54,6 +54,9 @@ public class FragmentPlatforms extends Fragment {
         // Hold a reference to main activity
         mainActivity = (MainActivity)getActivity();
 
+        // Fetch platforms
+        fetchPlatforms();
+
     }
 
     @Override
@@ -72,7 +75,6 @@ public class FragmentPlatforms extends Fragment {
 
         // Initialize recycler view
         buildRecyclerView(view);
-        fetchPlatforms();
 
         return view;
     }
@@ -101,8 +103,14 @@ public class FragmentPlatforms extends Fragment {
                 }
 
                 // Change adapters data
-                platformList = response.body();
-                adapter.setPlatformList(platformList);
+                platformList.clear();
+                for (Platform platform : response.body()) {
+                    platformList.add(platform);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override

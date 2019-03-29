@@ -54,6 +54,9 @@ public class FragmentFeatures extends Fragment {
         // Hold a reference to main activity
         mainActivity = (MainActivity)getActivity();
 
+        // Fetch features
+        fetchFeatures();
+
     }
 
     @Override
@@ -72,7 +75,6 @@ public class FragmentFeatures extends Fragment {
 
         // Initialize recycler view
         buildRecyclerView(view);
-        fetchFeatures();
 
         return view;
     }
@@ -101,8 +103,13 @@ public class FragmentFeatures extends Fragment {
                 }
 
                 // Change adapters data
-                featureList = response.body();
-                adapter.setFeatureList(featureList);
+                featureList.clear();
+                for (Feature feature : response.body()) {
+                    featureList.add(feature);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

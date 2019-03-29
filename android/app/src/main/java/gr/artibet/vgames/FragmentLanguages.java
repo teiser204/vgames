@@ -54,6 +54,9 @@ public class FragmentLanguages extends Fragment {
         // Hold a reference to main activity
         mainActivity = (MainActivity)getActivity();
 
+        // Fetch languages
+        fetchLanguages();
+
     }
 
     @Override
@@ -72,7 +75,6 @@ public class FragmentLanguages extends Fragment {
 
         // Initialize recycler view
         buildRecyclerView(view);
-        fetchLanguages();
 
         return view;
     }
@@ -101,8 +103,13 @@ public class FragmentLanguages extends Fragment {
                 }
 
                 // Change adapters data
-                languageList = response.body();
-                adapter.setLanguageList(languageList);
+                languageList.clear();
+                for (Language language : response.body()) {
+                    languageList.add(language);
+                }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
