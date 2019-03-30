@@ -33,7 +33,7 @@ public class ResultsActivity extends AppCompatActivity {
     private String mQuery;
     private List<Game> mGameList = null;
     private TextView mTvTitle;
-    Fragment fragment;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,12 @@ public class ResultsActivity extends AppCompatActivity {
         // Set title
         mTvTitle = findViewById(R.id.results_title);
         mTvTitle.setText(mTitle);
+
+        // Set initially wait fragment
+        mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        ft.add(R.id.fragment_container, new WaitFragment(), null);
+        ft.commit();
 
         // Retrieve Games
         fetchGames();
@@ -85,22 +91,22 @@ public class ResultsActivity extends AppCompatActivity {
                 // Set fragment results or no results
                 if (findViewById(R.id.fragment_container) != null) {
 
-                    if (mGameList == null || mGameList.size() == 0 ) {
+                    Fragment fragment;
+
+                    if (mGameList == null || mGameList.size() == 0) {
                         fragment = new NoResultsFragment();
                     } else {
                         fragment = new ResultsFragment();
                         ((ResultsFragment) fragment).setGameList(mGameList);
+
+                        // Set number of games into title
+                        mTvTitle.setText(mTitle + " (" + mGameList.size() + ")");
                     }
 
-                    // Set number of games into title
-                    mTvTitle.setText(mTitle + " (" + mGameList.size() + ")");
-
                     // Set fragment
-                    FragmentManager fm = getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
+                    FragmentTransaction ft = mFragmentManager.beginTransaction();
                     ft.replace(R.id.fragment_container, fragment, null);
                     ft.commit();
-
                 }
 
             }
