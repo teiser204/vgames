@@ -98,7 +98,7 @@ public class ResultsActivity extends AppCompatActivity {
                     // Set fragment
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.fragment_container, fragment, null);
+                    ft.replace(R.id.fragment_container, fragment, null);
                     ft.commit();
 
                 }

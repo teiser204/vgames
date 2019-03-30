@@ -33,4 +33,11 @@
     <string name="platform_title">Platform</string>
     <string name="language_title">Language</string>
     <string name="games_fetch_error">Error fetching game list</string>
+    <string name="exit">Exit</string>
+    <string name="sotiris">Sotiris Tsakiridis</string>
+    <string name="sakis">Sakis Taousanis</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
 </resources>

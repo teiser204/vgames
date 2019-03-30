@@ -27,4 +27,7 @@
     <string name="platform_title">Πλατφόρμα</string>
     <string name="language_title">Γλώσσα</string>
     <string name="games_fetch_error">Αδυναμία ανάκτησης της λίστας παιχνιδιών</string>
+    <string name="exit">Έξοδος</string>
+    <string name="sotiris">Σωτήρης Τσακιρίδης</string>
+    <string name="sakis">Σάκης Ταουσάνης</string>
 </resources>
