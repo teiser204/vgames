@@ -5,7 +5,7 @@
         "ryear": "2019",
         "rating": "4.8",
         "price": "14.99",
-        "image": "image_1",
+        "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
         "company": {
             "id": "1",
             "desc": "Nintendo"
@@ -17,7 +17,7 @@
         "ryear": "1996",
         "rating": "4.5",
         "price": "12.4",
-        "image": "image_2",
+        "image": "https://www.serres.gr/vgames/img/diablo.jpg",
         "company": {
             "id": "9",
             "desc": "BioWare"
@@ -29,7 +29,7 @@
         "ryear": "2012",
         "rating": "4.7",
         "price": "17.69",
-        "image": "image_3",
+        "image": "https://www.serres.gr/vgames/img/witcher2.jpg",
         "company": {
             "id": "12",
             "desc": "id Software"
@@ -41,7 +41,7 @@
         "ryear": "2007",
         "rating": "4.3",
         "price": "10.00",
-        "image": "image_4",
+        "image": "https://www.serres.gr/vgames/img/oblivion.jpg",
         "company": {
             "id": "8",
             "desc": "Sega Games Co. Ltd"
@@ -53,7 +53,7 @@
         "ryear": "2010",
         "rating": "4.6",
         "price": "8.89",
-        "image": "image_5",
+        "image": "https://www.serres.gr/vgames/img/monkey2.jpg",
         "company": {
             "id": "14",
             "desc": "Sierra"

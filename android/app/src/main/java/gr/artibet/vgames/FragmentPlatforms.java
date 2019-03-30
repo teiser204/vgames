@@ -140,8 +140,8 @@ public class FragmentPlatforms extends Fragment {
 
                 // Build filter part of url
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                intent.putExtra("ID", platform.getId());
-                intent.putExtra("TITLE", getResources().getString(R.string.platform_title) + ": " + platform.getDesc());
+                intent.putExtra("TITLE", platform.getDesc());
+                intent.putExtra("QUERY", "games.json?platform=" + platform.getId());
                 startActivity(intent);
             }
         });

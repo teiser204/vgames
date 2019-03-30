@@ -138,8 +138,8 @@ public class FragmentFeatures extends Fragment {
 
                 // Build filter part of url
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                intent.putExtra("ID", feature.getId());
-                intent.putExtra("TITLE", getResources().getString(R.string.feature_title) + ": " + feature.getDesc());
+                intent.putExtra("TITLE", feature.getDesc());
+                intent.putExtra("QUERY", "games.json?feature=" + feature.getId());
                 startActivity(intent);
             }
         });

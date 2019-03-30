@@ -66,7 +66,7 @@ public class ResultsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new GameAdapter(this.mGameList);
+        adapter = new GameAdapter(getActivity(), this.mGameList);
         recyclerView.setAdapter(adapter);
 
         // Set item click listener

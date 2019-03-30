@@ -139,8 +139,8 @@ public class FragmentLanguages extends Fragment {
 
                 // Build filter part of url
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                intent.putExtra("ID", language.getId());
-                intent.putExtra("TITLE", getResources().getString(R.string.language_title) + ": " + language.getDesc());
+                intent.putExtra("TITLE", language.getDesc());
+                intent.putExtra("QUERY", "games.json?language=" + language.getId());
                 startActivity(intent);
             }
         });

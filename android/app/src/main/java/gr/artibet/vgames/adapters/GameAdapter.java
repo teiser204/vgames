@@ -1,5 +1,6 @@
 package gr.artibet.vgames.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,14 +10,16 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import gr.artibet.vgames.R;
-import gr.artibet.vgames.models.Company;
 import gr.artibet.vgames.models.Game;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder> {
 
+    private Context mContext;
     private List<Game> mGameList;
     private OnItemClickListener mItemListener;
 
@@ -62,9 +65,11 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     }
 
     // Constructor
-    public GameAdapter(List<Game> gameList){
+    public GameAdapter(Context context, List<Game> gameList){
 
+        mContext = context;
         mGameList = gameList;
+
     }
 
     public void setmGameList(List<Game> gameList) {
@@ -91,7 +96,12 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         gameViewHolder.rbRating.setRating(game.getRating());
         gameViewHolder.tvRating.setText("(" + game.getRating() + ")");
 
-
+        // Load image
+        Glide.with(mContext)
+                .load(game.getImage())
+                .centerCrop()
+                .placeholder(R.drawable.ic_image_placeholder)
+                .into(gameViewHolder.ivImage);
 
     }
 
