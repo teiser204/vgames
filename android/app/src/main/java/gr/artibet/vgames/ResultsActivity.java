@@ -42,7 +42,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         // if saveInstanceState isn't null activity resumed
         if (savedInstanceState != null) {
-            return;
+           return;
         }
 
         // Get intent data
