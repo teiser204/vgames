@@ -30,4 +30,6 @@
     <string name="exit">Έξοδος</string>
     <string name="sotiris">Σωτήρης Τσακιρίδης</string>
     <string name="sakis">Σάκης Ταουσάνης</string>
+    <string name="exit_application">Τερματισμός εφαρμογής?</string>
+    <string name="cancel_exit">Επιστροφή</string>
 </resources>

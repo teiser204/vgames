@@ -3,12 +3,14 @@ package gr.artibet.vgames;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -206,13 +208,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
             mDrawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            confirmExit();
         }
+
+    }
+
+    // Confirm exit application
+    private void confirmExit() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.exit);
+        builder.setMessage(R.string.exit_application);
+
+        // Exit button
+        builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        // Cancel button
+        builder.setNegativeButton(R.string.cancel_exit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        // Show confirmation dialog
+        builder.show();
 
     }
 
     // drawer exit menu
     private void navExit() {
-        finish();
+        confirmExit();
     }
 }
