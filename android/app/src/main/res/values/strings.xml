@@ -32,6 +32,7 @@
     <string name="company_title">Company</string>
     <string name="platform_title">Platform</string>
     <string name="language_title">Language</string>
+    <string name="game_title">Title</string>
     <string name="games_fetch_error">Error fetching game list</string>
     <string name="sotiris">Sotiris Tsakiridis</string>
     <string name="sakis">Sakis Taousanis</string>

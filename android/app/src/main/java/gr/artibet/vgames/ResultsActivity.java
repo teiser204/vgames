@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -57,10 +59,14 @@ public class ResultsActivity extends AppCompatActivity {
         mTvTitle = findViewById(R.id.results_title);
         mTvTitle.setText(mTitle);
 
+        // Set back button on action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Retrieve Games
         fetchGames();
 
     }
+
 
     // retrieve games for mQuery
     private void fetchGames() {

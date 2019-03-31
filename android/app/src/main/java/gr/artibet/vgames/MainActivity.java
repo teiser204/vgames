@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Start results activity
         Intent intent = new Intent(this, ResultsActivity.class);
-        intent.putExtra("TITLE", "Τίτλος: '" + s + "'");
+        intent.putExtra("TITLE", getResources().getString(R.string.game_title) + ": '" + s + "'");
         intent.putExtra("QUERY", "games.json?title=" + s);
         startActivity(intent);
 
