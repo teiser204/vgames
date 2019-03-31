@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.adapters.GameAdapter;
@@ -26,7 +27,7 @@ public class ResultsFragment extends Fragment {
 
     // Required empty public constructor
     public ResultsFragment() {
-
+        mGameList = new ArrayList<Game>();
     }
 
     // Set game list

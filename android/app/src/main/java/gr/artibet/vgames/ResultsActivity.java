@@ -33,7 +33,6 @@ public class ResultsActivity extends AppCompatActivity {
     private String mQuery;
     private List<Game> mGameList = null;
     private TextView mTvTitle;
-    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,12 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
 
         // if saveInstanceState isn't null activity resumed
-        if (savedInstanceState != null) {
-           return;
+        if (savedInstanceState == null) {
+            // Set initially wait fragment
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.fragment_container, new WaitFragment(), null);
+            ft.commit();
         }
 
         // Get intent data
@@ -53,12 +56,6 @@ public class ResultsActivity extends AppCompatActivity {
         // Set title
         mTvTitle = findViewById(R.id.results_title);
         mTvTitle.setText(mTitle);
-
-        // Set initially wait fragment
-        mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = mFragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container, new WaitFragment(), null);
-        ft.commit();
 
         // Retrieve Games
         fetchGames();
@@ -104,7 +101,8 @@ public class ResultsActivity extends AppCompatActivity {
                     }
 
                     // Set fragment
-                    FragmentTransaction ft = mFragmentManager.beginTransaction();
+                    FragmentManager fm = getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
                     ft.replace(R.id.fragment_container, fragment, null);
                     ft.commit();
                 }
