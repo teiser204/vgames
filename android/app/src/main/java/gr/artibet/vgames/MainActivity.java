@@ -1,9 +1,8 @@
 package gr.artibet.vgames;
 
-import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
+
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -30,27 +29,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        SearchView.OnQueryTextListener {
 
-    // class members
+    // ---------------------------------------------------------------------------------------
+    // Class members
+    // ---------------------------------------------------------------------------------------
     private DrawerLayout mDrawer;
-
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
 
+    // ---------------------------------------------------------------------------------------
+    // onCreate override
+    // ---------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,39 +85,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         */
     }
 
-
+    // ---------------------------------------------------------------------------------------
+    // Options menu creation
+    // ---------------------------------------------------------------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchableActivity.class)));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        // Prepare searchView click listener
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Αναζήτηση τίτλου");
+        searchView.setOnQueryTextListener(this);
 
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    // Drawer click event listener
+    // ---------------------------------------------------------------------------------------
+    // Drawer listeners
+    // ---------------------------------------------------------------------------------------
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -139,10 +120,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    // ---------------------------------------------------------------------------------------
+    // Search View listeners
+    // ---------------------------------------------------------------------------------------
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+
+        // Start results activity
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra("TITLE", "Τίτλος: '" + s + "'");
+        intent.putExtra("QUERY", "games.json?title=" + s);
+        startActivity(intent);
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        // Do nothing
+        return false;
+    }
+
+
+    // ---------------------------------------------------------------------------------------
+    // Fragment management
+    // ---------------------------------------------------------------------------------------
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -189,7 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    // Show error toast message
+    // ---------------------------------------------------------------------------------------
+    // Toast error message
+    // ---------------------------------------------------------------------------------------
     public void showErrorToast(String message) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.toast_root));
@@ -203,6 +207,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toast.show();
     }
 
+
+    // ---------------------------------------------------------------------------------------
+    // Back pressed override
+    // ---------------------------------------------------------------------------------------
     @Override
     public void onBackPressed() {
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
@@ -213,7 +221,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    // Confirm exit application
+    // ---------------------------------------------------------------------------------------
+    // App exit confirmation
+    // ---------------------------------------------------------------------------------------
     private void confirmExit() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -241,7 +251,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    // drawer exit menu
+    // ---------------------------------------------------------------------------------------
+    // Drawer menu items click implementations
+    // ---------------------------------------------------------------------------------------
     private void navExit() {
         confirmExit();
     }

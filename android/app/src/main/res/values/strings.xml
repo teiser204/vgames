@@ -41,5 +41,6 @@
     <string name="exit">Exit</string>
     <string name="exit_application">Exit application?</string>
     <string name="cancel_exit">Cancel</string>
+    <string name="search">Search</string>
 
 </resources>
