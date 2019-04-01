@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class ResultsActivity extends AppCompatActivity {
     private String mQuery;
     private List<Game> mGameList = null;
     private TextView mTvTitle;
+    private ImageView mIvRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,15 @@ public class ResultsActivity extends AppCompatActivity {
             ft.add(R.id.fragment_container, new WaitFragment(), null);
             ft.commit();
         }
+
+        // Set refresh button listener
+        mIvRefresh = findViewById(R.id.refreshResultButton);
+        mIvRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fetchGames();
+            }
+        });
 
         // Get intent data
         Intent intent = getIntent();
@@ -86,6 +97,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                     // Toast failure message
                     showErrorToast(getString(R.string.games_fetch_error));
+                    mTvTitle.setText(mTitle);
                 }
 
                 // Change adapters data
@@ -98,6 +110,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                     if (mGameList == null || mGameList.size() == 0) {
                         fragment = new NoResultsFragment();
+                        mTvTitle.setText(mTitle + " (0)");
                     } else {
                         fragment = new ResultsFragment();
                         ((ResultsFragment) fragment).setGameList(mGameList);
@@ -120,6 +133,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 // Toast failure message
                 showErrorToast(getString(R.string.games_fetch_error));
+                mTvTitle.setText(mTitle);
             }
         });
     }
