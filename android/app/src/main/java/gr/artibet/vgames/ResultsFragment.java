@@ -1,6 +1,7 @@
 package gr.artibet.vgames;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,15 +46,6 @@ public class ResultsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_results, container, false);
 
-        // Set refresh button click listener
-        //refreshButton = view.findViewById(R.id.refreshGenreListButton);
-        //refreshButton.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        fetchGenres();
-        //    }
-        //});
-
         // Initialize recycler view
         buildRecyclerView(view);
 
@@ -76,6 +68,9 @@ public class ResultsFragment extends Fragment {
                 Game game = mGameList.get(position);
 
                 // Open game details activity
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                intent.putExtra("GAME_ID", game.getId());
+                startActivity(intent);
 
             }
         });

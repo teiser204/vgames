@@ -40,6 +40,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         public TextView tvCompany;
         public RatingBar rbRating;
         public TextView tvRating;
+        public TextView tvPrice;
 
         public GameViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -49,6 +50,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
             tvCompany = itemView.findViewById(R.id.tvCompany);
             rbRating = itemView.findViewById(R.id.rbRating);
             tvRating = itemView.findViewById(R.id.tvRating);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,6 +97,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         gameViewHolder.tvCompany.setText(game.getCompany().getDesc());
         gameViewHolder.rbRating.setRating(game.getRating());
         gameViewHolder.tvRating.setText("(" + game.getRating() + ")");
+        gameViewHolder.tvPrice.setText(String.format("%.2f", game.getPrice()));
 
         // Load image
         Glide.with(mContext)

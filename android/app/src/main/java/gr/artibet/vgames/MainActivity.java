@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     // ---------------------------------------------------------------------------------------
-    // App exit confirmation
+    // gr.artibet.vgames.App exit confirmation
     // ---------------------------------------------------------------------------------------
     private void confirmExit() {
 
