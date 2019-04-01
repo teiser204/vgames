@@ -1,0 +1,12 @@
+{
+    "id": "5",
+    "title": "Monkey Island 2 Special Edition: LeChuck’s Revenge",
+    "ryear": "2010",
+    "rating": "4.6",
+    "price": "8.89",
+    "image": "https://www.serres.gr/vgames/img/monkey2.jpg",
+    "company": {
+        "id": "14",
+        "desc": "Sierra"
+    }
+}

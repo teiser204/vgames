@@ -34,4 +34,5 @@
     <string name="cancel_exit">Επιστροφή</string>
     <string name="search">Αναζήτηση</string>
     <string name="game_title">Τίτλος</string>
+    <string name="description">Περιγραφή</string>
 </resources>

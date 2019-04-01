@@ -1,0 +1,12 @@
+{
+    "id": "2",
+    "title": "Diablo",
+    "ryear": "1996",
+    "rating": "4.5",
+    "price": "12.4",
+    "image": "https://www.serres.gr/vgames/img/diablo.jpg",
+    "company": {
+        "id": "9",
+        "desc": "BioWare"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "id": "3",
+    "title": "The Witcher 2: Assassins Of Kings - Enhanced Edition",
+    "ryear": "2012",
+    "rating": "4.7",
+    "price": "17.69",
+    "image": "https://www.serres.gr/vgames/img/witcher2.jpg",
+    "company": {
+        "id": "12",
+        "desc": "id Software"
+    }
+}

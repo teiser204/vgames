@@ -1,0 +1,12 @@
+{
+        "id": "1",
+        "title": "Grim Dawn - Forgotten Gods",
+        "ryear": "2019",
+        "rating": "4.8",
+        "price": "14.99",
+        "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
+        "company": {
+            "id": "1",
+            "desc": "Nintendo"
+        }
+}

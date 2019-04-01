@@ -1,8 +1,16 @@
 package gr.artibet.vgames;
 
 import android.content.Intent;
+import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import gr.artibet.vgames.api.GameAPI;
 import gr.artibet.vgames.models.Game;
@@ -31,6 +39,9 @@ public class GameActivity extends AppCompatActivity {
         // Get intent data
         Intent intent = getIntent();
         mGameId = intent.getIntExtra("GAME_ID", 0);
+
+        // Fetch Game
+        fetchGame();
     }
 
     // ---------------------------------------------------------------------------------------
@@ -76,6 +87,28 @@ public class GameActivity extends AppCompatActivity {
     // Update UI for fetched game
     // ---------------------------------------------------------------------------------------
     private void updateUI() {
+
+        // Get views
+        ImageView ivImage = findViewById(R.id.ivImage);
+        TextView tvTitle = findViewById(R.id.tvTitle);
+        TextView tvCompany = findViewById(R.id.tvCompany);
+        TextView tvRating = findViewById(R.id.tvRating);
+        RatingBar rbRating = findViewById(R.id.rbRating);
+        TextView tvDesc = findViewById(R.id.tvDesc);
+
+        // Load image
+        Glide.with(this)
+                .load(mGame.getImage())
+                .placeholder(R.drawable.ic_image_placeholder)
+                .into(ivImage);
+
+        // Set data
+        tvTitle.setText(mGame.getTitle());
+        tvCompany.setText(mGame.getCompany().getDesc());
+        rbRating.setRating(mGame.getRating());
+        tvRating.setText("(" + mGame.getRating() + ")");
+        tvDesc.setText(mGame.getDesc());
+
 
     }
 }
