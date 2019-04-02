@@ -44,6 +44,10 @@
     <string name="cancel_exit">Cancel</string>
     <string name="search">Search</string>
     <string name="description">Description</string>
+    <string name="features">Features</string>
+    <string name="platforms">Platforms</string>
+    <string name="languages">Languages</string>
+
 
 
 </resources>

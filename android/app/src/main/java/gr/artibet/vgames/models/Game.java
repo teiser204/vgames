@@ -1,5 +1,7 @@
 package gr.artibet.vgames.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -9,21 +11,29 @@ public class Game {
     private String title;
     private String desc;
     private Integer year;
-    private Integer month;
-    private Integer day;
     private float price;
     private float rating;
     private String url;
     private String image;
 
     private Company company;
+
+    @SerializedName("features")
     private ArrayList<Feature> featureList;
+
+    @SerializedName("platforms")
     private ArrayList<Platform> platformList;
+
+    @SerializedName("languages")
     private ArrayList<Language> languageList;
+
+    @SerializedName("genre")
     private ArrayList<Genre> genreList;
+
+    @SerializedName("gallery")
     private ArrayList<Gallery> galleryList;
 
-    // Defafult contructor
+    // Defafult constructor
     public Game() {
 
     }
@@ -60,22 +70,6 @@ public class Game {
 
     public void setYear(Integer year) {
         this.year = year;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-        this.day = day;
     }
 
     public float getPrice() {

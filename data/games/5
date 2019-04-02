@@ -9,5 +9,31 @@
     "company": {
         "id": "14",
         "desc": "Sierra"
-    }
+    },
+    "features": [
+        {
+            "id": "1",
+            "desc": "Single-player"
+        },
+        {
+            "id": "2",
+            "desc": "Multi-player"
+        }
+    ],
+    "platforms": [
+        {
+            "id": "1",
+            "desc": "Windows"
+        },
+        {
+            "id": "3",
+            "desc": "Linux"
+        }
+    ],
+    "languages": [
+        {
+            "id": "1",
+            "desc": "English"
+        }
+    ]
 }

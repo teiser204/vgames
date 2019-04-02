@@ -9,5 +9,11 @@
     "company": {
         "id": "8",
         "desc": "Sega Games Co. Ltd"
-    }
+    },
+    "languages": [
+        {
+            "id": "1",
+            "desc": "English"
+        }
+    ]
 }

@@ -35,4 +35,7 @@
     <string name="search">Αναζήτηση</string>
     <string name="game_title">Τίτλος</string>
     <string name="description">Περιγραφή</string>
+    <string name="features">Χαρακτηριστικά</string>
+    <string name="platforms">Πλατφόρμες</string>
+    <string name="languages">Γλώσσες</string>
 </resources>

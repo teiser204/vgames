@@ -1,13 +1,70 @@
 {
+    "id": "1",
+    "title": "Grim Dawn - Forgotten Gods",
+    "ryear": "2019",
+    "rating": "4.8",
+    "price": "14.99",
+    "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
+    "year": "2016",
+    "desc": "Enter an apocalyptic fantasy world where humanity is on the brink of extinction, iron is valued above gold and trust is hard earned. This ARPG features complex character development, hundreds of unique items, crafting and quests with choice & consequence.",
+    "company": {
         "id": "1",
-        "title": "Grim Dawn - Forgotten Gods",
-        "ryear": "2019",
-        "rating": "4.8",
-        "price": "14.99",
-        "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
-        "year": "2016",
-        "company": {
+        "desc": "Nintendo"
+    },
+    "features": [
+        {
             "id": "1",
-            "desc": "Nintendo"
+            "desc": "Single-player"
+        },
+        {
+            "id": "2",
+            "desc": "Multi-player"
+        },
+        {
+            "id": "8",
+            "desc": "Cloud saves"
         }
+    ],
+    "genre": [
+        {
+        "id": "1",
+        "desc": "Role-playing"
+        },
+        {
+            "id": "2",
+            "desc": "Simulation"
+        },
+        {
+            "id": "3",
+            "desc": "Indie"
+        }
+    ],
+    "platforms": [
+        {
+            "id": "1",
+            "desc": "Windows"
+        },
+        {
+            "id": "2",
+            "desc": "OSX"
+        },
+        {
+            "id": "3",
+            "desc": "Linux"
+        }
+    ],
+    "languages": [
+        {
+            "id": "1",
+            "desc": "English"
+        },
+        {
+            "id": "2",
+            "desc": "Deutsch"
+        },
+        {
+            "id": "3",
+            "desc": "français"
+        }
+    ]
 }

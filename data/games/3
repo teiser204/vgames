@@ -9,5 +9,11 @@
     "company": {
         "id": "12",
         "desc": "id Software"
-    }
+    },
+    "languages": [
+        {
+            "id": "1",
+            "desc": "English"
+        }
+    ]
 }

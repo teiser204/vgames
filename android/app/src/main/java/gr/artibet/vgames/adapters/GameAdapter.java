@@ -97,7 +97,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         gameViewHolder.tvCompany.setText(game.getCompany().getDesc());
         gameViewHolder.rbRating.setRating(game.getRating());
         gameViewHolder.tvRating.setText("(" + game.getRating() + ")");
-        gameViewHolder.tvPrice.setText(String.format("%.2f", game.getPrice()));
+        gameViewHolder.tvPrice.setText(String.format("%.2f €", game.getPrice()));
 
         // Load image
         Glide.with(mContext)
