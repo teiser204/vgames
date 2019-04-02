@@ -8,9 +8,9 @@ public class Game {
     private int id;
     private String title;
     private String desc;
-    private int ryear;
-    private int rmonth;
-    private int rday;
+    private Integer year;
+    private Integer month;
+    private Integer day;
     private float price;
     private float rating;
     private String url;
@@ -54,28 +54,28 @@ public class Game {
         this.desc = desc;
     }
 
-    public int getRyear() {
-        return ryear;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setRyear(int ryear) {
-        this.ryear = ryear;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public int getRmonth() {
-        return rmonth;
+    public Integer getMonth() {
+        return month;
     }
 
-    public void setRmonth(int rmonth) {
-        this.rmonth = rmonth;
+    public void setMonth(Integer month) {
+        this.month = month;
     }
 
-    public int getRday() {
-        return rday;
+    public Integer getDay() {
+        return day;
     }
 
-    public void setRday(int rday) {
-        this.rday = rday;
+    public void setDay(Integer day) {
+        this.day = day;
     }
 
     public float getPrice() {
@@ -157,4 +157,6 @@ public class Game {
     public void setGalleryList(ArrayList<Gallery> galleryList) {
         this.galleryList = galleryList;
     }
+
+
 }

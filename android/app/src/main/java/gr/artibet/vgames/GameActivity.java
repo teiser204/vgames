@@ -92,9 +92,11 @@ public class GameActivity extends AppCompatActivity {
         ImageView ivImage = findViewById(R.id.ivImage);
         TextView tvTitle = findViewById(R.id.tvTitle);
         TextView tvCompany = findViewById(R.id.tvCompany);
+        TextView tvYear = findViewById(R.id.tvYear);
         TextView tvRating = findViewById(R.id.tvRating);
         RatingBar rbRating = findViewById(R.id.rbRating);
         TextView tvDesc = findViewById(R.id.tvDesc);
+
 
         // Load image
         Glide.with(this)
@@ -108,6 +110,12 @@ public class GameActivity extends AppCompatActivity {
         rbRating.setRating(mGame.getRating());
         tvRating.setText("(" + mGame.getRating() + ")");
         tvDesc.setText(mGame.getDesc());
+        if (mGame.getYear() != null) {
+            tvYear.setText("(" + mGame.getYear() + ")");
+        }
+        else {
+            tvYear.setText("");
+        }
 
 
     }
