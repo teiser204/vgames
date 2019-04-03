@@ -2,11 +2,15 @@ package gr.artibet.vgames;
 
 import android.content.Intent;
 import android.media.Rating;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -46,6 +50,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Fetch Game
         fetchGame();
+
     }
 
     // ---------------------------------------------------------------------------------------
@@ -105,7 +110,7 @@ public class GameActivity extends AppCompatActivity {
         TextView tvFeatures = findViewById(R.id.tvFeatures);
         TextView tvPlatforms = findViewById(R.id.tvPlatforms);
         TextView tvLanguages = findViewById(R.id.tvLanguages);
-
+        Button btVisitPage = findViewById(R.id.btVisitPage);
 
         // Load image
         Glide.with(this)
@@ -184,6 +189,24 @@ public class GameActivity extends AppCompatActivity {
         else {
             tvLanguages.setText("-");
         }
+
+        // Visit page listener
+        btVisitPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = null;
+                try {
+                    uri = Uri.parse(mGame.getUrl());
+                }
+                catch(NullPointerException e) {
+                    Toast.makeText(GameActivity.this, getString(R.string.invalid_url),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(uri);
+                startActivity(i);
+            }
+        });
 
     }
 }

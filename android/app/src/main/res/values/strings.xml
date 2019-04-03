@@ -47,7 +47,9 @@
     <string name="features">Features</string>
     <string name="platforms">Platforms</string>
     <string name="languages">Languages</string>
-
+    <string name="advanced_search">Advanced search</string>
+    <string name="visit_webpage">Visit web page</string>
+    <string name="invalid_url">Invalid URL</string>
 
 
 </resources>

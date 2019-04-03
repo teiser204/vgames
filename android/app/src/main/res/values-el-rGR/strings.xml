@@ -38,4 +38,7 @@
     <string name="features">Χαρακτηριστικά</string>
     <string name="platforms">Πλατφόρμες</string>
     <string name="languages">Γλώσσες</string>
+    <string name="advanced_search">Σύνθετη αναζήτηση</string>
+    <string name="visit_webpage">Επισκεφτείτε την ιστοσελίδα</string>
+    <string name="invalid_url">Μη έγκυρος υπερσύνδεσμος</string>
 </resources>

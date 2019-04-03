@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.nav_asearch:
+                navSearch();
+                break;
+
             case R.id.nav_exit:
                 navExit();
                 break;
@@ -254,7 +259,14 @@ public class MainActivity extends AppCompatActivity implements
     // ---------------------------------------------------------------------------------------
     // Drawer menu items click implementations
     // ---------------------------------------------------------------------------------------
+
+    // Exit app
     private void navExit() {
         confirmExit();
+    }
+
+    // Advanced search
+    private void navSearch() {
+        Toast.makeText(this, "Advanced Search", Toast.LENGTH_SHORT).show();
     }
 }

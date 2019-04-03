@@ -6,6 +6,7 @@
     "price": "14.99",
     "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
     "year": "2016",
+    "url":"https://www.gog.com/game/grim_dawn",
     "desc": "Enter an apocalyptic fantasy world where humanity is on the brink of extinction, iron is valued above gold and trust is hard earned. This ARPG features complex character development, hundreds of unique items, crafting and quests with choice & consequence.",
     "company": {
         "id": "1",

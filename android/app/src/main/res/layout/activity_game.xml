@@ -172,6 +172,12 @@
             android:layout_marginTop="8dp"
             android:text="Desc" />
 
+        <Button
+            android:id="@+id/btVisitPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/visit_webpage"/>
+
     </LinearLayout>
 
 </ScrollView>
