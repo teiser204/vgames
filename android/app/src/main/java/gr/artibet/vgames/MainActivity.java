@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements
     private void confirmExit() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.exit);
+        builder.setTitle(R.string.app_label);
         builder.setMessage(R.string.exit_application);
 
         // Exit button
