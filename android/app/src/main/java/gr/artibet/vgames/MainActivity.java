@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements
     // tab fragment containers
     private FragmentTop mFragmentTop = null;
     private GenreFragmentContainer mGenreFragmentContainer = null;
+    private FeaturesFragmentContainer mFeaturesFragmentContainer = null;
 
 
 
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements
         // Create fragment containers
         mFragmentTop = new FragmentTop();
         mGenreFragmentContainer = new GenreFragmentContainer();
+        mFeaturesFragmentContainer = new FeaturesFragmentContainer();
 
 
         /*
@@ -191,8 +193,7 @@ public class MainActivity extends AppCompatActivity implements
                     return mGenreFragmentContainer;
 
                 case 2: // Features
-                    fragment = FragmentFeatures.newInstance();
-                    break;
+                    return mFeaturesFragmentContainer;
 
                 case 3: // Companies
                     fragment = FragmentCompanies.newInstance();

@@ -2,7 +2,6 @@ package gr.artibet.vgames;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,9 +12,9 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import gr.artibet.vgames.api.GameAPI;
+import gr.artibet.vgames.api.FeatureAPI;
 import gr.artibet.vgames.api.GenreAPI;
-import gr.artibet.vgames.models.Game;
+import gr.artibet.vgames.models.Feature;
 import gr.artibet.vgames.models.Genre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,22 +26,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GenreFragmentContainer extends Fragment {
+public class FeaturesFragmentContainer extends Fragment {
 
     // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
-    private List<Genre> mGenreList = null;
+    private List<Feature> mFeatureList = null;
     private ImageView mRefreshButton;
     private FragmentManager mFragmentManager;
 
     // ---------------------------------------------------------------------------------------
     // Default constructor
     // ---------------------------------------------------------------------------------------
-    public GenreFragmentContainer() {
+    public FeaturesFragmentContainer() {
         // Required empty public constructor
     }
-
 
     // ---------------------------------------------------------------------------------------
     // onCreateView
@@ -51,7 +49,7 @@ public class GenreFragmentContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_genre_container, container, false);
+        View view =  inflater.inflate(R.layout.fragment_features_container, container, false);
 
         mFragmentManager = getActivity().getSupportFragmentManager();
 
@@ -59,42 +57,42 @@ public class GenreFragmentContainer extends Fragment {
 
             // Set initially wait fragment
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.add(R.id.genreFragmentContainer, new WaitFragment(), null);
+            ft.add(R.id.featuresFragmentContainer, new WaitFragment(), null);
             ft.commit();
         }
 
         // Set refresh button click listener
-        mRefreshButton = view.findViewById(R.id.refreshGenreButton);
+        mRefreshButton = view.findViewById(R.id.refreshFeaturesButton);
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchGenre();
+                fetchFeatures();
             }
         });
 
         // Retrieve genre
-        fetchGenre();
+        fetchFeatures();
 
         return view;
     }
 
     // ---------------------------------------------------------------------------------------
-    // Fetch genre
+    // Fetch features
     // ---------------------------------------------------------------------------------------
-    private void fetchGenre() {
+    private void fetchFeatures() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        GenreAPI api = retrofit.create(GenreAPI.class);
+        FeatureAPI api = retrofit.create(FeatureAPI.class);
 
-        Call<List<Genre>> call = api.getGenres();
+        Call<List<Feature>> call = api.getFeatures();
 
-        call.enqueue(new Callback<List<Genre>>() {
+        call.enqueue(new Callback<List<Feature>>() {
             @Override
-            public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
+            public void onResponse(Call<List<Feature>> call, Response<List<Feature>> response) {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
@@ -102,25 +100,25 @@ public class GenreFragmentContainer extends Fragment {
                     // Set message fragment
                     FragmentTransaction ft = mFragmentManager.beginTransaction();
                     MessageFragment messageFragment = new MessageFragment();
-                    messageFragment.setMessage(getString(R.string.genre_fetch_error));
-                    ft.replace(R.id.genreFragmentContainer, messageFragment, null);
+                    messageFragment.setMessage(getString(R.string.feature_fetch_error));
+                    ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
                     ft.commit();
                 }
                 else {
 
-                    mGenreList = response.body();
+                    mFeatureList = response.body();
 
-                    if (mGenreList == null || mGenreList.size() == 0) {
+                    if (mFeatureList == null || mFeatureList.size() == 0) {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
                         MessageFragment messageFragment = new MessageFragment();
-                        messageFragment.setMessage(getString(R.string.no_genres));
-                        ft.replace(R.id.genreFragmentContainer, messageFragment, null);
+                        messageFragment.setMessage(getString(R.string.no_features));
+                        ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
                         ft.commit();
                     } else {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
-                        GenreFragment genreFragment = new GenreFragment();
-                        genreFragment.setGenreList(mGenreList);
-                        ft.replace(R.id.genreFragmentContainer, genreFragment, null);
+                        FeaturesFragment featuresFragment = new FeaturesFragment();
+                        featuresFragment.setmFeatureList(mFeatureList);
+                        ft.replace(R.id.featuresFragmentContainer, featuresFragment, null);
                         ft.commit();
                     }
 
@@ -130,16 +128,17 @@ public class GenreFragmentContainer extends Fragment {
 
             // Fetch error
             @Override
-            public void onFailure(Call<List<Genre>> call, Throwable t) {
+            public void onFailure(Call<List<Feature>> call, Throwable t) {
 
                 FragmentTransaction ft = mFragmentManager.beginTransaction();
                 MessageFragment messageFragment = new MessageFragment();
-                messageFragment.setMessage(getString(R.string.genre_fetch_error));
-                ft.replace(R.id.genreFragmentContainer, messageFragment, null);
+                messageFragment.setMessage(getString(R.string.feature_fetch_error));
+                ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
                 ft.commit();
 
             }
         });
     }
+
 
 }
