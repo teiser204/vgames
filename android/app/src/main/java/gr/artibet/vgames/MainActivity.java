@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout mDrawer;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+
+    // tab fragment containers
     private FragmentTop mFragmentTop = null;
+    private GenreFragmentContainer mGenreFragmentContainer = null;
+
+
 
     // ---------------------------------------------------------------------------------------
     // onCreate override
@@ -85,8 +90,10 @@ public class MainActivity extends AppCompatActivity implements
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        // Fetch Top games and change home tab
-        fetchTopGames();
+        // Create fragment containers
+        mFragmentTop = new FragmentTop();
+        mGenreFragmentContainer = new GenreFragmentContainer();
+
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -178,13 +185,10 @@ public class MainActivity extends AppCompatActivity implements
             Fragment fragment = null;
             switch (position) {
                 case 0: // Home fragment
-                    mFragmentTop = new FragmentTop();
-                    fragment = mFragmentTop;
-                    break;
+                    return mFragmentTop;
 
                 case 1: // Genre
-                    fragment = FragmentGenre.newInstance();
-                    break;
+                    return mGenreFragmentContainer;
 
                 case 2: // Features
                     fragment = FragmentFeatures.newInstance();
@@ -276,43 +280,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    // ---------------------------------------------------------------------------------------
-    // Fetch top games
-    // ---------------------------------------------------------------------------------------
-    private void fetchTopGames() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GameAPI gameAPI = retrofit.create(GameAPI.class);
-
-        Call<List<Game>> call = gameAPI.getTopGames();
-
-        call.enqueue(new Callback<List<Game>>() {
-            @Override
-            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                if (!response.isSuccessful()) {
-
-                    // Toast failure message
-                    showErrorToast(getString(R.string.games_fetch_error));
-                }
-
-                // Change adapters data
-                mFragmentTop.setGameList(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Game>> call, Throwable t) {
-
-                // Toast failure message
-                showErrorToast(getString(R.string.games_fetch_error));
-
-            }
-        });
-    }
 
     // ---------------------------------------------------------------------------------------
     // Drawer menu items click implementations

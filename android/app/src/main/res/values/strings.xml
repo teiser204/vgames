@@ -36,6 +36,7 @@
     <string name="games_fetch_error">Error fetching game list</string>
     <string name="sotiris">Sotiris Tsakiridis</string>
     <string name="sakis">Sakis Taousanis</string>
+    <string name="no_genres">Genre list is empty</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
@@ -50,6 +51,10 @@
     <string name="advanced_search">Advanced search</string>
     <string name="visit_webpage">Visit web page</string>
     <string name="invalid_url">Invalid URL</string>
+    <string name="no_features">Feature list is empty</string>
+    <string name="no_companies">Company list is empty</string>
+    <string name="no_platforms">Platform list is empty</string>
+    <string name="no_languages">Language list is empty</string>
 
 
 </resources>

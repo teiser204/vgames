@@ -41,4 +41,9 @@
     <string name="visit_webpage">Επισκεφτείτε την ιστοσελίδα</string>
     <string name="invalid_url">Μη έγκυρος υπερσύνδεσμος</string>
     <string name="tab_top">ΚΟΡΥΦΑΙΑ</string>
+    <string name="no_genres">Η λίστα των ειδών είναι κενή</string>
+    <string name="no_features">Η λίστα των χαρακτηριστικών είναι κενή</string>
+    <string name="no_companies">Η λίστα των εταιριών είναι κενή</string>
+    <string name="no_platforms">Η λίστα των πλατφορμών είναι κενή</string>
+    <string name="no_languages">Η λίστα των γλωσσών είναι κενή</string>
 </resources>

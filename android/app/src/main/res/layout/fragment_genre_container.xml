@@ -4,25 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:scrollbars="none">
+    android:scrollbars="none"
+    android:background="#FFFFFF">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:background="@android:color/holo_red_dark">
+        android:background="@android:color/holo_blue_dark">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="4dp"
-            android:text="Κορυφαία παιχνίδια"
+            android:text="@string/genre_list"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/refreshTopGamesButton"
+            android:id="@+id/refreshGenreButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="4dp"
@@ -35,11 +36,10 @@
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/topFragmentContainer"
+        android:id="@+id/genreFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        tools:context=".FragmentTop"
+        tools:context=".GenreFragmentContainer"
         android:scrollbars="none">
 
     </FrameLayout>
