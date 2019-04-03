@@ -15,4 +15,7 @@ public interface GameAPI {
 
     @GET("games/{id}")
     Call<Game> getGame(@Path("id") int id);
+
+    @GET("games/top.json")
+    Call<List<Game>> getTopGames();
 }

@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "title": "Grim Dawn - Forgotten Gods",
+        "ryear": "2019",
+        "rating": "4.8",
+        "price": "14.99",
+        "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg",
+        "company": {
+            "id": "1",
+            "desc": "Nintendo"
+        }
+    },
+    {
+        "id": "2",
+        "title": "Diablo",
+        "ryear": "1996",
+        "rating": "4.5",
+        "price": "12.4",
+        "image": "https://www.serres.gr/vgames/img/diablo.jpg",
+        "company": {
+            "id": "9",
+            "desc": "BioWare"
+        }
+    },
+    {
+        "id": "3",
+        "title": "The Witcher 2: Assassins Of Kings - Enhanced Edition",
+        "ryear": "2012",
+        "rating": "4.7",
+        "price": "17.69",
+        "image": "https://www.serres.gr/vgames/img/witcher2.jpg",
+        "company": {
+            "id": "12",
+            "desc": "id Software"
+        }
+    },
+    {
+        "id": "4",
+        "title": "Elder Scrolls IV: Oblivion",
+        "ryear": "2007",
+        "rating": "4.3",
+        "price": "10.00",
+        "image": "https://www.serres.gr/vgames/img/oblivion.jpg",
+        "company": {
+            "id": "8",
+            "desc": "Sega Games Co. Ltd"
+        }
+    },
+    {
+        "id": "5",
+        "title": "Monkey Island 2 Special Edition: LeChuck’s Revenge",
+        "ryear": "2010",
+        "rating": "4.6",
+        "price": "8.89",
+        "image": "https://www.serres.gr/vgames/img/monkey2.jpg",
+        "company": {
+            "id": "14",
+            "desc": "Sierra"
+        }
+    }
+]

@@ -3,7 +3,6 @@
     <string name="app_name">vgames</string>
     <string name="tab_features">ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ</string>
     <string name="tab_genre">ΕΙΔΗ</string>
-    <string name="tab_home">ΑΡΧΙΚΗ ΣΕΛΙΔΑ</string>
     <string name="tab_companies">ΕΤΑΙΡΙΕΣ</string>
     <string name="tab_platforms">ΠΛΑΤΦΟΡΜΕΣ</string>
     <string name="tab_languages">ΓΛΩΣΣΕΣ</string>
@@ -41,4 +40,5 @@
     <string name="advanced_search">Σύνθετη αναζήτηση</string>
     <string name="visit_webpage">Επισκεφτείτε την ιστοσελίδα</string>
     <string name="invalid_url">Μη έγκυρος υπερσύνδεσμος</string>
+    <string name="tab_top">ΚΟΡΥΦΑΙΑ</string>
 </resources>

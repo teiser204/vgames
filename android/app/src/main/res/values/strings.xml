@@ -3,7 +3,7 @@
     <string name="app_label">vgames</string>
     <string name="search_hint">Search games</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
-    <string name="tab_home">HOME PAGE</string>
+    <string name="tab_top">TOP GAMES</string>
     <string name="tab_genre">GENRE</string>
     <string name="tab_features">FEATURES</string>
     <string name="tab_companies">COMPANIES</string>

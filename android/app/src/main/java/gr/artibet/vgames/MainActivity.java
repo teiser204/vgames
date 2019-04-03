@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import gr.artibet.vgames.api.GameAPI;
+import gr.artibet.vgames.models.Game;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -39,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout mDrawer;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private FragmentTop mFragmentTop = null;
 
     // ---------------------------------------------------------------------------------------
     // onCreate override
@@ -72,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        // Fetch Top games and change home tab
+        fetchTopGames();
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -154,14 +169,17 @@ public class MainActivity extends AppCompatActivity implements
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
+
 
         @Override
         public Fragment getItem(int position) {
             Fragment fragment = null;
             switch (position) {
                 case 0: // Home fragment
-                    fragment = FragmentHome.newInstance("Param1", "Param2");
+                    mFragmentTop = new FragmentTop();
+                    fragment = mFragmentTop;
                     break;
 
                 case 1: // Genre
@@ -193,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements
         public int getCount() {
             return 6;
         }
+
+
     }
 
 
@@ -254,6 +274,44 @@ public class MainActivity extends AppCompatActivity implements
         // Show confirmation dialog
         builder.show();
 
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Fetch top games
+    // ---------------------------------------------------------------------------------------
+    private void fetchTopGames() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getResources().getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        GameAPI gameAPI = retrofit.create(GameAPI.class);
+
+        Call<List<Game>> call = gameAPI.getTopGames();
+
+        call.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+
+                    // Toast failure message
+                    showErrorToast(getString(R.string.games_fetch_error));
+                }
+
+                // Change adapters data
+                mFragmentTop.setGameList(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+
+                // Toast failure message
+                showErrorToast(getString(R.string.games_fetch_error));
+
+            }
+        });
     }
 
     // ---------------------------------------------------------------------------------------
