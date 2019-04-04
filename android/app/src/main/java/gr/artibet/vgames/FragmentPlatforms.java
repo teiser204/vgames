@@ -65,7 +65,7 @@ public class FragmentPlatforms extends Fragment {
         View view = inflater.inflate(R.layout.fragment_platforms, container, false);
 
         // Set refresh button click listener
-        refreshButton = view.findViewById(R.id.refreshPlatformListButton);
+        refreshButton = view.findViewById(R.id.refreshPlatformsButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +125,7 @@ public class FragmentPlatforms extends Fragment {
 
     // Build recycler view
     private void buildRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.platformRecyclerView);
+        recyclerView = view.findViewById(R.id.platformsRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     private GenreFragmentContainer mGenreFragmentContainer = null;
     private FeaturesFragmentContainer mFeaturesFragmentContainer = null;
     private CompaniesFragmentContainer mCompaniesFragmentContainer = null;
+    private PlatformsFragmentContainer mPlatformsFragmentContainer = null;
 
 
 
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements
         mGenreFragmentContainer = new GenreFragmentContainer();
         mFeaturesFragmentContainer = new FeaturesFragmentContainer();
         mCompaniesFragmentContainer = new CompaniesFragmentContainer();
+        mPlatformsFragmentContainer = new PlatformsFragmentContainer();
 
 
         /*
@@ -201,8 +203,7 @@ public class MainActivity extends AppCompatActivity implements
                     return mCompaniesFragmentContainer;
 
                 case 4: // Platforms
-                    fragment = FragmentPlatforms.newInstance();
-                    break;
+                    return mPlatformsFragmentContainer;
 
                 case 5: // Languages
                     fragment = FragmentLanguages.newInstance();

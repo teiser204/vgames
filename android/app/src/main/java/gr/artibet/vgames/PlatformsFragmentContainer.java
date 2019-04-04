@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import java.util.List;
 
 import gr.artibet.vgames.api.CompanyAPI;
+import gr.artibet.vgames.api.PlatformAPI;
 import gr.artibet.vgames.models.Company;
+import gr.artibet.vgames.models.Platform;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,19 +23,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class CompaniesFragmentContainer extends Fragment {
+public class PlatformsFragmentContainer extends Fragment {
 
     // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
-    private List<Company> mCompanyList = null;
+    private List<Platform> mPlatformList = null;
     private ImageView mRefreshButton;
     private FragmentManager mFragmentManager;
 
     // ---------------------------------------------------------------------------------------
     // Default constructor
     // ---------------------------------------------------------------------------------------
-    public CompaniesFragmentContainer() {
+    public PlatformsFragmentContainer() {
         // Required empty public constructor
     }
 
@@ -44,7 +46,7 @@ public class CompaniesFragmentContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_companies_container, container, false);
+        View view =  inflater.inflate(R.layout.fragment_platforms_container, container, false);
 
         mFragmentManager = getActivity().getSupportFragmentManager();
 
@@ -52,21 +54,21 @@ public class CompaniesFragmentContainer extends Fragment {
 
             // Set initially wait fragment
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.add(R.id.companiesFragmentContainer, new WaitFragment(), null);
+            ft.add(R.id.platformsFragmentContainer, new WaitFragment(), null);
             ft.commit();
         }
 
         // Set refresh button click listener
-        mRefreshButton = view.findViewById(R.id.refreshCompaniesButton);
+        mRefreshButton = view.findViewById(R.id.refreshPlatformsButton);
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchCompanies();
+                fetchPlatforms();
             }
         });
 
         // Retrieve genre
-        fetchCompanies();
+        fetchPlatforms();
 
         return view;
     }
@@ -74,20 +76,20 @@ public class CompaniesFragmentContainer extends Fragment {
     // ---------------------------------------------------------------------------------------
     // Fetch companies
     // ---------------------------------------------------------------------------------------
-    private void fetchCompanies() {
+    private void fetchPlatforms() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        CompanyAPI api = retrofit.create(CompanyAPI.class);
+        PlatformAPI api = retrofit.create(PlatformAPI.class);
 
-        Call<List<Company>> call = api.getCompanies();
+        Call<List<Platform>> call = api.getPlatforms();
 
-        call.enqueue(new Callback<List<Company>>() {
+        call.enqueue(new Callback<List<Platform>>() {
             @Override
-            public void onResponse(Call<List<Company>> call, Response<List<Company>> response) {
+            public void onResponse(Call<List<Platform>> call, Response<List<Platform>> response) {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
@@ -95,25 +97,25 @@ public class CompaniesFragmentContainer extends Fragment {
                     // Set message fragment
                     FragmentTransaction ft = mFragmentManager.beginTransaction();
                     MessageFragment messageFragment = new MessageFragment();
-                    messageFragment.setMessage(getString(R.string.company_fetch_error));
-                    ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
+                    messageFragment.setMessage(getString(R.string.platform_fetch_error));
+                    ft.replace(R.id.platformsFragmentContainer, messageFragment, null);
                     ft.commit();
                 }
                 else {
 
-                    mCompanyList = response.body();
+                    mPlatformList = response.body();
 
-                    if (mCompanyList == null || mCompanyList.size() == 0) {
+                    if (mPlatformList == null || mPlatformList.size() == 0) {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
                         MessageFragment messageFragment = new MessageFragment();
-                        messageFragment.setMessage(getString(R.string.no_companies));
-                        ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
+                        messageFragment.setMessage(getString(R.string.no_platforms));
+                        ft.replace(R.id.platformsFragmentContainer, messageFragment, null);
                         ft.commit();
                     } else {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
-                        CompaniesFragment companiesFragment = new CompaniesFragment();
-                        companiesFragment.setCompanyList(mCompanyList);
-                        ft.replace(R.id.companiesFragmentContainer, companiesFragment, null);
+                        PlatformsFragment platformsFragment = new PlatformsFragment();
+                        platformsFragment.setPlatformList(mPlatformList);
+                        ft.replace(R.id.platformsFragmentContainer, platformsFragment, null);
                         ft.commit();
                     }
 
@@ -123,12 +125,12 @@ public class CompaniesFragmentContainer extends Fragment {
 
             // Fetch error
             @Override
-            public void onFailure(Call<List<Company>> call, Throwable t) {
+            public void onFailure(Call<List<Platform>> call, Throwable t) {
 
                 FragmentTransaction ft = mFragmentManager.beginTransaction();
                 MessageFragment messageFragment = new MessageFragment();
-                messageFragment.setMessage(getString(R.string.company_fetch_error));
-                ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
+                messageFragment.setMessage(getString(R.string.platform_fetch_error));
+                ft.replace(R.id.platformsFragmentContainer, messageFragment, null);
                 ft.commit();
 
             }
