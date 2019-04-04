@@ -65,7 +65,7 @@ public class FragmentLanguages extends Fragment {
         View view = inflater.inflate(R.layout.fragment_languages, container, false);
 
         // Set refresh button click listener
-        refreshButton = view.findViewById(R.id.refreshLanguageListButton);
+        refreshButton = view.findViewById(R.id.refreshLanguagesButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +124,7 @@ public class FragmentLanguages extends Fragment {
 
     // Build recycler view
     private void buildRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.languageRecyclerView);
+        recyclerView = view.findViewById(R.id.languagesRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
