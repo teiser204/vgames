@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class MessageFragment extends Fragment {
 
     private String mMessage;
+    private TextView mTvMessage = null;
 
 
     public MessageFragment() {
@@ -20,6 +21,9 @@ public class MessageFragment extends Fragment {
 
     public void setMessage(String message) {
         mMessage = message;
+        if (mTvMessage != null) {
+            mTvMessage.setText(mMessage);
+        }
     }
 
 
@@ -30,8 +34,8 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_message, container, false);
-        TextView tvMessage = view.findViewById(R.id.tvMessage);
-        tvMessage.setText(mMessage);
+        mTvMessage = view.findViewById(R.id.tvMessage);
+        mTvMessage.setText(mMessage);
 
         return view;
 

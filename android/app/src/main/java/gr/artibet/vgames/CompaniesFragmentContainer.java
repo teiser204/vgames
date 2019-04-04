@@ -12,10 +12,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import gr.artibet.vgames.api.FeatureAPI;
-import gr.artibet.vgames.api.GenreAPI;
-import gr.artibet.vgames.models.Feature;
-import gr.artibet.vgames.models.Genre;
+import gr.artibet.vgames.api.CompanyAPI;
+import gr.artibet.vgames.models.Company;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,19 +24,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FeaturesFragmentContainer extends Fragment {
+public class CompaniesFragmentContainer extends Fragment {
 
     // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
-    private List<Feature> mFeatureList = null;
+    private List<Company> mCompanyList = null;
     private ImageView mRefreshButton;
     private FragmentManager mFragmentManager;
 
     // ---------------------------------------------------------------------------------------
     // Default constructor
     // ---------------------------------------------------------------------------------------
-    public FeaturesFragmentContainer() {
+    public CompaniesFragmentContainer() {
         // Required empty public constructor
     }
 
@@ -49,7 +47,7 @@ public class FeaturesFragmentContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_features_container, container, false);
+        View view =  inflater.inflate(R.layout.fragment_companies_container, container, false);
 
         mFragmentManager = getActivity().getSupportFragmentManager();
 
@@ -57,42 +55,42 @@ public class FeaturesFragmentContainer extends Fragment {
 
             // Set initially wait fragment
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.add(R.id.featuresFragmentContainer, new WaitFragment(), null);
+            ft.add(R.id.companiesFragmentContainer, new WaitFragment(), null);
             ft.commit();
         }
 
         // Set refresh button click listener
-        mRefreshButton = view.findViewById(R.id.refreshFeaturesButton);
+        mRefreshButton = view.findViewById(R.id.refreshCompaniesButton);
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchFeatures();
+                fetchCompanies();
             }
         });
 
         // Retrieve genre
-        fetchFeatures();
+        fetchCompanies();
 
         return view;
     }
 
     // ---------------------------------------------------------------------------------------
-    // Fetch features
+    // Fetch companies
     // ---------------------------------------------------------------------------------------
-    private void fetchFeatures() {
+    private void fetchCompanies() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        FeatureAPI api = retrofit.create(FeatureAPI.class);
+        CompanyAPI api = retrofit.create(CompanyAPI.class);
 
-        Call<List<Feature>> call = api.getFeatures();
+        Call<List<Company>> call = api.getCompanies();
 
-        call.enqueue(new Callback<List<Feature>>() {
+        call.enqueue(new Callback<List<Company>>() {
             @Override
-            public void onResponse(Call<List<Feature>> call, Response<List<Feature>> response) {
+            public void onResponse(Call<List<Company>> call, Response<List<Company>> response) {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
@@ -100,25 +98,25 @@ public class FeaturesFragmentContainer extends Fragment {
                     // Set message fragment
                     FragmentTransaction ft = mFragmentManager.beginTransaction();
                     MessageFragment messageFragment = new MessageFragment();
-                    messageFragment.setMessage(getString(R.string.feature_fetch_error));
-                    ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
+                    messageFragment.setMessage(getString(R.string.company_fetch_error));
+                    ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
                     ft.commit();
                 }
                 else {
 
-                    mFeatureList = response.body();
+                    mCompanyList = response.body();
 
-                    if (mFeatureList == null || mFeatureList.size() == 0) {
+                    if (mCompanyList == null || mCompanyList.size() == 0) {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
                         MessageFragment messageFragment = new MessageFragment();
-                        messageFragment.setMessage(getString(R.string.no_features));
-                        ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
+                        messageFragment.setMessage(getString(R.string.no_companies));
+                        ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
                         ft.commit();
                     } else {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
-                        FeaturesFragment featuresFragment = new FeaturesFragment();
-                        featuresFragment.setFeatureList(mFeatureList);
-                        ft.replace(R.id.featuresFragmentContainer, featuresFragment, null);
+                        CompaniesFragment companiesFragment = new CompaniesFragment();
+                        companiesFragment.setCompanyList(mCompanyList);
+                        ft.replace(R.id.companiesFragmentContainer, companiesFragment, null);
                         ft.commit();
                     }
 
@@ -128,12 +126,12 @@ public class FeaturesFragmentContainer extends Fragment {
 
             // Fetch error
             @Override
-            public void onFailure(Call<List<Feature>> call, Throwable t) {
+            public void onFailure(Call<List<Company>> call, Throwable t) {
 
                 FragmentTransaction ft = mFragmentManager.beginTransaction();
                 MessageFragment messageFragment = new MessageFragment();
-                messageFragment.setMessage(getString(R.string.feature_fetch_error));
-                ft.replace(R.id.featuresFragmentContainer, messageFragment, null);
+                messageFragment.setMessage(getString(R.string.company_fetch_error));
+                ft.replace(R.id.companiesFragmentContainer, messageFragment, null);
                 ft.commit();
 
             }

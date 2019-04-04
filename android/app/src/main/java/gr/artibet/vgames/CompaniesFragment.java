@@ -13,33 +13,32 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import gr.artibet.vgames.adapters.FeatureAdapter;
-import gr.artibet.vgames.models.Feature;
+import gr.artibet.vgames.adapters.CompanyAdapter;
+import gr.artibet.vgames.models.Company;
 
-
-public class FeaturesFragment extends Fragment {
+public class CompaniesFragment extends Fragment {
 
     // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
-    private List<Feature> mFeatureList;
+    private List<Company> mCompanyList;
 
     private RecyclerView recyclerView;
-    private FeatureAdapter adapter;
+    private CompanyAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     // ---------------------------------------------------------------------------------------
     // Default constructor
     // ---------------------------------------------------------------------------------------
-    public FeaturesFragment() {
-        mFeatureList = new ArrayList<Feature>();
+    public CompaniesFragment() {
+        mCompanyList = new ArrayList<Company>();
     }
 
     // ---------------------------------------------------------------------------------------
-    // Set feature list
+    // Set company list
     // ---------------------------------------------------------------------------------------
-    public void setFeatureList(List<Feature> featureList) {
-        mFeatureList = featureList;
+    public void setCompanyList(List<Company> companyList) {
+        mCompanyList = companyList;
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
@@ -52,7 +51,7 @@ public class FeaturesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_features, container, false);
+        View view =  inflater.inflate(R.layout.fragment_companies, container, false);
 
         // Initialize recycler view
         buildRecyclerView(view);
@@ -64,22 +63,22 @@ public class FeaturesFragment extends Fragment {
     // Build recycler view
     // ---------------------------------------------------------------------------------------
     private void buildRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.featuresRecyclerView);
+        recyclerView = view.findViewById(R.id.companiesRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new FeatureAdapter(mFeatureList);
+        adapter = new CompanyAdapter(mCompanyList);
         recyclerView.setAdapter(adapter);
 
         // Set item click listener
-        adapter.setOnItemClickListener(new FeatureAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CompanyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Feature feature = mFeatureList.get(position);
+                Company company = mCompanyList.get(position);
 
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
-                intent.putExtra("TITLE", feature.getDesc());
-                intent.putExtra("QUERY", "games.json?feature=" + feature.getId());
+                intent.putExtra("TITLE", company.getDesc());
+                intent.putExtra("QUERY", "games.json?company=" + company.getId());
                 startActivity(intent);
 
             }

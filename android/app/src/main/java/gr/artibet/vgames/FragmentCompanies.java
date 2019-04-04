@@ -65,7 +65,7 @@ public class FragmentCompanies extends Fragment {
         View view = inflater.inflate(R.layout.fragment_companies, container, false);
 
         // Set refresh button click listener
-        refreshButton = view.findViewById(R.id.refreshCompanyListButton);
+        refreshButton = view.findViewById(R.id.refreshCompaniesButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +124,7 @@ public class FragmentCompanies extends Fragment {
 
     // Build recycler view
     private void buildRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.companyRecyclerView);
+        recyclerView = view.findViewById(R.id.companiesRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
