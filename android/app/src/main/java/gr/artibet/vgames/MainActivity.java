@@ -3,6 +3,7 @@ package gr.artibet.vgames;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -296,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements
 
     // Advanced search
     private void navSearch() {
-        Toast.makeText(this, "Advanced Search", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 }

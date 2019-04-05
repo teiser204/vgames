@@ -56,6 +56,7 @@
     <string name="no_platforms">Platform list is empty</string>
     <string name="no_languages">Language list is empty</string>
     <string name="image_gallery">Image gallery</string>
+    <string name="search_title">Search Criteria</string>
 
 
 </resources>
