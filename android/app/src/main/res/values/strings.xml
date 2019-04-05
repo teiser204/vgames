@@ -55,6 +55,7 @@
     <string name="no_companies">Company list is empty</string>
     <string name="no_platforms">Platform list is empty</string>
     <string name="no_languages">Language list is empty</string>
+    <string name="image_gallery">Image gallery</string>
 
 
 </resources>

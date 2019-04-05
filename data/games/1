@@ -67,5 +67,47 @@
             "id": "3",
             "desc": "français"
         }
+    ],
+    "gallery": [
+        {
+            "id": "1",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "2",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "3",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "4",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "5",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "6",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "7",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "8",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "9",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        },
+        {
+            "id": "10",
+            "image": "https://www.serres.gr/vgames/img/grim_dawn.jpg"
+        }
     ]
 }

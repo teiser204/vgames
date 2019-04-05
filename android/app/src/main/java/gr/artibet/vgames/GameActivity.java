@@ -3,6 +3,8 @@ package gr.artibet.vgames;
 import android.content.Intent;
 import android.media.Rating;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +19,11 @@ import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import gr.artibet.vgames.api.GameAPI;
 import gr.artibet.vgames.models.Feature;
+import gr.artibet.vgames.models.Gallery;
 import gr.artibet.vgames.models.Game;
 import gr.artibet.vgames.models.Genre;
 import gr.artibet.vgames.models.Language;
@@ -190,6 +195,21 @@ public class GameActivity extends AppCompatActivity {
         else {
             tvLanguages.setText("-");
         }
+
+        // Game Image Gallery
+        if (mGame.getGalleryList() != null) {
+            ArrayList<String> imageList = new ArrayList<>();
+            for (Gallery gallery : mGame.getGalleryList()) {
+                imageList.add(gallery.getImage());
+            }
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            GalleryFragment galleryFragment = new GalleryFragment();
+            galleryFragment.setImageList(imageList);
+            ft.add(R.id.galleryContainer, galleryFragment, null);
+            ft.commit();
+        }
+
 
         // Visit page listener
         btVisitPage.setOnClickListener(new View.OnClickListener() {

@@ -46,4 +46,5 @@
     <string name="no_companies">Η λίστα των εταιριών είναι κενή</string>
     <string name="no_platforms">Η λίστα των πλατφορμών είναι κενή</string>
     <string name="no_languages">Η λίστα των γλωσσών είναι κενή</string>
+    <string name="image_gallery">Συλλογή εικόνων</string>
 </resources>
