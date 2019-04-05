@@ -310,7 +310,18 @@ public class SearchActivity extends AppCompatActivity {
     private void setSearchFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.search_fragment_container, new SearchFragment(), null);
+        SearchFragment searchFragment = new SearchFragment();
+
+        // Set lists
+        searchFragment.setGenreList(mGenreList);
+        searchFragment.setCompanyList(mCompanyList);
+        searchFragment.setFeatureList(mFeatureList);
+        searchFragment.setPlatformList(mPlatformList);
+        searchFragment.setLanuageList(mLanguageList);
+
+        ft.replace(R.id.search_fragment_container,searchFragment, null);
         ft.commit();
+
+
     }
 }

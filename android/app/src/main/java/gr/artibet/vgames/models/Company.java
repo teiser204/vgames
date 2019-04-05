@@ -22,4 +22,7 @@ public class Company {
     public String getDesc() { return desc; }
     public void setDesc(String desc) { this.desc = desc; }
 
+    public String toString() {
+        return desc;
+    }
 }
