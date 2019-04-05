@@ -16,5 +16,47 @@
             "id": "1",
             "desc": "English"
         }
+    ],
+    "gallery": [
+        {
+            "id": "1",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "2",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "3",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "4",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "5",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "6",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "7",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "8",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "9",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        },
+        {
+            "id": "10",
+            "image": "https://www.serres.gr/vgames/img/diablo.jpg"
+        }
     ]
 }
