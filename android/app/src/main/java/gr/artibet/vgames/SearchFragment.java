@@ -34,8 +34,15 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
     List<Language> mLanguageList;
 
     // Widgets
-    EditText mEditTextTitle;
-    EditText mEditTextDesc;
+    EditText mTitleEditText;
+    EditText mDescriptionEditText;
+    EditText mReleaseYearFromEditText;
+    EditText mReleaseYearToEditText;
+    Spinner mGenreSpinner;
+    Spinner mCompanySpinner;
+    Spinner mFeatureSpinner;
+    Spinner mPlatformSpinner;
+    Spinner mLanguageSpinner;
 
     public SearchFragment() {
         mGenreList = new ArrayList<>();
@@ -71,8 +78,15 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
 
         // Get widgets
-        mEditTextTitle = view.findViewById(R.id.search_title);
-        mEditTextDesc = view.findViewById(R.id.search_description);
+        mTitleEditText = view.findViewById(R.id.search_title);
+        mDescriptionEditText = view.findViewById(R.id.search_description);
+        mReleaseYearFromEditText = view.findViewById(R.id.search_year_from);
+        mReleaseYearToEditText = view.findViewById(R.id.search_year_to);
+        mGenreSpinner = view.findViewById(R.id.search_genre);
+        mCompanySpinner = view.findViewById(R.id.search_company);
+        mFeatureSpinner = view.findViewById(R.id.search_feature);
+        mPlatformSpinner = view.findViewById(R.id.search_platform);
+        mLanguageSpinner = view.findViewById(R.id.search_language);
 
         // Create Adapters
         ArrayAdapter<Genre> genreAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, mGenreList);
@@ -88,26 +102,19 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         platformAdapter.setDropDownViewResource(R.layout.spinner_item);
         languageAdapter.setDropDownViewResource(R.layout.spinner_item);
 
-        // Get spinner views
-        Spinner genreSpinner = view.findViewById(R.id.search_genre);
-        Spinner companySpinner = view.findViewById(R.id.search_company);
-        Spinner featureSpinner = view.findViewById(R.id.search_feature);
-        Spinner platformSpinner = view.findViewById(R.id.search_platform);
-        Spinner languageSpinner = view.findViewById(R.id.search_language);
-
         // Set adapters to spinners
-        genreSpinner.setAdapter(genreAdapter);
-        companySpinner.setAdapter(companyAdapter);
-        featureSpinner.setAdapter(featureAdapter);
-        platformSpinner.setAdapter(platformAdapter);
-        languageSpinner.setAdapter(languageAdapter);
+        mGenreSpinner.setAdapter(genreAdapter);
+        mCompanySpinner.setAdapter(companyAdapter);
+        mFeatureSpinner.setAdapter(featureAdapter);
+        mPlatformSpinner.setAdapter(platformAdapter);
+        mLanguageSpinner.setAdapter(languageAdapter);
 
         // Hide soft keyboard on spinners touch
-        genreSpinner.setOnTouchListener(this);
-        companySpinner.setOnTouchListener(this);
-        featureSpinner.setOnTouchListener(this);
-        platformSpinner.setOnTouchListener(this);
-        languageSpinner.setOnTouchListener(this);
+        mGenreSpinner.setOnTouchListener(this);
+        mCompanySpinner.setOnTouchListener(this);
+        mFeatureSpinner.setOnTouchListener(this);
+        mPlatformSpinner.setOnTouchListener(this);
+        mLanguageSpinner.setOnTouchListener(this);
 
         return view;
 
@@ -119,8 +126,10 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         InputMethodManager imm=(InputMethodManager)getActivity().getApplicationContext().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mEditTextTitle.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(mEditTextDesc.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(mTitleEditText.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(mDescriptionEditText.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(mReleaseYearFromEditText.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(mReleaseYearToEditText.getWindowToken(), 0);
         return false;
     }
 

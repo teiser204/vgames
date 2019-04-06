@@ -98,8 +98,16 @@ public class SearchActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         switch (id) {
+
+            // Start searching
             case R.id.action_search:
                 Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+            // Clear search form
+            case R.id.action_clear:
+                // Recreate a new clean search fragment
+                if (!isDataPending()) setSearchFragment();
                 break;
         }
 
@@ -134,7 +142,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     // Gen genre list and add empty option
                     mGenreList = response.body();
-                    Genre emptyGenre = new Genre(-1, "(" + getString(R.string.choose_genre) + ")");
+                    Genre emptyGenre = new Genre(-1, "----------");
                     mGenreList.add(0, emptyGenre);
                     mGenreFetchStatus = FETCH_SUCCESS;
 
@@ -183,7 +191,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     // Gen company list and add empty option
                     mCompanyList = response.body();
-                    Company emptyCompany = new Company(-1, "(" + getString(R.string.choose_company) + ")");
+                    Company emptyCompany = new Company(-1, "----------");
                     mCompanyList.add(0, emptyCompany);
                     mCompaniesFetchStatus = FETCH_SUCCESS;
 
@@ -231,7 +239,7 @@ public class SearchActivity extends AppCompatActivity {
                     // Gen feature list and add empty option
                     mFeatureList = response.body();
                     mFeaturesFetchStatus = FETCH_SUCCESS;
-                    Feature emptyFeature = new Feature(-1, "(" + getString(R.string.choose_feature) + ")");
+                    Feature emptyFeature = new Feature(-1, "----------");
                     mFeatureList.add(0, emptyFeature);
 
                     // If all spinners have been fetched
@@ -280,7 +288,7 @@ public class SearchActivity extends AppCompatActivity {
                     // Gen platform list and add empty option
                     mPlatformList = response.body();
                     mPlantformsFetchStatus = FETCH_SUCCESS;
-                    Platform emptyPlatform = new Platform(-1, "(" + getString(R.string.choose_platform) + ")");
+                    Platform emptyPlatform = new Platform(-1, "----------");
                     mPlatformList.add(0, emptyPlatform);
 
                     // If all spinners have been fetched
@@ -328,7 +336,7 @@ public class SearchActivity extends AppCompatActivity {
                     // Gen language list and add empty option
                     mLanguageList = response.body();
                     mLanguagesFetchStatus = FETCH_SUCCESS;
-                    Language emptyLanguage = new Language(-1, "(" + getString(R.string.choose_language) + ")");
+                    Language emptyLanguage = new Language(-1, "----------");
                     mLanguageList.add(0, emptyLanguage);
 
                     // If all spinners have been fetched

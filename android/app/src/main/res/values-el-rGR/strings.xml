@@ -53,4 +53,8 @@
     <string name="choose_feature">Επιλέξτε χαρακτηριστικό</string>
     <string name="choose_platform">Επιλέξτε πλατφόρμα</string>
     <string name="choose_language">Επιλέξτε γλώσσα</string>
+    <string name="release_year_from">Έτος κυκλοφορίας (από)</string>
+    <string name="release_year_to">Έτος κυκλοφορίας (έως)</string>
+    <string name="game_description">Περιγραφή</string>
+    <string name="clear">Καθαρισμός</string>
 </resources>
