@@ -57,6 +57,11 @@
     <string name="no_languages">Language list is empty</string>
     <string name="image_gallery">Image gallery</string>
     <string name="search_title">Search Criteria</string>
+    <string name="choose_genre">Choose genre</string>
+    <string name="choose_company">Choose company</string>
+    <string name="choose_feature">Choose feature</string>
+    <string name="choose_platform">Choose platoform</string>
+    <string name="choose_language">Choose language</string>
 
 
 </resources>

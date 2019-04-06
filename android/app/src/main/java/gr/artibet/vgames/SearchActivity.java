@@ -4,6 +4,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -76,6 +79,34 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     // ---------------------------------------------------------------------------------------
+    // Create options menu
+    // ---------------------------------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        return true;
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Handle option menu actions
+    // ---------------------------------------------------------------------------------------
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_search:
+                Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // ---------------------------------------------------------------------------------------
     // Fetch genre
     // ---------------------------------------------------------------------------------------
     private void fetchGenre() {
@@ -101,11 +132,15 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else {
 
+                    // Gen genre list and add empty option
                     mGenreList = response.body();
+                    Genre emptyGenre = new Genre(-1, "(" + getString(R.string.choose_genre) + ")");
+                    mGenreList.add(0, emptyGenre);
                     mGenreFetchStatus = FETCH_SUCCESS;
 
                     // If all spinners have been fetched
                     // set search fragment
+                    if (!isDataPending()) setSearchFragment();
 
 
                 }
@@ -146,8 +181,15 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else {
 
+                    // Gen company list and add empty option
                     mCompanyList = response.body();
+                    Company emptyCompany = new Company(-1, "(" + getString(R.string.choose_company) + ")");
+                    mCompanyList.add(0, emptyCompany);
                     mCompaniesFetchStatus = FETCH_SUCCESS;
+
+
+                    // If all spinners have been fetched
+                    // set search fragment
                     if (!isDataPending()) setSearchFragment();
                 }
 
@@ -186,8 +228,14 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else {
 
+                    // Gen feature list and add empty option
                     mFeatureList = response.body();
                     mFeaturesFetchStatus = FETCH_SUCCESS;
+                    Feature emptyFeature = new Feature(-1, "(" + getString(R.string.choose_feature) + ")");
+                    mFeatureList.add(0, emptyFeature);
+
+                    // If all spinners have been fetched
+                    // set search fragment
                     if (!isDataPending()) setSearchFragment();
 
                 }
@@ -228,8 +276,15 @@ public class SearchActivity extends AppCompatActivity {
 
                 }
                 else {
+
+                    // Gen platform list and add empty option
                     mPlatformList = response.body();
                     mPlantformsFetchStatus = FETCH_SUCCESS;
+                    Platform emptyPlatform = new Platform(-1, "(" + getString(R.string.choose_platform) + ")");
+                    mPlatformList.add(0, emptyPlatform);
+
+                    // If all spinners have been fetched
+                    // set search fragment
                     if (!isDataPending()) setSearchFragment();
 
                 }
@@ -270,8 +325,14 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 else {
 
+                    // Gen language list and add empty option
                     mLanguageList = response.body();
                     mLanguagesFetchStatus = FETCH_SUCCESS;
+                    Language emptyLanguage = new Language(-1, "(" + getString(R.string.choose_language) + ")");
+                    mLanguageList.add(0, emptyLanguage);
+
+                    // If all spinners have been fetched
+                    // set search fragment
                     if (!isDataPending()) setSearchFragment();
                 }
 
@@ -317,7 +378,7 @@ public class SearchActivity extends AppCompatActivity {
         searchFragment.setCompanyList(mCompanyList);
         searchFragment.setFeatureList(mFeatureList);
         searchFragment.setPlatformList(mPlatformList);
-        searchFragment.setLanuageList(mLanguageList);
+        searchFragment.setLanguageList(mLanguageList);
 
         ft.replace(R.id.search_fragment_container,searchFragment, null);
         ft.commit();

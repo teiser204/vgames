@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.api.GameAPI;
@@ -22,9 +23,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentTop extends Fragment {
 
     // Class members
@@ -35,6 +33,7 @@ public class FragmentTop extends Fragment {
     // Default contractor
     public FragmentTop() {
         // Required empty public constructor
+        mGameList = new ArrayList<>();
     }
 
     @Override
@@ -56,7 +55,7 @@ public class FragmentTop extends Fragment {
             // Set initially wait fragment
             FragmentTransaction ft = mFragmentManager.beginTransaction();
             ft.add(R.id.topFragmentContainer, new WaitFragment(), null);
-            ft.commit();
+            ft.commitAllowingStateLoss();
         }
 
         // Set refresh button click listener
