@@ -1,11 +1,17 @@
 package gr.artibet.vgames;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -51,6 +57,9 @@ public class SearchActivity extends AppCompatActivity {
     int mFeaturesFetchStatus = FETCH_PENDING;
     int mPlantformsFetchStatus = FETCH_PENDING;
     int mLanguagesFetchStatus = FETCH_PENDING;
+
+    // Fragments
+    private SearchFragment mSearchFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +110,16 @@ public class SearchActivity extends AppCompatActivity {
 
             // Start searching
             case R.id.action_search:
-                Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show();
+                String url = mSearchFragment.getUrl();
+                if (url.isEmpty()) {
+                    showErrorToast(getString(R.string.no_search_criteria));
+                }
+                else {
+                    Intent intent = new Intent(this, ResultsActivity.class);
+                    intent.putExtra("TITLE", getResources().getString(R.string.advanced_search));
+                    intent.putExtra("QUERY", url);
+                    startActivity(intent);
+                }
                 break;
 
             // Clear search form
@@ -379,18 +397,32 @@ public class SearchActivity extends AppCompatActivity {
     private void setSearchFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        SearchFragment searchFragment = new SearchFragment();
+        mSearchFragment = new SearchFragment();
 
         // Set lists
-        searchFragment.setGenreList(mGenreList);
-        searchFragment.setCompanyList(mCompanyList);
-        searchFragment.setFeatureList(mFeatureList);
-        searchFragment.setPlatformList(mPlatformList);
-        searchFragment.setLanguageList(mLanguageList);
+        mSearchFragment.setGenreList(mGenreList);
+        mSearchFragment.setCompanyList(mCompanyList);
+        mSearchFragment.setFeatureList(mFeatureList);
+        mSearchFragment.setPlatformList(mPlatformList);
+        mSearchFragment.setLanguageList(mLanguageList);
 
-        ft.replace(R.id.search_fragment_container,searchFragment, null);
+        ft.replace(R.id.search_fragment_container, mSearchFragment, null);
         ft.commit();
+    }
 
+    // ---------------------------------------------------------------------------------------
+    // Toast error message
+    // ---------------------------------------------------------------------------------------
+    public void showErrorToast(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.toast_root));
 
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(message);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

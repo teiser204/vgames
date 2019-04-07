@@ -57,4 +57,7 @@
     <string name="release_year_to">Έτος κυκλοφορίας (έως)</string>
     <string name="game_description">Περιγραφή</string>
     <string name="clear">Καθαρισμός</string>
+    <string name="price_from">Τιμή (από)</string>
+    <string name="price_to">Τιμή (έως)</string>
+    <string name="no_search_criteria">Δεν έχετε δώσει κριτήρια αναζήτησης</string>
 </resources>

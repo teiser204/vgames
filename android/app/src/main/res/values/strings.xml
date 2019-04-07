@@ -66,6 +66,9 @@
     <string name="release_year_to">Release year (to)</string>
     <string name="game_description">Description</string>
     <string name="clear">Clear</string>
+    <string name="price_from">Price (from)</string>
+    <string name="price_to">Price (from)</string>
+    <string name="no_search_criteria">You have not provided any search criteria</string>
 
 
 </resources>
