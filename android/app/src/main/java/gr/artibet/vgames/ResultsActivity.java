@@ -6,8 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,42 +33,19 @@ public class ResultsActivity extends AppCompatActivity {
     private String mTitle;
     private String mQuery;
     private List<Game> mGameList = null;
-    private TextView mTvTitle;
-    private ImageView mIvRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        // if saveInstanceState isn't null activity resumed
-        if (savedInstanceState == null) {
-            // Set initially wait fragment
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragment_container, new WaitFragment(), null);
-            ft.commit();
-        }
-
-        // Set refresh button listener
-        mIvRefresh = findViewById(R.id.refreshResultButton);
-        mIvRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fetchGames();
-            }
-        });
-
         // Get intent data
         Intent intent = getIntent();
         mTitle = intent.getStringExtra("TITLE");
         mQuery = intent.getStringExtra("QUERY");
 
-        // Set title
-        mTvTitle = findViewById(R.id.results_title);
-        mTvTitle.setText(mTitle);
-
-        // Set back button on action bar
+        // Set title and back arrow
+        getSupportActionBar().setTitle(mTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Retrieve Games
@@ -73,9 +53,48 @@ public class ResultsActivity extends AppCompatActivity {
 
     }
 
+    // ---------------------------------------------------------------------------------------
+    // Options menu creation
+    // ---------------------------------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.results_menu, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            // Go back
+            case android.R.id.home:
+                onBackPressed();
+                break;
+
+            // Refresh results
+            case R.id.action_refresh:
+                fetchGames();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     // retrieve games for mQuery
     private void fetchGames() {
+
+        // Set wait fragment
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_container, new WaitFragment(), null);
+        ft.commit();
+
+        // Retrieve from API
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -90,9 +109,11 @@ public class ResultsActivity extends AppCompatActivity {
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                 if (!response.isSuccessful()) {
 
-                    // Toast failure message
-                    showErrorToast(getString(R.string.games_fetch_error));
-                    mTvTitle.setText(mTitle);
+                    // Set error message fragment
+                    MessageFragment mf = new MessageFragment();
+                    mf.setMessage(getString(R.string.games_fetch_error));
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mf, null).commit();
+
                 }
 
                 // Change adapters data
@@ -105,16 +126,16 @@ public class ResultsActivity extends AppCompatActivity {
 
                     if (mGameList == null || mGameList.size() == 0) {
                         fragment = new MessageFragment();
-                        mTvTitle.setText(mTitle + " (0)");
+                        getSupportActionBar().setTitle(mTitle + " (0)");
                     } else {
                         fragment = new ResultsFragment();
                         ((ResultsFragment) fragment).setGameList(mGameList);
 
                         // Set number of games into title
-                        mTvTitle.setText(mTitle + " (" + mGameList.size() + ")");
+                        getSupportActionBar().setTitle(mTitle + " (" + mGameList.size() + ")");
                     }
 
-                    // Set fragment
+                    // Set Results fragment
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.replace(R.id.fragment_container, fragment, null);
@@ -126,9 +147,10 @@ public class ResultsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
 
-                // Toast failure message
-                showErrorToast(getString(R.string.games_fetch_error));
-                mTvTitle.setText(mTitle);
+                // Set error message fragment
+                MessageFragment mf = new MessageFragment();
+                mf.setMessage(getString(R.string.games_fetch_error));
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mf, null).commit();
             }
         });
     }

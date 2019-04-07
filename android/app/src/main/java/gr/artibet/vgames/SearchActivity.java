@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -55,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
     int mGenreFetchStatus = FETCH_PENDING;
     int mCompaniesFetchStatus = FETCH_PENDING;
     int mFeaturesFetchStatus = FETCH_PENDING;
-    int mPlantformsFetchStatus = FETCH_PENDING;
+    int mPlatformsFetchStatus = FETCH_PENDING;
     int mLanguagesFetchStatus = FETCH_PENDING;
 
     // Fragments
@@ -66,8 +67,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        // Set title
+        // Set title and back arrow
         getSupportActionBar().setTitle(getResources().getString(R.string.search_title));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // if saveInstanceState isn't null activity resumed
         if (savedInstanceState == null) {
@@ -107,6 +109,11 @@ public class SearchActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         switch (id) {
+
+            // Go back
+            case android.R.id.home:
+                onBackPressed();
+                break;
 
             // Start searching
             case R.id.action_search:
@@ -305,7 +312,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     // Gen platform list and add empty option
                     mPlatformList = response.body();
-                    mPlantformsFetchStatus = FETCH_SUCCESS;
+                    mPlatformsFetchStatus = FETCH_SUCCESS;
                     Platform emptyPlatform = new Platform(-1, "----------");
                     mPlatformList.add(0, emptyPlatform);
 
@@ -381,7 +388,7 @@ public class SearchActivity extends AppCompatActivity {
         if (mGenreFetchStatus == FETCH_PENDING ||
             mCompaniesFetchStatus == FETCH_PENDING ||
             mFeaturesFetchStatus == FETCH_PENDING ||
-            mPlantformsFetchStatus == FETCH_PENDING ||
+            mPlatformsFetchStatus == FETCH_PENDING ||
             mLanguagesFetchStatus == FETCH_PENDING) {
 
             return true;

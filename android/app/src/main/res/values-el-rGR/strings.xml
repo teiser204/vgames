@@ -60,4 +60,5 @@
     <string name="price_from">Τιμή (από)</string>
     <string name="price_to">Τιμή (έως)</string>
     <string name="no_search_criteria">Δεν έχετε δώσει κριτήρια αναζήτησης</string>
+    <string name="game_details">Στοιχεία παιχνιδιού</string>
 </resources>

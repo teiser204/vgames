@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,15 +56,54 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mGameId = intent.getIntExtra("GAME_ID", 0);
 
+        // Set title and back arrow
+        getSupportActionBar().setTitle(R.string.game_details);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Fetch Game
         fetchGame();
 
     }
 
     // ---------------------------------------------------------------------------------------
+    // Options menu creation
+    // ---------------------------------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.game_menu, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            // Go back
+            case android.R.id.home:
+                onBackPressed();
+                break;
+
+            // Refresh results
+            case R.id.action_refresh:
+                fetchGame();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    // ---------------------------------------------------------------------------------------
     // Fetch game data from API
     // ---------------------------------------------------------------------------------------
     private void fetchGame() {
+
+        // Set wait fragment
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
