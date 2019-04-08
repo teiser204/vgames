@@ -82,7 +82,7 @@ public class FeaturesFragmentContainer extends Fragment {
     private void fetchFeatures() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

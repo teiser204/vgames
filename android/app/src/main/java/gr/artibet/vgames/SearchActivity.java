@@ -145,7 +145,7 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchGenre() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -195,7 +195,7 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchCompanies() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -243,7 +243,7 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchFeatures() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -291,7 +291,7 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchPlatforms() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -339,7 +339,7 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchLanguages() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

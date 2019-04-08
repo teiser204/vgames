@@ -9,6 +9,11 @@
         android:title="@string/advanced_search" />
 
     <item
+        android:id="@+id/nav_api_settings"
+        android:icon="@drawable/ic_api_settings"
+        android:title="@string/api_settings" />
+
+    <item
         android:id="@+id/nav_exit"
         android:icon="@drawable/ic_exit"
         android:title="@string/exit" />

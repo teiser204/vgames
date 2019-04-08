@@ -89,7 +89,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Fetch game data from API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

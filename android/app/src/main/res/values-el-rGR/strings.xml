@@ -62,4 +62,11 @@
     <string name="no_search_criteria">Δεν έχετε δώσει κριτήρια αναζήτησης</string>
     <string name="game_details">Στοιχεία παιχνιδιού</string>
     <string name="game_fetch_error">Σφάλμα κατά την ανάκτηση των δεδομένων του παιχνιδιού</string>
+    <string name="api_settings">Παράμετροι API</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="refresh">Ανανέωση</string>
+    <string name="game_list">Λίστα παιχνιδιών</string>
+    <string name="top_games">Κορυφαία παιχνίδια</string>
+    <string name="top_games_min_rating">Ελάχιστη αξιολόγηση κορυφαίων παιχνιδιών</string>
+    <string name="base_url">Βασική διεύθυνση URL</string>
 </resources>

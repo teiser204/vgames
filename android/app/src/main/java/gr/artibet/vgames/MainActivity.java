@@ -19,14 +19,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -134,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements
                 navSearch();
                 break;
 
+            case R.id.nav_api_settings:
+                apiSettings();
+                break;
+
             case R.id.nav_exit:
                 navExit();
                 break;
@@ -214,23 +212,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     // ---------------------------------------------------------------------------------------
-    // Toast error message
-    // ---------------------------------------------------------------------------------------
-    public void showErrorToast(String message) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.toast_root));
-
-        TextView text = layout.findViewById(R.id.toast_text);
-        text.setText(message);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
-    }
-
-
-    // ---------------------------------------------------------------------------------------
     // Back pressed override
     // ---------------------------------------------------------------------------------------
     @Override
@@ -244,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     // ---------------------------------------------------------------------------------------
-    // gr.artibet.vgames.App exit confirmation
+    // Exit confirmation
     // ---------------------------------------------------------------------------------------
     private void confirmExit() {
 
@@ -286,6 +267,13 @@ public class MainActivity extends AppCompatActivity implements
     // Advanced search
     private void navSearch() {
         Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+
+
+    // Open API Settings Activity
+    private void apiSettings() {
+        Intent intent = new Intent(this, ApiSettingsActivity.class);
         startActivity(intent);
     }
 }

@@ -66,6 +66,10 @@ public class ResultsActivity extends AppCompatActivity {
 
     }
 
+
+    // ---------------------------------------------------------------------------------------
+    // Menu listeners
+    // ---------------------------------------------------------------------------------------
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -85,7 +89,9 @@ public class ResultsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // retrieve games for mQuery
+    // ---------------------------------------------------------------------------------------
+    // Retrive games from API
+    // ---------------------------------------------------------------------------------------
     private void fetchGames() {
 
         // Set wait fragment
@@ -96,7 +102,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Retrieve from API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

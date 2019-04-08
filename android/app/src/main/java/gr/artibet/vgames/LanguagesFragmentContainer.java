@@ -79,7 +79,7 @@ public class LanguagesFragmentContainer extends Fragment {
     private void fetchLanguages() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getResources().getString(R.string.base_url))
+                .baseUrl("https://www.serres.gr/vgames/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

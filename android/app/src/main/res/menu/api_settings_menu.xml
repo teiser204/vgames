@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="gr.artibet.vgames.GameActivity">
+    tools:context="gr.artibet.vgames.ResultsActivity">
 
     <item
-        android:id="@+id/action_game_refresh"
-        android:icon="@drawable/ic_refresh"
-        android:title="@string/refresh"
+        android:id="@+id/action_api_settings_save"
+        android:icon="@drawable/ic_save"
+        android:title="@string/save"
         app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

@@ -170,7 +170,7 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         int nCriteria = 0;
 
         // Start with base url
-        String baseUrl = getResources().getString(R.string.base_url);
+        String baseUrl = "https://www.serres.gr/vgames/";
 
         // Build Uri object and append "games" path
         Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
