@@ -4,8 +4,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import gr.artibet.vgames.api.ApiSettings;
 
 public class ApiSettingsActivity extends AppCompatActivity {
+
+    // ---------------------------------------------------------------------------------------
+    // Class members - widgets
+    // ---------------------------------------------------------------------------------------
+    EditText mBaseUrlEditText;
+    EditText mGamesEditText;
+    EditText mGameDetailsEditText;
+    EditText mTopGamesEditText;
+    EditText mTopGamesRatingEditText;
+    EditText mGenresEditText;
+    EditText mCompaniesEditText;
+    EditText mFeaturesEditText;
+    EditText mPlatformsEditText;
+    EditText mLanguagesEditText;
 
 
     // ---------------------------------------------------------------------------------------
@@ -19,6 +36,31 @@ public class ApiSettingsActivity extends AppCompatActivity {
         // Set title and back arrow
         getSupportActionBar().setTitle(getResources().getString(R.string.api_settings));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Get widget references
+        mBaseUrlEditText = findViewById(R.id.api_settings_baseurl);
+        mGamesEditText = findViewById(R.id.api_settings_games);
+        mGameDetailsEditText = findViewById(R.id.api_settings_game_details);
+        mTopGamesEditText = findViewById(R.id.api_settings_top_games);
+        mTopGamesRatingEditText = findViewById(R.id.api_settings_top_games_rating);
+        mGenresEditText = findViewById(R.id.api_settings_genre);
+        mCompaniesEditText = findViewById(R.id.api_settings_companies);
+        mFeaturesEditText = findViewById(R.id.api_settings_features);
+        mPlatformsEditText = findViewById(R.id.api_settings_platforms);
+        mLanguagesEditText = findViewById(R.id.api_settings_languages);
+
+        // Load settings
+        ApiSettings apiSettings = new ApiSettings(this);
+        mBaseUrlEditText.setText(apiSettings.getBaseUrl());
+        mGamesEditText.setText(apiSettings.getGames());
+        mGameDetailsEditText.setText(apiSettings.getGameDetails());
+        mTopGamesEditText.setText(apiSettings.getTopGames());
+        mTopGamesRatingEditText.setText(String.valueOf(apiSettings.getTopGamesRating()));
+        mGenresEditText.setText(apiSettings.getGenre());
+        mCompaniesEditText.setText(apiSettings.getCompanies());
+        mFeaturesEditText.setText(apiSettings.getFeatures());
+        mPlatformsEditText.setText(apiSettings.getPlatforms());
+        mLanguagesEditText.setText(apiSettings.getLanguages());
 
     }
 
@@ -50,9 +92,33 @@ public class ApiSettingsActivity extends AppCompatActivity {
                 break;
 
             // Save settings
+            case R.id.action_api_settings_save:
+                saveSettings();
+                break;
 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Save API settings int shared preferences
+    // ---------------------------------------------------------------------------------------
+    private void saveSettings() {
+        ApiSettings apiSettings = new ApiSettings(this);
+
+        apiSettings.setBaseUrl(mBaseUrlEditText.getText().toString());
+        apiSettings.setGames(mGamesEditText.getText().toString());
+        apiSettings.setGameDetails(mGameDetailsEditText.getText().toString());
+        apiSettings.setTopGames(mTopGamesEditText.getText().toString());
+        apiSettings.setTopGamesRating(Float.parseFloat(mTopGamesRatingEditText.getText().toString()));
+        apiSettings.setGenre(mGenresEditText.getText().toString());
+        apiSettings.setCompanies(mCompaniesEditText.getText().toString());
+        apiSettings.setFeatures(mFeaturesEditText.getText().toString());
+        apiSettings.setPlatforms(mPlatformsEditText.getText().toString());
+        apiSettings.setLanguages(mLanguagesEditText.getText().toString());
+
+        apiSettings.save();
+
     }
 }
