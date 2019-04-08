@@ -107,6 +107,7 @@ public class ResultsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+
                 if (!response.isSuccessful()) {
 
                     // Set error message fragment
@@ -114,32 +115,34 @@ public class ResultsActivity extends AppCompatActivity {
                     mf.setMessage(getString(R.string.games_fetch_error));
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mf, null).commit();
 
-                }
+                } else {
 
-                // Change adapters data
-                mGameList = response.body();
+                    // Change adapters data
+                    mGameList = response.body();
 
-                // Set fragment results or no results
-                if (findViewById(R.id.fragment_container) != null) {
+                    // Set fragment results or no results
+                    if (findViewById(R.id.fragment_container) != null) {
 
-                    Fragment fragment;
+                        Fragment fragment;
 
-                    if (mGameList == null || mGameList.size() == 0) {
-                        fragment = new MessageFragment();
-                        getSupportActionBar().setTitle(mTitle + " (0)");
-                    } else {
-                        fragment = new ResultsFragment();
-                        ((ResultsFragment) fragment).setGameList(mGameList);
+                        if (mGameList == null || mGameList.size() == 0) {
+                            fragment = new MessageFragment();
+                            getSupportActionBar().setTitle(mTitle + " (0)");
+                        } else {
+                            fragment = new ResultsFragment();
+                            ((ResultsFragment) fragment).setGameList(mGameList);
 
-                        // Set number of games into title
-                        getSupportActionBar().setTitle(mTitle + " (" + mGameList.size() + ")");
+                            // Set number of games into title
+                            getSupportActionBar().setTitle(mTitle + " (" + mGameList.size() + ")");
+                        }
+
+                        // Set Results fragment
+                        FragmentManager fm = getSupportFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.fragment_container, fragment, null);
+                        ft.commit();
                     }
 
-                    // Set Results fragment
-                    FragmentManager fm = getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, fragment, null);
-                    ft.commit();
                 }
 
             }
@@ -155,18 +158,6 @@ public class ResultsActivity extends AppCompatActivity {
         });
     }
 
-    public void showErrorToast(String message) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.toast_root));
-
-        TextView text = layout.findViewById(R.id.toast_text);
-        text.setText(message);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
 
 }
 

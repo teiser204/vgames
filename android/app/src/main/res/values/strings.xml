@@ -70,6 +70,7 @@
     <string name="price_to">Price (from)</string>
     <string name="no_search_criteria">You have not provided any search criteria</string>
     <string name="game_details">Game details</string>
+    <string name="game_fetch_error">Game fetch error</string>
 
 
 </resources>
