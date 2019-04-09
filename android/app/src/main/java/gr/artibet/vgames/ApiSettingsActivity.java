@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import gr.artibet.vgames.api.ApiSettings;
+import gr.artibet.vgames.globals.Util;
 
 public class ApiSettingsActivity extends AppCompatActivity {
 
@@ -119,6 +120,8 @@ public class ApiSettingsActivity extends AppCompatActivity {
         apiSettings.setLanguages(mLanguagesEditText.getText().toString());
 
         apiSettings.save();
+
+        Util.successToast(this, getResources().getString(R.string.api_settings_saved));
 
     }
 }

@@ -62,7 +62,7 @@ public class GameFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_game, container, false);
 
         // Update UI
-        updateUI(view);
+        if (mGame != null) updateUI(view);
 
         return view;
     }

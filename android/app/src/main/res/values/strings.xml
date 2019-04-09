@@ -77,6 +77,7 @@
     <string name="game_list">Game list</string>
     <string name="top_games">Top games</string>
     <string name="top_games_min_rating">Top games minimum rating</string>
+    <string name="api_settings_saved">API settings has been saved successfully</string>
 
 
 </resources>

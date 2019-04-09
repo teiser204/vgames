@@ -22,6 +22,7 @@ import gr.artibet.vgames.api.FeatureAPI;
 import gr.artibet.vgames.api.GenreAPI;
 import gr.artibet.vgames.api.LanguageAPI;
 import gr.artibet.vgames.api.PlatformAPI;
+import gr.artibet.vgames.globals.Util;
 import gr.artibet.vgames.models.Company;
 import gr.artibet.vgames.models.Feature;
 import gr.artibet.vgames.models.Genre;
@@ -119,7 +120,7 @@ public class SearchActivity extends AppCompatActivity {
             case R.id.action_search:
                 String url = mSearchFragment.getUrl();
                 if (url.isEmpty()) {
-                    showErrorToast(getString(R.string.no_search_criteria));
+                    Util.errorToast(this, getString(R.string.no_search_criteria));
                 }
                 else {
                     Intent intent = new Intent(this, ResultsActivity.class);
@@ -417,19 +418,5 @@ public class SearchActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    // ---------------------------------------------------------------------------------------
-    // Toast error message
-    // ---------------------------------------------------------------------------------------
-    public void showErrorToast(String message) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.toast_root));
 
-        TextView text = layout.findViewById(R.id.toast_text);
-        text.setText(message);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
 }
