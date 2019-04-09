@@ -2,6 +2,7 @@ package gr.artibet.vgames;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.adapters.GenreAdapter;
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.models.Genre;
 
 
@@ -78,9 +80,13 @@ public class GenreFragment extends Fragment {
             public void onItemClick(int position) {
                 Genre genre = mGenreList.get(position);
 
+                ApiSettings apiSettings = new ApiSettings(getActivity());
+                Uri.Builder builder = Uri.parse(apiSettings.getGamesUrl()).buildUpon();
+                builder.appendQueryParameter("genre", String.valueOf(genre.getId()));
+
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("TITLE", genre.getDesc());
-                intent.putExtra("QUERY", "games.json?genre=" + genre.getId());
+                intent.putExtra("QUERY", builder.build().toString());
                 startActivity(intent);
 
             }

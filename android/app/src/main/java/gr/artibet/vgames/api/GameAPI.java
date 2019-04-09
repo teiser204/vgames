@@ -13,8 +13,8 @@ public interface GameAPI {
     @GET
     Call<List<Game>> getGames(@Url String query);
 
-    @GET("games/{id}")
-    Call<Game> getGame(@Path("id") int id);
+    @GET
+    Call<Game> getGameDetails(@Url String url);
 
     @GET
     Call<List<Game>> getTopGames(@Url String url);

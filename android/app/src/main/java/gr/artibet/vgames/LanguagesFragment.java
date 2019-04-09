@@ -2,6 +2,7 @@ package gr.artibet.vgames;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.adapters.LanguageAdapter;
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.models.Language;
 
 public class LanguagesFragment extends Fragment {
@@ -76,9 +78,13 @@ public class LanguagesFragment extends Fragment {
             public void onItemClick(int position) {
                 Language language = mLanguageList.get(position);
 
+                ApiSettings apiSettings = new ApiSettings(getActivity());
+                Uri.Builder builder = Uri.parse(apiSettings.getGamesUrl()).buildUpon();
+                builder.appendQueryParameter("language", String.valueOf(language.getId()));
+
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("TITLE", language.getDesc());
-                intent.putExtra("QUERY", "games.json?language=" + language.getId());
+                intent.putExtra("QUERY", builder.build().toString());
                 startActivity(intent);
 
             }

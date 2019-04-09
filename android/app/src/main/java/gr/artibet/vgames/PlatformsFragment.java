@@ -2,6 +2,7 @@ package gr.artibet.vgames;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.artibet.vgames.adapters.PlatformAdapter;
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.models.Platform;
 
 public class PlatformsFragment extends Fragment {
@@ -76,9 +78,13 @@ public class PlatformsFragment extends Fragment {
             public void onItemClick(int position) {
                 Platform platform = mPlatformList.get(position);
 
+                ApiSettings apiSettings = new ApiSettings(getActivity());
+                Uri.Builder builder = Uri.parse(apiSettings.getGamesUrl()).buildUpon();
+                builder.appendQueryParameter("platform", String.valueOf(platform.getId()));
+
                 Intent intent = new Intent(getActivity(), ResultsActivity.class);
                 intent.putExtra("TITLE", platform.getDesc());
-                intent.putExtra("QUERY", "games.json?platform=" + platform.getId());
+                intent.putExtra("QUERY", builder.build().toString());
                 startActivity(intent);
 
             }

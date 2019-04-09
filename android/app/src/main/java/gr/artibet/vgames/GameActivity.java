@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.GameAPI;
 import gr.artibet.vgames.models.Game;
 import retrofit2.Call;
@@ -87,15 +88,17 @@ public class GameActivity extends AppCompatActivity {
         ft.replace(R.id.game_fragment_container, new WaitFragment(), null);
         ft.commit();
 
+        ApiSettings apiSettings = new ApiSettings(this);
+
         // Fetch game data from API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GameAPI gameAPI = retrofit.create(GameAPI.class);
 
-        Call<Game> call = gameAPI.getGame(mGameId);
+        Call<Game> call = gameAPI.getGameDetails(apiSettings.getGameDetailsUrl(mGameId));
 
         call.enqueue(new Callback<Game>() {
             @Override

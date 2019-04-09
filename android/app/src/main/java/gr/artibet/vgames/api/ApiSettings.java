@@ -249,4 +249,26 @@ public class ApiSettings {
 
     }
 
+    // ---------------------------------------------------------------------------------------
+    // Language list URL
+    // ---------------------------------------------------------------------------------------
+    public String getGamesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mGames).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Language list URL
+    // ---------------------------------------------------------------------------------------
+    public String getGameDetailsUrl(int gameId) {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mGameDetails).buildUpon();
+        builder.appendPath(String.valueOf(gameId));
+
+        String str = builder.build().toString();
+        return builder.build().toString();
+
+    }
+
 }

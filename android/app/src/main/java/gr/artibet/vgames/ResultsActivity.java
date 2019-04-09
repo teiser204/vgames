@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.GameAPI;
 import gr.artibet.vgames.models.Game;
 import retrofit2.Call;
@@ -100,9 +101,11 @@ public class ResultsActivity extends AppCompatActivity {
         ft.replace(R.id.fragment_container, new WaitFragment(), null);
         ft.commit();
 
+        ApiSettings apiSettings = new ApiSettings(this);
+
         // Retrieve from API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

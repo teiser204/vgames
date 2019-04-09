@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.models.Company;
 import gr.artibet.vgames.models.Feature;
 import gr.artibet.vgames.models.Genre;
@@ -169,12 +170,10 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         // Count criteria - There should be at least one
         int nCriteria = 0;
 
-        // Start with base url
-        String baseUrl = "https://www.serres.gr/vgames/";
 
-        // Build Uri object and append "games" path
-        Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
-        builder.appendPath(PATH_GAMES);
+        // Build Uri object
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+        Uri.Builder builder = Uri.parse(apiSettings.getGamesUrl()).buildUpon();
 
         // Title
         String title = mTitleEditText.getText().toString();
@@ -258,6 +257,7 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         if (nCriteria == 0) {
             return "";
         }
+        String str = builder.build().toString();
         return builder.build().toString();
 
     }
