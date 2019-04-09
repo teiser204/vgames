@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.CompanyAPI;
 import gr.artibet.vgames.api.LanguageAPI;
 import gr.artibet.vgames.models.Company;
@@ -78,14 +79,16 @@ public class LanguagesFragmentContainer extends Fragment {
     // ---------------------------------------------------------------------------------------
     private void fetchLanguages() {
 
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         LanguageAPI api = retrofit.create(LanguageAPI.class);
 
-        Call<List<Language>> call = api.getLanguages();
+        Call<List<Language>> call = api.getLanguages(apiSettings.getLanguagesUrl());
 
         call.enqueue(new Callback<List<Language>>() {
             @Override

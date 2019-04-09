@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.CompanyAPI;
 import gr.artibet.vgames.api.FeatureAPI;
 import gr.artibet.vgames.api.GenreAPI;
@@ -47,22 +48,28 @@ public class SearchActivity extends AppCompatActivity {
     // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
-    List<Genre> mGenreList;
-    List<Company> mCompanyList;
-    List<Feature> mFeatureList;
-    List<Platform> mPlatformList;
-    List<Language> mLanguageList;
+    private List<Genre> mGenreList;
+    private List<Company> mCompanyList;
+    private List<Feature> mFeatureList;
+    private List<Platform> mPlatformList;
+    private List<Language> mLanguageList;
 
     // fetch status - 1 indicates successful fetching
-    int mGenreFetchStatus = FETCH_PENDING;
-    int mCompaniesFetchStatus = FETCH_PENDING;
-    int mFeaturesFetchStatus = FETCH_PENDING;
-    int mPlatformsFetchStatus = FETCH_PENDING;
-    int mLanguagesFetchStatus = FETCH_PENDING;
+    private int mGenreFetchStatus = FETCH_PENDING;
+    private int mCompaniesFetchStatus = FETCH_PENDING;
+    private int mFeaturesFetchStatus = FETCH_PENDING;
+    private int mPlatformsFetchStatus = FETCH_PENDING;
+    private int mLanguagesFetchStatus = FETCH_PENDING;
 
     // Fragments
     private SearchFragment mSearchFragment = null;
 
+    // API settings
+    private ApiSettings mApiSettings;
+
+    // ---------------------------------------------------------------------------------------
+    // onCreate
+    // ---------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +78,9 @@ public class SearchActivity extends AppCompatActivity {
         // Set title and back arrow
         getSupportActionBar().setTitle(getResources().getString(R.string.search_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Create API settings instance
+        mApiSettings = new ApiSettings(this);
 
         // if saveInstanceState isn't null activity resumed
         if (savedInstanceState == null) {
@@ -146,13 +156,13 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchGenre() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(mApiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GenreAPI api = retrofit.create(GenreAPI.class);
 
-        Call<List<Genre>> call = api.getGenres();
+        Call<List<Genre>> call = api.getGenres(mApiSettings.getGenreUrl());
 
         call.enqueue(new Callback<List<Genre>>() {
             @Override
@@ -196,13 +206,13 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchCompanies() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(mApiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         CompanyAPI api = retrofit.create(CompanyAPI.class);
 
-        Call<List<Company>> call = api.getCompanies();
+        Call<List<Company>> call = api.getCompanies(mApiSettings.getCompaniesUrl());
 
         call.enqueue(new Callback<List<Company>>() {
             @Override
@@ -244,13 +254,13 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchFeatures() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(mApiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         FeatureAPI api = retrofit.create(FeatureAPI.class);
 
-        Call<List<Feature>> call = api.getFeatures();
+        Call<List<Feature>> call = api.getFeatures(mApiSettings.getFeaturesUrl());
 
         call.enqueue(new Callback<List<Feature>>() {
             @Override
@@ -292,13 +302,13 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchPlatforms() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(mApiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         PlatformAPI api = retrofit.create(PlatformAPI.class);
 
-        Call<List<Platform>> call = api.getPlatforms();
+        Call<List<Platform>> call = api.getPlatforms(mApiSettings.getPlatformsUrl());
 
         call.enqueue(new Callback<List<Platform>>() {
             @Override
@@ -340,13 +350,13 @@ public class SearchActivity extends AppCompatActivity {
     private void fetchLanguages() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(mApiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         LanguageAPI api = retrofit.create(LanguageAPI.class);
 
-        Call<List<Language>> call = api.getLanguages();
+        Call<List<Language>> call = api.getLanguages(mApiSettings.getLanguagesUrl());
 
         call.enqueue(new Callback<List<Language>>() {
             @Override

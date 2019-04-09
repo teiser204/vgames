@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.GameAPI;
 import gr.artibet.vgames.models.Game;
 import retrofit2.Call;
@@ -78,14 +79,16 @@ public class FragmentTop extends Fragment {
     // ---------------------------------------------------------------------------------------
     private void fetchTopGames() {
 
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GameAPI gameAPI = retrofit.create(GameAPI.class);
 
-        Call<List<Game>> call = gameAPI.getTopGames();
+        Call<List<Game>> call = gameAPI.getTopGames(apiSettings.getTopGamesUrl());
 
         call.enqueue(new Callback<List<Game>>() {
             @Override

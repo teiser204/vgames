@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.FeatureAPI;
 import gr.artibet.vgames.api.GenreAPI;
 import gr.artibet.vgames.models.Feature;
@@ -81,14 +82,16 @@ public class FeaturesFragmentContainer extends Fragment {
     // ---------------------------------------------------------------------------------------
     private void fetchFeatures() {
 
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         FeatureAPI api = retrofit.create(FeatureAPI.class);
 
-        Call<List<Feature>> call = api.getFeatures();
+        Call<List<Feature>> call = api.getFeatures(apiSettings.getFeaturesUrl());
 
         call.enqueue(new Callback<List<Feature>>() {
             @Override

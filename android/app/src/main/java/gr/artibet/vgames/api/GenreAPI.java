@@ -5,9 +5,10 @@ import java.util.List;
 import gr.artibet.vgames.models.Genre;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 public interface GenreAPI {
 
-    @GET("genres.json")
-    Call<List<Genre>> getGenres();
+    @GET
+    Call<List<Genre>> getGenres(@Url String url);
 }

@@ -5,9 +5,10 @@ import java.util.List;
 import gr.artibet.vgames.models.Language;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 public interface LanguageAPI {
 
-    @GET("languages.json")
-    Call<List<Language>> getLanguages();
+    @GET
+    Call<List<Language>> getLanguages(@Url String url);
 }

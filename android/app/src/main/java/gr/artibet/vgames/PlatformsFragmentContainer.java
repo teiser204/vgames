@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.CompanyAPI;
 import gr.artibet.vgames.api.PlatformAPI;
 import gr.artibet.vgames.models.Company;
@@ -78,14 +79,16 @@ public class PlatformsFragmentContainer extends Fragment {
     // ---------------------------------------------------------------------------------------
     private void fetchPlatforms() {
 
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         PlatformAPI api = retrofit.create(PlatformAPI.class);
 
-        Call<List<Platform>> call = api.getPlatforms();
+        Call<List<Platform>> call = api.getPlatforms(apiSettings.getPlatformsUrl());
 
         call.enqueue(new Callback<List<Platform>>() {
             @Override

@@ -2,6 +2,7 @@ package gr.artibet.vgames.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 public class ApiSettings {
 
@@ -9,7 +10,7 @@ public class ApiSettings {
     // Keys to shared preferences
     // ---------------------------------------------------------------------------------------
     private static final String API_SHARED_PREFS = "apiSharedPrefs";
-    private static final String BASE_URL = "apiBaseurl";
+    private static final String BASE_URL = "apiBaseUrl";
     private static final String GAMES = "apiGames";
     private static final String GAME_DETAILS = "apiGameDetails";
     private static final String TOP_GAMES = "apiTopGames";
@@ -23,7 +24,7 @@ public class ApiSettings {
     // ---------------------------------------------------------------------------------------
     // Default values
     // ---------------------------------------------------------------------------------------
-    private static final String mbaseUrlDefault = "https://www.serres.gr/vgames/";
+    private static final String mBaseUrlDefault = "https://www.serres.gr/vgames/";
     private static final String mGamesDefault = "games";
     private static final String mGameDetailsDefault = "games/{id}";
     private static final String mTopGamesDefault = "top_games";
@@ -58,7 +59,7 @@ public class ApiSettings {
 
         // Load shared preferences - set defaults if none exist
         SharedPreferences sharedPreferences = context.getSharedPreferences(API_SHARED_PREFS, Context.MODE_PRIVATE);
-        mBaseUrl = sharedPreferences.getString(BASE_URL, mbaseUrlDefault);
+        mBaseUrl = sharedPreferences.getString(BASE_URL, mBaseUrlDefault);
         mGames = sharedPreferences.getString(GAMES, mGamesDefault);
         mGameDetails = sharedPreferences.getString(GAME_DETAILS, mGameDetailsDefault);
         mTopGames = sharedPreferences.getString(TOP_GAMES, mTopGamesDefault);
@@ -98,7 +99,11 @@ public class ApiSettings {
     // ---------------------------------------------------------------------------------------
 
     public String getBaseUrl() {
-        return mBaseUrl;
+
+        // Add trailing '/' if not exist
+        if (mBaseUrl.endsWith("/")) return mBaseUrl;
+        else return new String(mBaseUrl + "/");
+
     }
 
     public String getGames() {
@@ -181,4 +186,67 @@ public class ApiSettings {
     public void setLanguages(String languages) {
         this.mLanguages = languages;
     }
+
+
+    // ---------------------------------------------------------------------------------------
+    // Top games URL
+    // ---------------------------------------------------------------------------------------
+    public String getTopGamesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mTopGames).buildUpon();
+        builder.appendQueryParameter("rating", String.valueOf(mTopGamesRating));
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Genre list URL
+    // ---------------------------------------------------------------------------------------
+    public String getGenreUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mGenre).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Feature list URL
+    // ---------------------------------------------------------------------------------------
+    public String getFeaturesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mFeatures).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Company list URL
+    // ---------------------------------------------------------------------------------------
+    public String getCompaniesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mCompanies).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Platform list URL
+    // ---------------------------------------------------------------------------------------
+    public String getPlatformsUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mPlatforms).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Language list URL
+    // ---------------------------------------------------------------------------------------
+    public String getLanguagesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl() + mLanguages).buildUpon();
+
+        return builder.build().toString();
+
+    }
+
 }

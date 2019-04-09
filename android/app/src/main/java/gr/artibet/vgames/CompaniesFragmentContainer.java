@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import gr.artibet.vgames.api.ApiSettings;
 import gr.artibet.vgames.api.CompanyAPI;
 import gr.artibet.vgames.models.Company;
 import retrofit2.Call;
@@ -76,14 +77,16 @@ public class CompaniesFragmentContainer extends Fragment {
     // ---------------------------------------------------------------------------------------
     private void fetchCompanies() {
 
+        ApiSettings apiSettings = new ApiSettings(getActivity());
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.serres.gr/vgames/")
+                .baseUrl(apiSettings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         CompanyAPI api = retrofit.create(CompanyAPI.class);
 
-        Call<List<Company>> call = api.getCompanies();
+        Call<List<Company>> call = api.getCompanies(apiSettings.getCompaniesUrl());
 
         call.enqueue(new Callback<List<Company>>() {
             @Override
