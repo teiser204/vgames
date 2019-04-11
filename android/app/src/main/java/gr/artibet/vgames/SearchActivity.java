@@ -63,6 +63,7 @@ public class SearchActivity extends AppCompatActivity {
 
     // Fragments
     private SearchFragment mSearchFragment = null;
+    private MessageFragment mMessageFragment = null;
 
     // API settings
     private ApiSettings mApiSettings;
@@ -128,15 +129,16 @@ public class SearchActivity extends AppCompatActivity {
 
             // Start searching
             case R.id.action_search:
-                String url = mSearchFragment.getUrl();
-                if (url.isEmpty()) {
-                    Util.errorToast(this, getString(R.string.no_search_criteria));
-                }
-                else {
-                    Intent intent = new Intent(this, ResultsActivity.class);
-                    intent.putExtra("TITLE", getResources().getString(R.string.advanced_search));
-                    intent.putExtra("QUERY", url);
-                    startActivity(intent);
+                if (mSearchFragment != null) {
+                    String url = mSearchFragment.getUrl();
+                    if (url.isEmpty()) {
+                        Util.errorToast(this, getString(R.string.no_search_criteria));
+                    } else {
+                        Intent intent = new Intent(this, ResultsActivity.class);
+                        intent.putExtra("TITLE", getResources().getString(R.string.advanced_search));
+                        intent.putExtra("QUERY", url);
+                        startActivity(intent);
+                    }
                 }
                 break;
 
@@ -170,9 +172,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
-
-                    // Set message fragment
-
+                    mGenreFetchStatus = FETCH_ERROR;
                 }
                 else {
 
@@ -182,20 +182,17 @@ public class SearchActivity extends AppCompatActivity {
                     mGenreList.add(0, emptyGenre);
                     mGenreFetchStatus = FETCH_SUCCESS;
 
-                    // If all spinners have been fetched
-                    // set search fragment
-                    if (!isDataPending()) setSearchFragment();
-
-
                 }
+
+                if (!isDataPending()) setSearchFragment();
 
             }
 
             // Fetch error
             @Override
             public void onFailure(Call<List<Genre>> call, Throwable t) {
-
-
+                mGenreFetchStatus = FETCH_ERROR;
+                if (!isDataPending()) setSearchFragment();
             }
         });
     }
@@ -220,8 +217,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
-
-
+                    mCompaniesFetchStatus = FETCH_ERROR;
                 }
                 else {
 
@@ -231,19 +227,17 @@ public class SearchActivity extends AppCompatActivity {
                     mCompanyList.add(0, emptyCompany);
                     mCompaniesFetchStatus = FETCH_SUCCESS;
 
-
-                    // If all spinners have been fetched
-                    // set search fragment
-                    if (!isDataPending()) setSearchFragment();
                 }
+
+                if (!isDataPending()) setSearchFragment();
 
             }
 
             // Fetch error
             @Override
             public void onFailure(Call<List<Company>> call, Throwable t) {
-
-
+                mCompaniesFetchStatus = FETCH_ERROR;
+                if (!isDataPending()) setSearchFragment();
             }
         });
     }
@@ -268,7 +262,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
-
+                    mFeaturesFetchStatus = FETCH_ERROR;
                 }
                 else {
 
@@ -278,19 +272,17 @@ public class SearchActivity extends AppCompatActivity {
                     Feature emptyFeature = new Feature(-1, "----------");
                     mFeatureList.add(0, emptyFeature);
 
-                    // If all spinners have been fetched
-                    // set search fragment
-                    if (!isDataPending()) setSearchFragment();
-
                 }
+
+                if (!isDataPending()) setSearchFragment();
 
             }
 
             // Fetch error
             @Override
             public void onFailure(Call<List<Feature>> call, Throwable t) {
-
-
+                mFeaturesFetchStatus = FETCH_ERROR;
+                if (!isDataPending()) setSearchFragment();
             }
         });
     }
@@ -316,8 +308,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
-
-
+                    mPlatformsFetchStatus = FETCH_ERROR;
                 }
                 else {
 
@@ -327,19 +318,17 @@ public class SearchActivity extends AppCompatActivity {
                     Platform emptyPlatform = new Platform(-1, "----------");
                     mPlatformList.add(0, emptyPlatform);
 
-                    // If all spinners have been fetched
-                    // set search fragment
-                    if (!isDataPending()) setSearchFragment();
-
                 }
+
+                if (!isDataPending()) setSearchFragment();
 
             }
 
             // Fetch error
             @Override
             public void onFailure(Call<List<Platform>> call, Throwable t) {
-
-
+                mPlatformsFetchStatus = FETCH_ERROR;
+                if (!isDataPending()) setSearchFragment();
             }
         });
     }
@@ -364,8 +353,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 // 404 or something
                 if (!response.isSuccessful()) {
-
-
+                    mLanguagesFetchStatus = FETCH_ERROR;
                 }
                 else {
 
@@ -375,19 +363,16 @@ public class SearchActivity extends AppCompatActivity {
                     Language emptyLanguage = new Language(-1, "----------");
                     mLanguageList.add(0, emptyLanguage);
 
-                    // If all spinners have been fetched
-                    // set search fragment
-                    if (!isDataPending()) setSearchFragment();
                 }
 
+                if (!isDataPending()) setSearchFragment();
             }
 
             // Fetch error
             @Override
             public void onFailure(Call<List<Language>> call, Throwable t) {
-
-
-
+                mLanguagesFetchStatus = FETCH_ERROR;
+                if (!isDataPending()) setSearchFragment();
             }
         });
     }
@@ -413,18 +398,59 @@ public class SearchActivity extends AppCompatActivity {
     // Replace wait fragment with search fragment
     // ---------------------------------------------------------------------------------------
     private void setSearchFragment() {
+
+        // Check if there is a fetch error
+        // Is so, build an error string
+        String errorMessage = "";
+
+        // Genre list
+        if (mGenreFetchStatus == FETCH_ERROR) {
+            errorMessage += getResources().getString(R.string.genre_fetch_error) + "\n";
+        }
+
+        // Company list
+        if (mCompaniesFetchStatus == FETCH_ERROR) {
+            errorMessage += getResources().getString(R.string.company_fetch_error) + "\n";
+        }
+
+        // Feature list
+        if (mFeaturesFetchStatus == FETCH_ERROR) {
+            errorMessage += getResources().getString(R.string.feature_fetch_error) + "\n";
+        }
+
+        // Platform list
+        if (mPlatformsFetchStatus == FETCH_ERROR) {
+            errorMessage += getResources().getString(R.string.platform_fetch_error) + "\n";
+        }
+
+        // Language list
+        if (mLanguagesFetchStatus == FETCH_ERROR) {
+            errorMessage += getResources().getString(R.string.language_fetch_error);
+        }
+
+        // Set fragment
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        mSearchFragment = new SearchFragment();
 
-        // Set lists
-        mSearchFragment.setGenreList(mGenreList);
-        mSearchFragment.setCompanyList(mCompanyList);
-        mSearchFragment.setFeatureList(mFeatureList);
-        mSearchFragment.setPlatformList(mPlatformList);
-        mSearchFragment.setLanguageList(mLanguageList);
+        if (errorMessage == "") {
 
-        ft.replace(R.id.search_fragment_container, mSearchFragment, null);
+            mSearchFragment = new SearchFragment();
+
+            // Set lists
+            mSearchFragment.setGenreList(mGenreList);
+            mSearchFragment.setCompanyList(mCompanyList);
+            mSearchFragment.setFeatureList(mFeatureList);
+            mSearchFragment.setPlatformList(mPlatformList);
+            mSearchFragment.setLanguageList(mLanguageList);
+
+            ft.replace(R.id.search_fragment_container, mSearchFragment, null);
+        }
+        else {
+            mMessageFragment = new MessageFragment();
+            mMessageFragment.setMessage(errorMessage);
+            ft.replace(R.id.search_fragment_container, mMessageFragment, null);
+        }
+
         ft.commit();
     }
 
