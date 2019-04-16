@@ -8,4 +8,7 @@ db.sqlite3
 
 vgames/__pycache__/
 
+games/__pycache__/
+games/migrations/__pycache__/
+
 
