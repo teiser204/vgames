@@ -1,0 +1,11 @@
+venv/
+.vscode/
+.idea/
+.vs/
+mysql.conf
+vgames.sock
+db.sqlite3
+
+vgames/__pycache__/
+
+
