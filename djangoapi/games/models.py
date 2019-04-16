@@ -95,7 +95,7 @@ class Company(models.Model):
 # game
 # --------------------------------------------------------------------
 class Game(models.Model):
-    company         = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="games", verbose_name="Κατηγορία")
+    company         = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="games", verbose_name="Εταιρία")
     title           = models.CharField(max_length=255, verbose_name='Τίτλος παιχνιδιού')
     desc            = models.TextField(blank=False, verbose_name='Περιγραφή')
     year            = models.PositiveSmallIntegerField(blank=False, null=False, verbose_name='Έτος έκδοσης')
@@ -128,8 +128,11 @@ class Game(models.Model):
 # gallery
 # --------------------------------------------------------------------
 class Gallery(models.Model):
-    game            = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="gallery", verbose_name="Εικόνες")
+    game            = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="gallery", verbose_name="Παιχνίδι")
     image           = models.ImageField(default="default.png", upload_to="game_images", verbose_name='Εικόνα παιχνιδιού')
+
+    def __str__(self):
+        return self.game.title + " (" + str(self.id) + ")"
 
     class Meta:
         db_table = 'gallery'   
