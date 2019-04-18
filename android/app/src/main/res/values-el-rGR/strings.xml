@@ -70,4 +70,6 @@
     <string name="top_games_min_rating">Ελάχιστη αξιολόγηση κορυφαίων παιχνιδιών</string>
     <string name="base_url">Βασική διεύθυνση URL</string>
     <string name="api_settings_saved">Οι παράμετροι API αποθηκεύτηκαν με επιτυχία</string>
+    <string name="recent_games">Νέες παραλαβές</string>
+    <string name="tab_recent">Νέες παραλαβές</string>
 </resources>

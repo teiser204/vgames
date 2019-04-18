@@ -24,7 +24,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class FragmentTop extends Fragment {
+public class RecentFragment extends Fragment {
 
     // Class members
     private List<Game> mGameList = null;
@@ -32,7 +32,7 @@ public class FragmentTop extends Fragment {
     private FragmentManager mFragmentManager;
 
     // Default contractor
-    public FragmentTop() {
+    public RecentFragment() {
         // Required empty public constructor
         mGameList = new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class FragmentTop extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_top, container, false);
+        View view = inflater.inflate(R.layout.fragment_recent, container, false);
 
         mFragmentManager = getActivity().getSupportFragmentManager();
 
@@ -55,21 +55,21 @@ public class FragmentTop extends Fragment {
 
             // Set initially wait fragment
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.add(R.id.topFragmentContainer, new WaitFragment(), null);
+            ft.add(R.id.recentFragmentContainer, new WaitFragment(), null);
             ft.commitAllowingStateLoss();
         }
 
         // Set refresh button click listener
-        mRefreshButton = view.findViewById(R.id.refreshTopGamesButton);
+        mRefreshButton = view.findViewById(R.id.refreshRecentGamesButton);
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchTopGames();
+                fetchRecentGames();
             }
         });
 
         // Retrieve Games
-        fetchTopGames();
+        fetchRecentGames();
 
         return view;
     }
@@ -77,7 +77,7 @@ public class FragmentTop extends Fragment {
     // ---------------------------------------------------------------------------------------
     // Fetch top games
     // ---------------------------------------------------------------------------------------
-    private void fetchTopGames() {
+    private void fetchRecentGames() {
 
         ApiSettings apiSettings = new ApiSettings(getActivity());
 
@@ -88,7 +88,10 @@ public class FragmentTop extends Fragment {
 
         GameAPI gameAPI = retrofit.create(GameAPI.class);
 
-        Call<List<Game>> call = gameAPI.getTopGames(apiSettings.getTopGamesUrl());
+        // TODO
+        // Add query parameters for recent games
+
+        Call<List<Game>> call = gameAPI.getGames(apiSettings.getGamesUrl());
 
         call.enqueue(new Callback<List<Game>>() {
             @Override
@@ -101,8 +104,8 @@ public class FragmentTop extends Fragment {
                     FragmentTransaction ft = mFragmentManager.beginTransaction();
                     MessageFragment messageFragment = new MessageFragment();
                     messageFragment.setMessage(getString(R.string.games_fetch_error));
-                    ft.replace(R.id.topFragmentContainer, messageFragment, null);
-                    ft.commit();
+                    ft.replace(R.id.recentFragmentContainer, messageFragment, null);
+                    ft.commitAllowingStateLoss();
                 }
                 else {
 
@@ -112,14 +115,14 @@ public class FragmentTop extends Fragment {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
                         MessageFragment messageFragment = new MessageFragment();
                         messageFragment.setMessage(getString(R.string.no_results_text));
-                        ft.replace(R.id.topFragmentContainer, messageFragment, null);
-                        ft.commit();
+                        ft.replace(R.id.recentFragmentContainer, messageFragment, null);
+                        ft.commitAllowingStateLoss();
                     } else {
                         FragmentTransaction ft = mFragmentManager.beginTransaction();
                         ResultsFragment resultsFragment = new ResultsFragment();
                         resultsFragment.setGameList(mGameList);
-                        ft.replace(R.id.topFragmentContainer, resultsFragment, null);
-                        ft.commit();
+                        ft.replace(R.id.recentFragmentContainer, resultsFragment, null);
+                        ft.commitAllowingStateLoss();
                     }
 
                 }
@@ -133,8 +136,8 @@ public class FragmentTop extends Fragment {
                 FragmentTransaction ft = mFragmentManager.beginTransaction();
                 MessageFragment messageFragment = new MessageFragment();
                 messageFragment.setMessage(getString(R.string.games_fetch_error));
-                ft.replace(R.id.topFragmentContainer, messageFragment, null);
-                ft.commit();
+                ft.replace(R.id.recentFragmentContainer, messageFragment, null);
+                ft.commitAllowingStateLoss();
 
             }
         });

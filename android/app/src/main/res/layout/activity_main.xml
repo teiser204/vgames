@@ -26,6 +26,12 @@
             app:tabMode="scrollable">
 
             <android.support.design.widget.TabItem
+                android:id="@+id/tabRecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_recent" />
+
+            <android.support.design.widget.TabItem
                 android:id="@+id/tabTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

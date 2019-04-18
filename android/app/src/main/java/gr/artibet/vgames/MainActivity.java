@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements
     private ViewPager mViewPager;
 
     // tab fragment containers
-    private FragmentTop mFragmentTop = null;
+    private RecentFragment mFragmentRecent = null;
+    private TopFragment mFragmentTop = null;
     private GenreFragmentContainer mGenreFragmentContainer = null;
     private FeaturesFragmentContainer mFeaturesFragmentContainer = null;
     private CompaniesFragmentContainer mCompaniesFragmentContainer = null;
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         // Create fragment containers
-        mFragmentTop = new FragmentTop();
+        mFragmentRecent = new RecentFragment();
+        mFragmentTop = new TopFragment();
         mGenreFragmentContainer = new GenreFragmentContainer();
         mFeaturesFragmentContainer = new FeaturesFragmentContainer();
         mCompaniesFragmentContainer = new CompaniesFragmentContainer();
@@ -179,22 +181,26 @@ public class MainActivity extends AppCompatActivity implements
         public Fragment getItem(int position) {
             Fragment fragment = null;
             switch (position) {
-                case 0: // Home fragment
+
+                case 0: // Recent fragment
+                    return mFragmentRecent;
+
+                case 1: // Home fragment
                     return mFragmentTop;
 
-                case 1: // Genre
+                case 2: // Genre
                     return mGenreFragmentContainer;
 
-                case 2: // Features
+                case 3: // Features
                     return mFeaturesFragmentContainer;
 
-                case 3: // Companies
+                case 4: // Companies
                     return mCompaniesFragmentContainer;
 
-                case 4: // Platforms
+                case 5: // Platforms
                     return mPlatformsFragmentContainer;
 
-                case 5: // Languages
+                case 6: // Languages
                     return mLanguagesFragmentContainer;
             }
 
@@ -204,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public int getCount() {
-            return 6;
+            return 7;
         }
 
 
