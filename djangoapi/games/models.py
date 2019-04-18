@@ -12,6 +12,10 @@ class Feature(models.Model):
     def __str__(self):
         return self.desc 
 
+    # count games in feature
+    def total_games(self):
+        return self.games.all().count()
+
     class Meta:
         db_table = 'feature'   
         verbose_name = 'Χαρακτηριστικό'
@@ -29,6 +33,10 @@ class Platform(models.Model):
 
     def __str__(self):
         return self.desc 
+
+    # count games in platform
+    def total_games(self):
+        return self.games.all().count()
 
     class Meta:
         db_table = 'platform'   
@@ -48,6 +56,10 @@ class Language(models.Model):
     def __str__(self):
         return self.desc 
 
+    # count games in language
+    def total_games(self):
+        return self.games.all().count()
+
     class Meta:
         db_table = 'language'   
         verbose_name = 'Γλώσσα'
@@ -66,6 +78,10 @@ class Genre(models.Model):
     def __str__(self):
         return self.desc 
 
+    # count games in genre
+    def total_games(self):
+        return self.games.all().count()
+
     class Meta:
         db_table = 'genre'   
         verbose_name = 'Κατηγορία'
@@ -83,6 +99,10 @@ class Company(models.Model):
 
     def __str__(self):
         return self.desc 
+
+    # count games in company
+    def total_games(self):
+        return self.games.all().count()
 
     class Meta:
         db_table = 'company'   
