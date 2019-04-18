@@ -88,7 +88,7 @@ public class TopFragment extends Fragment {
 
         GameAPI gameAPI = retrofit.create(GameAPI.class);
 
-        Call<List<Game>> call = gameAPI.getTopGames(apiSettings.getTopGamesUrl());
+        Call<List<Game>> call = gameAPI.getGames(apiSettings.getTopGamesUrl());
 
         call.enqueue(new Callback<List<Game>>() {
             @Override

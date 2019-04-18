@@ -16,6 +16,4 @@ public interface GameAPI {
     @GET
     Call<Game> getGameDetails(@Url String url);
 
-    @GET
-    Call<List<Game>> getTopGames(@Url String url);
 }

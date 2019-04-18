@@ -51,35 +51,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/game_details"
+            android:text="@string/recent_games_limit"
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <EditText
-            android:id="@+id/api_settings_game_details"
+            android:id="@+id/api_settings_recent_games_limit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text=""
-            android:textSize="20sp"
-            android:textAppearance="@android:style/TextAppearance.Widget.EditText"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/top_games"
-            android:layout_marginTop="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-        <EditText
-            android:id="@+id/api_settings_top_games"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:text=""
             android:textSize="20sp"
             android:textAppearance="@android:style/TextAppearance.Widget.EditText"/>
@@ -98,6 +80,26 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:text=""
+            android:textSize="20sp"
+            android:textAppearance="@android:style/TextAppearance.Widget.EditText"/>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/top_games_limit"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <EditText
+            android:id="@+id/api_settings_top_games_limit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="number"
             android:text=""
             android:textSize="20sp"
             android:textAppearance="@android:style/TextAppearance.Widget.EditText"/>

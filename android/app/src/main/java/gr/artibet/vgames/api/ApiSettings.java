@@ -12,9 +12,9 @@ public class ApiSettings {
     private static final String API_SHARED_PREFS = "apiSharedPrefs";
     private static final String BASE_URL = "apiBaseUrl";
     private static final String GAMES = "apiGames";
-    private static final String GAME_DETAILS = "apiGameDetails";
-    private static final String TOP_GAMES = "apiTopGames";
+    private static final String RECENT_GAMES_LIMIT = "apiRecentGamesLimit";
     private static final String TOP_GAMES_RATING = "apiTopGamesRating";
+    private static final String TOP_GAMES_LIMIT = "apiTopGamesLimit";
     private static final String GENRE = "apiGenre";
     private static final String COMPANIES = "apiCompanies";
     private static final String FEATURES = "apiFeatures";
@@ -26,9 +26,9 @@ public class ApiSettings {
     // ---------------------------------------------------------------------------------------
     private static final String mBaseUrlDefault = "https://www.serres.gr/vgames/";
     private static final String mGamesDefault = "games";
-    private static final String mGameDetailsDefault = "games/{id}";
-    private static final String mTopGamesDefault = "top_games";
+    private static final int mRecentGamesLimitDefault = 10;
     private static final float mTopGamesRatingDefault = 4.5f;
+    private static final int mTopGamesLimitDefault = 10;
     private static final String mGenreDefault = "genre";
     private static final String mCompaniesDefault = "companies";
     private static final String mFeaturesDefault = "features";
@@ -41,9 +41,9 @@ public class ApiSettings {
     private Context mContext;
     private String mBaseUrl;
     private String mGames;
-    private String mGameDetails;
-    private String mTopGames;
+    private int mRecentGamesLimit;
     private float mTopGamesRating;
+    private int mTopGamesLimit;
     private String mGenre;
     private String mCompanies;
     private String mFeatures;
@@ -61,9 +61,9 @@ public class ApiSettings {
         SharedPreferences sharedPreferences = context.getSharedPreferences(API_SHARED_PREFS, Context.MODE_PRIVATE);
         mBaseUrl = sharedPreferences.getString(BASE_URL, mBaseUrlDefault);
         mGames = sharedPreferences.getString(GAMES, mGamesDefault);
-        mGameDetails = sharedPreferences.getString(GAME_DETAILS, mGameDetailsDefault);
-        mTopGames = sharedPreferences.getString(TOP_GAMES, mTopGamesDefault);
+        mRecentGamesLimit = sharedPreferences.getInt(RECENT_GAMES_LIMIT, mRecentGamesLimitDefault);
         mTopGamesRating = sharedPreferences.getFloat(TOP_GAMES_RATING, mTopGamesRatingDefault);
+        mTopGamesLimit = sharedPreferences.getInt(TOP_GAMES_LIMIT, mTopGamesLimitDefault);
         mGenre = sharedPreferences.getString(GENRE, mGenreDefault);
         mCompanies = sharedPreferences.getString(COMPANIES, mCompaniesDefault);
         mFeatures = sharedPreferences.getString(FEATURES, mFeaturesDefault);
@@ -81,9 +81,9 @@ public class ApiSettings {
 
         editor.putString(BASE_URL, mBaseUrl);
         editor.putString(GAMES, mGames);
-        editor.putString(GAME_DETAILS, mGameDetails);
-        editor.putString(TOP_GAMES, mTopGames);
+        editor.putInt(RECENT_GAMES_LIMIT, mRecentGamesLimit);
         editor.putFloat(TOP_GAMES_RATING, mTopGamesRating);
+        editor.putInt(TOP_GAMES_LIMIT, mTopGamesLimit);
         editor.putString(GENRE, mGenre);
         editor.putString(COMPANIES, mCompanies);
         editor.putString(FEATURES, mFeatures);
@@ -110,16 +110,16 @@ public class ApiSettings {
         return mGames;
     }
 
-    public String getGameDetails() {
-        return mGameDetails;
-    }
-
-    public String getTopGames() {
-        return mTopGames;
+    public int getmRecentGamesLimit() {
+        return mRecentGamesLimit;
     }
 
     public float getTopGamesRating() {
         return mTopGamesRating;
+    }
+
+    public int getmTopGamesLimit() {
+        return mTopGamesLimit;
     }
 
     public String getGenre() {
@@ -155,17 +155,13 @@ public class ApiSettings {
         this.mGames = games;
     }
 
-    public void setGameDetails(String gameDetails) {
-        this.mGameDetails = gameDetails;
-    }
-
-    public void setTopGames(String topGames) {
-        this.mTopGames = topGames;
-    }
+    public void setRecentGamesLimit(int limit) { this.mRecentGamesLimit = limit; }
 
     public void setTopGamesRating(float topGamesRating) {
         this.mTopGamesRating = topGamesRating;
     }
+
+    public void setTopGamesLimit(int limit) { this.mTopGamesLimit = limit; }
 
     public void setGenre(String genre) {
         this.mGenre = genre;
@@ -189,11 +185,27 @@ public class ApiSettings {
 
 
     // ---------------------------------------------------------------------------------------
+    // Recent games URL
+    // ---------------------------------------------------------------------------------------
+    public String getRecentGamesUrl() {
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGames);
+        builder.appendQueryParameter("order_by", "created_at");
+        builder.appendQueryParameter("order_dir", "desc");
+        builder.appendQueryParameter("limit", String.valueOf(mRecentGamesLimit));
+
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
     // Top games URL
     // ---------------------------------------------------------------------------------------
     public String getTopGamesUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mTopGames).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGames);
         builder.appendQueryParameter("rating", String.valueOf(mTopGamesRating));
+        builder.appendQueryParameter("limit", String.valueOf(mTopGamesLimit));
 
         return builder.build().toString();
 
@@ -203,7 +215,8 @@ public class ApiSettings {
     // Genre list URL
     // ---------------------------------------------------------------------------------------
     public String getGenreUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mGenre).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGenre);
 
         return builder.build().toString();
 
@@ -213,7 +226,8 @@ public class ApiSettings {
     // Feature list URL
     // ---------------------------------------------------------------------------------------
     public String getFeaturesUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mFeatures).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mFeatures);
 
         return builder.build().toString();
 
@@ -223,7 +237,8 @@ public class ApiSettings {
     // Company list URL
     // ---------------------------------------------------------------------------------------
     public String getCompaniesUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mCompanies).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mCompanies);
 
         return builder.build().toString();
 
@@ -233,7 +248,8 @@ public class ApiSettings {
     // Platform list URL
     // ---------------------------------------------------------------------------------------
     public String getPlatformsUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mPlatforms).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mPlatforms);
 
         return builder.build().toString();
 
@@ -243,7 +259,8 @@ public class ApiSettings {
     // Language list URL
     // ---------------------------------------------------------------------------------------
     public String getLanguagesUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mLanguages).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mLanguages);
 
         return builder.build().toString();
 
@@ -253,7 +270,8 @@ public class ApiSettings {
     // Language list URL
     // ---------------------------------------------------------------------------------------
     public String getGamesUrl() {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mGames).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGames);
 
         return builder.build().toString();
 
@@ -263,10 +281,22 @@ public class ApiSettings {
     // Language list URL
     // ---------------------------------------------------------------------------------------
     public String getGameDetailsUrl(int gameId) {
-        Uri.Builder builder = Uri.parse(getBaseUrl() + mGameDetails).buildUpon();
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGames + "d");
         builder.appendPath(String.valueOf(gameId));
 
-        String str = builder.build().toString();
+        return builder.build().toString();
+
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Search title url
+    // ---------------------------------------------------------------------------------------
+    public String getSearchTitleUrl(String token) {
+        Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
+        builder.appendPath(mGames);
+        builder.appendQueryParameter("title", token);
+
         return builder.build().toString();
 
     }

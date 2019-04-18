@@ -80,6 +80,8 @@
     <string name="api_settings_saved">API settings has been saved successfully</string>
     <string name="recent_games">New entries</string>
     <string name="tab_recent">New entries</string>
+    <string name="top_games_limit">Number of top games</string>
+    <string name="recent_games_limit">Number of recent games</string>
 
 
 </resources>

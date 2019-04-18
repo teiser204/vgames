@@ -16,9 +16,9 @@ public class ApiSettingsActivity extends AppCompatActivity {
     // ---------------------------------------------------------------------------------------
     EditText mBaseUrlEditText;
     EditText mGamesEditText;
-    EditText mGameDetailsEditText;
-    EditText mTopGamesEditText;
+    EditText mRecentGamesLimitEditText;
     EditText mTopGamesRatingEditText;
+    EditText mTopGamesLimitEditText;
     EditText mGenresEditText;
     EditText mCompaniesEditText;
     EditText mFeaturesEditText;
@@ -41,9 +41,9 @@ public class ApiSettingsActivity extends AppCompatActivity {
         // Get widget references
         mBaseUrlEditText = findViewById(R.id.api_settings_baseurl);
         mGamesEditText = findViewById(R.id.api_settings_games);
-        mGameDetailsEditText = findViewById(R.id.api_settings_game_details);
-        mTopGamesEditText = findViewById(R.id.api_settings_top_games);
+        mRecentGamesLimitEditText = findViewById(R.id.api_settings_recent_games_limit);
         mTopGamesRatingEditText = findViewById(R.id.api_settings_top_games_rating);
+        mTopGamesLimitEditText = findViewById(R.id.api_settings_top_games_limit);
         mGenresEditText = findViewById(R.id.api_settings_genre);
         mCompaniesEditText = findViewById(R.id.api_settings_companies);
         mFeaturesEditText = findViewById(R.id.api_settings_features);
@@ -54,9 +54,9 @@ public class ApiSettingsActivity extends AppCompatActivity {
         ApiSettings apiSettings = new ApiSettings(this);
         mBaseUrlEditText.setText(apiSettings.getBaseUrl());
         mGamesEditText.setText(apiSettings.getGames());
-        mGameDetailsEditText.setText(apiSettings.getGameDetails());
-        mTopGamesEditText.setText(apiSettings.getTopGames());
+        mRecentGamesLimitEditText.setText(String.valueOf(apiSettings.getmRecentGamesLimit()));
         mTopGamesRatingEditText.setText(String.valueOf(apiSettings.getTopGamesRating()));
+        mTopGamesLimitEditText.setText(String.valueOf(apiSettings.getmTopGamesLimit()));
         mGenresEditText.setText(apiSettings.getGenre());
         mCompaniesEditText.setText(apiSettings.getCompanies());
         mFeaturesEditText.setText(apiSettings.getFeatures());
@@ -110,9 +110,9 @@ public class ApiSettingsActivity extends AppCompatActivity {
 
         apiSettings.setBaseUrl(mBaseUrlEditText.getText().toString());
         apiSettings.setGames(mGamesEditText.getText().toString());
-        apiSettings.setGameDetails(mGameDetailsEditText.getText().toString());
-        apiSettings.setTopGames(mTopGamesEditText.getText().toString());
+        apiSettings.setRecentGamesLimit(Integer.parseInt(mRecentGamesLimitEditText.getText().toString()));
         apiSettings.setTopGamesRating(Float.parseFloat(mTopGamesRatingEditText.getText().toString()));
+        apiSettings.setTopGamesLimit(Integer.parseInt(mTopGamesLimitEditText.getText().toString()));
         apiSettings.setGenre(mGenresEditText.getText().toString());
         apiSettings.setCompanies(mCompaniesEditText.getText().toString());
         apiSettings.setFeatures(mFeaturesEditText.getText().toString());

@@ -88,10 +88,7 @@ public class RecentFragment extends Fragment {
 
         GameAPI gameAPI = retrofit.create(GameAPI.class);
 
-        // TODO
-        // Add query parameters for recent games
-
-        Call<List<Game>> call = gameAPI.getGames(apiSettings.getGamesUrl());
+        Call<List<Game>> call = gameAPI.getGames(apiSettings.getRecentGamesUrl());
 
         call.enqueue(new Callback<List<Game>>() {
             @Override

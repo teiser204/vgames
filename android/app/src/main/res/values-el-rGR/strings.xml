@@ -72,4 +72,6 @@
     <string name="api_settings_saved">Οι παράμετροι API αποθηκεύτηκαν με επιτυχία</string>
     <string name="recent_games">Νέες παραλαβές</string>
     <string name="tab_recent">Νέες παραλαβές</string>
+    <string name="top_games_limit">Πλήθος κορυφαίων παιχνιδιών</string>
+    <string name="recent_games_limit">Πλήθος πρόσφατων παιχνιδιών</string>
 </resources>

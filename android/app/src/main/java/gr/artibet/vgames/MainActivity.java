@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import gr.artibet.vgames.api.ApiSettings;
+
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -151,9 +153,12 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onQueryTextSubmit(String s) {
 
         // Start results activity
+        ApiSettings apiSettings = new ApiSettings(this);
+
         Intent intent = new Intent(this, ResultsActivity.class);
         intent.putExtra("TITLE", getResources().getString(R.string.game_title) + ": '" + s + "'");
-        intent.putExtra("QUERY", "games.json?title=" + s);
+        intent.putExtra("QUERY", apiSettings.getSearchTitleUrl(s));
+
         startActivity(intent);
 
         return false;
