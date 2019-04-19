@@ -1,12 +1,14 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
-    GenreSerializer, CompanySerializer
+    GenreSerializer, CompanySerializer, GameListSerializer, 
+    GameDetailsSerializer
 )
 from games.models import (
-    Feature, Platform, Language, Genre, Company
+    Feature, Platform, Language, Genre, Company, Game
 )
 
 
@@ -57,4 +59,24 @@ def genre_list(request):
 def company_list(request):
     companies = Company.objects.all()
     ser = CompanySerializer(companies, many=True)
+    return Response(ser.data)      
+
+
+# --------------------------------------------------------------------
+# Game list
+# --------------------------------------------------------------------
+@api_view(['GET'])
+def game_list(request):
+    games = Game.objects.all()
+    ser = GameListSerializer(games, many=True, context={"request": request})
+    return Response(ser.data)        
+
+
+# --------------------------------------------------------------------
+# Game details
+# --------------------------------------------------------------------
+@api_view(['GET'])
+def game_details(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    ser = GameDetailsSerializer(game, many=False, context={"request": request})
     return Response(ser.data)      

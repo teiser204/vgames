@@ -1,5 +1,5 @@
 from django.db import models
-
+from vgames import settings
 
 # --------------------------------------------------------------------
 # feature
@@ -11,10 +11,6 @@ class Feature(models.Model):
 
     def __str__(self):
         return self.desc 
-
-    # count games in feature
-    def total_games(self):
-        return self.games.all().count()
 
     class Meta:
         db_table = 'feature'   
@@ -34,10 +30,6 @@ class Platform(models.Model):
     def __str__(self):
         return self.desc 
 
-    # count games in platform
-    def total_games(self):
-        return self.games.all().count()
-
     class Meta:
         db_table = 'platform'   
         verbose_name = 'Πλατφόρμα'
@@ -55,10 +47,6 @@ class Language(models.Model):
 
     def __str__(self):
         return self.desc 
-
-    # count games in language
-    def total_games(self):
-        return self.games.all().count()
 
     class Meta:
         db_table = 'language'   
@@ -78,10 +66,6 @@ class Genre(models.Model):
     def __str__(self):
         return self.desc 
 
-    # count games in genre
-    def total_games(self):
-        return self.games.all().count()
-
     class Meta:
         db_table = 'genre'   
         verbose_name = 'Κατηγορία'
@@ -99,10 +83,6 @@ class Company(models.Model):
 
     def __str__(self):
         return self.desc 
-
-    # count games in company
-    def total_games(self):
-        return self.games.all().count()
 
     class Meta:
         db_table = 'company'   
@@ -132,7 +112,6 @@ class Game(models.Model):
     platforms       = models.ManyToManyField(Platform, related_name="games", verbose_name="Πλατφόρμες", db_table="game_platform")
     languages       = models.ManyToManyField(Language, related_name="games", verbose_name="Γλώσσες", db_table="game_language")
     genres          = models.ManyToManyField(Genre, related_name="games", verbose_name="Κατηγορίες", db_table="game_genre")
-
 
     def __str__(self):
         return self.title 

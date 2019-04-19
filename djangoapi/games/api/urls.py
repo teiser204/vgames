@@ -1,13 +1,15 @@
 from django.urls import path
 from games.api.views import (
     feature_list, platform_list, language_list,
-    genre_list, company_list
+    genre_list, company_list, game_list, game_details
 ) 
 
 urlpatterns = [
-    path('features/', feature_list, name='api-features'),
-    path('platforms/', platform_list, name='api-platforms'),
-    path('languages/', language_list, name='api-languages'),
-    path('genres/', genre_list, name='api-genres'),
-    path('companies/', company_list, name='api-companies'),
+    path('features/', feature_list, name='api-feature-list'),
+    path('platforms/', platform_list, name='api-platform-list'),
+    path('languages/', language_list, name='api-language-list'),
+    path('genres/', genre_list, name='api-genre-list'),
+    path('companies/', company_list, name='api-company-list'),
+    path('games/', game_list, name='api-game-list'),
+    path('games/<int:game_id>/', game_details, name='api-game-details')
 ]

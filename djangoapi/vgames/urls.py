@@ -7,3 +7,5 @@ urlpatterns = [
     # api paths
     path('api/', include('games.api.urls'))
 ]
+
+

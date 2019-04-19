@@ -27,7 +27,7 @@ public class Game {
     @SerializedName("languages")
     private ArrayList<Language> languageList;
 
-    @SerializedName("genre")
+    @SerializedName("genres")
     private ArrayList<Genre> genreList;
 
     @SerializedName("gallery")
