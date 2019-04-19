@@ -25,7 +25,7 @@ SECRET_KEY = '*2&6=l6std#te_*zon=lj1f-q87!qgpx2e5t@l&ub_9b+hso4x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vgames.pythonanywhere.com', 'localhost']
 
 
 # Application definition
