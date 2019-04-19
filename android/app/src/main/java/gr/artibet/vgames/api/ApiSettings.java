@@ -282,7 +282,7 @@ public class ApiSettings {
     // ---------------------------------------------------------------------------------------
     public String getGameDetailsUrl(int gameId) {
         Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
-        builder.appendPath(mGames + "d");
+        builder.appendPath(mGames);
         builder.appendPath(String.valueOf(gameId));
 
         return builder.build().toString();
