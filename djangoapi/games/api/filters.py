@@ -14,6 +14,13 @@ class GameFilter(filters.FilterSet):
     
     class Meta:
         model = Game
-        fields = ['title', 'desc', 'min_price', 'max_price']
+        fields = [
+            'title',
+            'desc',
+            'min_price',
+            'max_price',
+            'from_year',
+            'to_year',
+        ]
 
 
