@@ -73,7 +73,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     @Override
     public void onBindViewHolder(@NonNull CompanyViewHolder companyViewHolder, int i) {
         Company company = companyList.get(i);
-        companyViewHolder.textViewDesc.setText(company.getDesc());
+        companyViewHolder.textViewDesc.setText(company.getDesc() + " (" + company.getTotalGames() + ")");
     }
 
     @Override

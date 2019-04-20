@@ -72,7 +72,7 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.Platfo
     @Override
     public void onBindViewHolder(@NonNull PlatformViewHolder platformViewHolder, int i) {
         Platform platform = platformList.get(i);
-        platformViewHolder.textViewDesc.setText(platform.getDesc());
+        platformViewHolder.textViewDesc.setText(platform.getDesc() + " (" + platform.getTotalGames() + ")");
     }
 
     @Override

@@ -73,7 +73,7 @@ public class FeatureAdapter extends RecyclerView.Adapter<FeatureAdapter.FeatureV
     @Override
     public void onBindViewHolder(@NonNull FeatureViewHolder featureViewHolder, int i) {
         Feature feature = featureList.get(i);
-        featureViewHolder.textViewDesc.setText(feature.getDesc());
+        featureViewHolder.textViewDesc.setText(feature.getDesc() + " (" + feature.getTotalGames() + ")");
     }
 
     @Override

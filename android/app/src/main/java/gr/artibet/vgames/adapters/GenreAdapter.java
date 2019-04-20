@@ -72,7 +72,7 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
     @Override
     public void onBindViewHolder(@NonNull GenreViewHolder genreViewHolder, int i) {
         Genre genre = genreList.get(i);
-        genreViewHolder.textViewDesc.setText(genre.getDesc());
+        genreViewHolder.textViewDesc.setText(genre.getDesc() + " (" + genre.getTotalGames() + ")");
     }
 
     @Override

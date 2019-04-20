@@ -1,11 +1,16 @@
 package gr.artibet.vgames.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Platform {
 
     // Class members
 
     private int id;
     private String desc;
+
+    @SerializedName("total_games")
+    private int totalGames;
 
     // Constructors
 
@@ -21,6 +26,9 @@ public class Platform {
 
     public String getDesc() { return desc; }
     public void setDesc(String desc) { this.desc = desc; }
+
+    public int getTotalGames() { return totalGames; }
+    public void setTotalGames(int n) { this.totalGames = n; }
 
 
     @Override

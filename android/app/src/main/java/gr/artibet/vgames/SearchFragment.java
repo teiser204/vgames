@@ -29,13 +29,12 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
     // ---------------------------------------------------------------------------------------
     // Query parameters constants
     // ---------------------------------------------------------------------------------------
-    private static final String PATH_GAMES = "games.json";
     private static final String QUERY_TITLE = "title";
     private static final String QUERY_DESCRIPTION = "desc";
-    private static final String QUERY_YEAR_FROM = "year_from";
-    private static final String QUERY_YEAR_TO = "year_to";
-    private static final String QUERY_PRICE_FROM = "price_from";
-    private static final String QUERY_PRICE_TO = "price_to";
+    private static final String QUERY_YEAR_FROM = "from_year";
+    private static final String QUERY_YEAR_TO = "to_year";
+    private static final String QUERY_PRICE_FROM = "min_price";
+    private static final String QUERY_PRICE_TO = "max_price";
     private static final String QUERY_GENRE = "genre";
     private static final String QUERY_COMPANY = "company";
     private static final String QUERY_FEATURE = "feature";
@@ -170,7 +169,6 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         // Count criteria - There should be at least one
         int nCriteria = 0;
 
-
         // Build Uri object
         ApiSettings apiSettings = new ApiSettings(getActivity());
         Uri.Builder builder = Uri.parse(apiSettings.getGamesUrl()).buildUpon();
@@ -251,7 +249,6 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
             nCriteria++;
             builder.appendQueryParameter(QUERY_LANGUAGE, String.valueOf(language.getId()));
         }
-
 
         // Return URL string
         if (nCriteria == 0) {

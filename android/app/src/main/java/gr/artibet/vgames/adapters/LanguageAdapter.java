@@ -73,7 +73,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
     @Override
     public void onBindViewHolder(@NonNull LanguageViewHolder languageViewHolder, int i) {
         Language language = languageList.get(i);
-        languageViewHolder.textViewDesc.setText(language.getDesc());
+        languageViewHolder.textViewDesc.setText(language.getDesc() + " (" + language.getTotalGames() + ")");
     }
 
     @Override

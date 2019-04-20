@@ -29,7 +29,7 @@ public class ApiSettings {
     private static final int mRecentGamesLimitDefault = 10;
     private static final float mTopGamesRatingDefault = 4.5f;
     private static final int mTopGamesLimitDefault = 10;
-    private static final String mGenreDefault = "genre";
+    private static final String mGenreDefault = "genres";
     private static final String mCompaniesDefault = "companies";
     private static final String mFeaturesDefault = "features";
     private static final String mPlatformsDefault = "platforms";
