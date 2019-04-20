@@ -16,6 +16,7 @@ class GameFilter(filters.FilterSet):
     feature     = filters.NumberFilter(field_name='features__id', lookup_expr='exact')
     platform    = filters.NumberFilter(field_name='platforms__id', lookup_expr='exact')
     language    = filters.NumberFilter(field_name='languages__id', lookup_expr='exact')
+    from_rating = filters.NumberFilter(field_name='rating', lookup_expr='gte');
 
     
     class Meta:
@@ -32,6 +33,7 @@ class GameFilter(filters.FilterSet):
             'feature',
             'platform',
             'language',
+            'from_rating',
         ]
 
 

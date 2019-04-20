@@ -7,6 +7,24 @@ import android.net.Uri;
 public class ApiSettings {
 
     // ---------------------------------------------------------------------------------------
+    // Query parameter keys
+    // ---------------------------------------------------------------------------------------
+    public static final String QUERY_TITLE = "title";
+    public static final String QUERY_DESCRIPTION = "desc";
+    public static final String QUERY_YEAR_FROM = "from_year";
+    public static final String QUERY_YEAR_TO = "to_year";
+    public static final String QUERY_PRICE_FROM = "min_price";
+    public static final String QUERY_PRICE_TO = "max_price";
+    public static final String QUERY_GENRE = "genre";
+    public static final String QUERY_COMPANY = "company";
+    public static final String QUERY_FEATURE = "feature";
+    public static final String QUERY_PLATFORM = "platform";
+    public static final String QUERY_LANGUAGE = "language";
+    public static final String QUERY_LIMIT = "limit";
+    public static final String QUERY_RATING_FROM = "from_rating";
+    public static final String QUERY_ORDERING = "ordering";
+
+    // ---------------------------------------------------------------------------------------
     // Keys to shared preferences
     // ---------------------------------------------------------------------------------------
     private static final String API_SHARED_PREFS = "apiSharedPrefs";
@@ -190,9 +208,8 @@ public class ApiSettings {
     public String getRecentGamesUrl() {
         Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
         builder.appendPath(mGames);
-        builder.appendQueryParameter("order_by", "created_at");
-        builder.appendQueryParameter("order_dir", "desc");
-        builder.appendQueryParameter("limit", String.valueOf(mRecentGamesLimit));
+        builder.appendQueryParameter(QUERY_ORDERING, "-created_at");
+        builder.appendQueryParameter(QUERY_LIMIT, String.valueOf(mRecentGamesLimit));
 
         return builder.build().toString();
 
@@ -204,8 +221,9 @@ public class ApiSettings {
     public String getTopGamesUrl() {
         Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
         builder.appendPath(mGames);
-        builder.appendQueryParameter("rating", String.valueOf(mTopGamesRating));
-        builder.appendQueryParameter("limit", String.valueOf(mTopGamesLimit));
+        builder.appendQueryParameter(QUERY_RATING_FROM, String.valueOf(mTopGamesRating));
+        builder.appendQueryParameter(QUERY_LIMIT, String.valueOf(mTopGamesLimit));
+        builder.appendQueryParameter(QUERY_ORDERING, "-rating");
 
         return builder.build().toString();
 
@@ -295,7 +313,7 @@ public class ApiSettings {
     public String getSearchTitleUrl(String token) {
         Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
         builder.appendPath(mGames);
-        builder.appendQueryParameter("title", token);
+        builder.appendQueryParameter(QUERY_TITLE, token);
 
         return builder.build().toString();
 

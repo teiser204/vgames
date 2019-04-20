@@ -27,21 +27,6 @@ import gr.artibet.vgames.models.Platform;
 public class SearchFragment extends Fragment implements Spinner.OnTouchListener {
 
     // ---------------------------------------------------------------------------------------
-    // Query parameters constants
-    // ---------------------------------------------------------------------------------------
-    private static final String QUERY_TITLE = "title";
-    private static final String QUERY_DESCRIPTION = "desc";
-    private static final String QUERY_YEAR_FROM = "from_year";
-    private static final String QUERY_YEAR_TO = "to_year";
-    private static final String QUERY_PRICE_FROM = "min_price";
-    private static final String QUERY_PRICE_TO = "max_price";
-    private static final String QUERY_GENRE = "genre";
-    private static final String QUERY_COMPANY = "company";
-    private static final String QUERY_FEATURE = "feature";
-    private static final String QUERY_PLATFORM = "platform";
-    private static final String QUERY_LANGUAGE = "language";
-
-    // ---------------------------------------------------------------------------------------
     // Class members
     // ---------------------------------------------------------------------------------------
     List<Genre> mGenreList;
@@ -177,77 +162,77 @@ public class SearchFragment extends Fragment implements Spinner.OnTouchListener 
         String title = mTitleEditText.getText().toString();
         if (!title.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_TITLE, title);
+            builder.appendQueryParameter(ApiSettings.QUERY_TITLE, title);
         }
 
         // Description
         String description = mDescriptionEditText.getText().toString();
         if (!description.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_DESCRIPTION, description);
+            builder.appendQueryParameter(ApiSettings.QUERY_DESCRIPTION, description);
         }
 
         // Year from
         String yearFrom = mReleaseYearFromEditText.getText().toString();
         if (!yearFrom.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_YEAR_FROM, yearFrom);
+            builder.appendQueryParameter(ApiSettings.QUERY_YEAR_FROM, yearFrom);
         }
 
         // Year to
         String yearTo = mReleaseYearToEditText.getText().toString();
         if (!yearTo.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_YEAR_TO, yearTo);
+            builder.appendQueryParameter(ApiSettings.QUERY_YEAR_TO, yearTo);
         }
 
         // Price from
         String priceFrom = mPriceFrom.getText().toString();
         if (!priceFrom.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_PRICE_FROM, priceFrom);
+            builder.appendQueryParameter(ApiSettings.QUERY_PRICE_FROM, priceFrom);
         }
 
         // Price to
         String priceTo = mPriceTo.getText().toString();
         if (!priceTo.isEmpty()) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_PRICE_TO, priceTo);
+            builder.appendQueryParameter(ApiSettings.QUERY_PRICE_TO, priceTo);
         }
 
         // Genre
         Genre genre = (Genre) mGenreSpinner.getSelectedItem();
         if (genre.getId() != -1) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_GENRE, String.valueOf(genre.getId()));
+            builder.appendQueryParameter(ApiSettings.QUERY_GENRE, String.valueOf(genre.getId()));
         }
 
         // Company
         Company company = (Company) mCompanySpinner.getSelectedItem();
         if (company.getId() != -1) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_COMPANY, String.valueOf(company.getId()));
+            builder.appendQueryParameter(ApiSettings.QUERY_COMPANY, String.valueOf(company.getId()));
         }
 
         // Feature
         Feature feature = (Feature) mFeatureSpinner.getSelectedItem();
         if (feature.getId() != -1) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_FEATURE, String.valueOf(feature.getId()));
+            builder.appendQueryParameter(ApiSettings.QUERY_FEATURE, String.valueOf(feature.getId()));
         }
 
         // Platform
         Platform platform = (Platform) mPlatformSpinner.getSelectedItem();
         if (platform.getId() != -1) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_PLATFORM, String.valueOf(platform.getId()));
+            builder.appendQueryParameter(ApiSettings.QUERY_PLATFORM, String.valueOf(platform.getId()));
         }
 
         // Language
         Language language = (Language) mLanguageSpinner.getSelectedItem();
         if (language.getId() != -1) {
             nCriteria++;
-            builder.appendQueryParameter(QUERY_LANGUAGE, String.valueOf(language.getId()));
+            builder.appendQueryParameter(ApiSettings.QUERY_LANGUAGE, String.valueOf(language.getId()));
         }
 
         // Return URL string

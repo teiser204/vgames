@@ -61,6 +61,7 @@ class GameList(generics.ListAPIView):
     queryset = Game.objects.all()
     serializer_class = GameListSerializer
     filterset_class = GameFilter
+    ordering_fields = ('created_at', 'rating', 'price')
 
     # if request.method == 'GET':
         
