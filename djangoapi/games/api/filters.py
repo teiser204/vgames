@@ -28,6 +28,10 @@ class GameFilter(filters.FilterSet):
             'from_year',
             'to_year',
             'company',
+            'genre',
+            'feature',
+            'platform',
+            'language',
         ]
 
 
