@@ -11,6 +11,12 @@ class GameFilter(filters.FilterSet):
     to_year     = filters.NumberFilter(field_name='year', lookup_expr='lte')
     min_price   = filters.NumberFilter(field_name='price', lookup_expr='gte')
     max_price   = filters.NumberFilter(field_name='price', lookup_expr='lte')
+    company     = filters.NumberFilter(field_name='company', lookup_expr='exact')
+    genre       = filters.NumberFilter(field_name='genres__id', lookup_expr='exact')
+    feature     = filters.NumberFilter(field_name='features__id', lookup_expr='exact')
+    platform    = filters.NumberFilter(field_name='platforms__id', lookup_expr='exact')
+    language    = filters.NumberFilter(field_name='languages__id', lookup_expr='exact')
+
     
     class Meta:
         model = Game
@@ -21,6 +27,7 @@ class GameFilter(filters.FilterSet):
             'max_price',
             'from_year',
             'to_year',
+            'company',
         ]
 
 
