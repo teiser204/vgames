@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import generics
+
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
     GenreSerializer, CompanySerializer, GameListSerializer, 
@@ -10,66 +12,65 @@ from .serializers import (
 from games.models import (
     Feature, Platform, Language, Genre, Company, Game
 )
+from games.api.filters import GameFilter
+
 
 
 # --------------------------------------------------------------------
 # Feature view
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def feature_list(request):
-    features = Feature.objects.all()
-    ser = FeatureSerializer(features, many=True)
-    return Response(ser.data)
+class FeatureList(generics.ListAPIView):
+    queryset = Feature.objects.all()
+    serializer_class = FeatureSerializer
 
 
 # --------------------------------------------------------------------
 # Platform view
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def platform_list(request):
-    platforms = Platform.objects.all()
-    ser = PlatformSerializer(platforms, many=True)
-    return Response(ser.data)    
+class PlatformList(generics.ListAPIView):
+    queryset = Platform.objects.all()
+    serializer_class = PlatformSerializer    
 
 
 # --------------------------------------------------------------------
 # Language view
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def language_list(request):
-    languages = Language.objects.all()
-    ser = LanguageSerializer(languages, many=True)
-    return Response(ser.data)        
+class LanguageList(generics.ListAPIView):
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer    
 
 
 # --------------------------------------------------------------------
 # Genre view
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def genre_list(request):
-    genres = Genre.objects.all()
-    ser = GenreSerializer(genres, many=True)
-    return Response(ser.data)      
-
+class GenreList(generics.ListAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
 
 # --------------------------------------------------------------------
 # Company view
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def company_list(request):
-    companies = Company.objects.all()
-    ser = CompanySerializer(companies, many=True)
-    return Response(ser.data)      
-
+class CompanyList(generics.ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
 
 # --------------------------------------------------------------------
 # Game list
 # --------------------------------------------------------------------
-@api_view(['GET'])
-def game_list(request):
-    games = Game.objects.all()
-    ser = GameListSerializer(games, many=True, context={"request": request})
-    return Response(ser.data)        
+class GameList(generics.ListAPIView):
+    queryset = Game.objects.all()
+    serializer_class = GameListSerializer
+    filterset_class = GameFilter
+
+    # if request.method == 'GET':
+        
+    #     # Έλεγχος για τα υποστηριζόμενα κριτήρια αναζήτησης
+    #     games = Game.objects.all()
+    #     ser = GameListSerializer(games, many=True, context={"request": request})
+    #     return Response(ser.data)        
+
+    # else:
+    #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # --------------------------------------------------------------------

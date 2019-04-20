@@ -99,8 +99,8 @@ class Game(models.Model):
     title           = models.CharField(max_length=255, verbose_name='Τίτλος παιχνιδιού')
     desc            = models.TextField(blank=False, verbose_name='Περιγραφή')
     year            = models.PositiveSmallIntegerField(blank=False, null=False, verbose_name='Έτος έκδοσης')
-    price           = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
-    rating          = models.DecimalField(max_digits=3, decimal_places=2, blank=False, null=False)
+    price           = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False, verbose_name='Τιμή')
+    rating          = models.DecimalField(max_digits=3, decimal_places=2, blank=False, null=False, verbose_name='Βαθμολογία')
     url             = models.CharField(max_length=255, verbose_name='Ιστότοπος παιχνιδιού')
     image           = models.ImageField(default="default.png", upload_to="game_images", verbose_name='Εικόνα παιχνιδιού')
 
