@@ -1,6 +1,18 @@
 from django_filters import rest_framework as filters
 from games.models import Game
 
+
+# --------------------------------------------------------------------
+# Custom filter backend to handle limit query parameter
+# --------------------------------------------------------------------
+class LimitFilterBackend(filters.DjangoFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        limit = request.query_params.get('limit', None)
+        if (limit is not None) and (isinstance(limit, int)):
+            return queryset[:int(limit)]
+        return queryset
+
+
 # --------------------------------------------------------------------
 # Game list filters
 # --------------------------------------------------------------------

@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
+from .filters import LimitFilterBackend
 
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
@@ -60,6 +61,7 @@ class CompanyList(generics.ListAPIView):
 class GameList(generics.ListAPIView):
     queryset = Game.objects.all()
     serializer_class = GameListSerializer
+    filter_backends = (LimitFilterBackend,)
     filterset_class = GameFilter
     
     # if request.method == 'GET':
