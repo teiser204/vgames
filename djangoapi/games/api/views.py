@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
+from django_filters import rest_framework as filters
 from .filters import LimitFilterBackend
 
 from .serializers import (
@@ -61,8 +62,8 @@ class CompanyList(generics.ListAPIView):
 class GameList(generics.ListAPIView):
     queryset = Game.objects.all()
     serializer_class = GameListSerializer
-    filter_backends = (LimitFilterBackend,)
     filterset_class = GameFilter
+    filter_backends = (filters.DjangoFilterBackend, LimitFilterBackend)
     
     # if request.method == 'GET':
         
