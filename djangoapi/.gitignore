@@ -10,7 +10,8 @@ vgames/__pycache__/
 
 games/__pycache__/
 games/migrations/__pycache__/
-api/__pycache__/
+games/api/__pycache__/
+
 
 
 
