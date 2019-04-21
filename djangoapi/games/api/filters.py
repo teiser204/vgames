@@ -10,7 +10,10 @@ class LimitFilterBackend(BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         limit = request.query_params.get('limit', None)
         if (limit is not None):
-            return queryset[:int(limit)]
+            try:
+                return queryset[:int(limit)]
+            except:
+                return queryset
         return queryset
 
 

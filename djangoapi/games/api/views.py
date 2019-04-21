@@ -63,7 +63,7 @@ class GameList(generics.ListAPIView):
     queryset = Game.objects.all()
     serializer_class = GameListSerializer
     filterset_class = GameFilter
-    filter_backends = (filters.DjangoFilterBackend, LimitFilterBackend)
+    #filter_backends = (filters.DjangoFilterBackend, LimitFilterBackend)
     
     # if request.method == 'GET':
         
