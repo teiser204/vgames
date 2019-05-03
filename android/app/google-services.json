@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "695652322847",
+    "firebase_url": "https://vgames-5c3e6.firebaseio.com",
+    "project_id": "vgames-5c3e6",
+    "storage_bucket": "vgames-5c3e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695652322847:android:6ddd3b5b06ef70c0",
+        "android_client_info": {
+          "package_name": "gr.artibet.vgames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695652322847-ervouvashg7l5efplbgq7otdn8lp20r2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gr.artibet.vgames",
+            "certificate_hash": "13f73a2075c3954addff47fe11ca418280eb481d"
+          }
+        },
+        {
+          "client_id": "695652322847-mvkl8h6lan4070v817n76p0vllqnj2jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVGhhpfjyXXbfBB6HqJEkwrYIm0WQJu1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695652322847-mvkl8h6lan4070v817n76p0vllqnj2jq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
