@@ -5,7 +5,7 @@ from games.api.views import (
     LanguageList, LanguageDetail,
     GenreList, GenreDetail,
     CompanyList, CompanyDetail,
-    GameList, game_details
+    GameList, GameDetail
 ) 
 
 urlpatterns = [
@@ -32,5 +32,5 @@ urlpatterns = [
     
     # games
     path('games/', GameList.as_view(), name='api-game-list'),
-    path('games/<int:game_id>/', game_details, name='api-game-details')
+    path('games/<int:pk>/', GameDetail.as_view(), name='api-game-details')
 ]
