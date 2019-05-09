@@ -106,6 +106,54 @@ class GameListSerializer(serializers.ModelSerializer):
 
 
 # --------------------------------------------------------------------
+# Game Create serializer
+# --------------------------------------------------------------------
+class GameCreateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Game
+        fields = (
+            'id', 
+            'title',
+            'year',
+            'rating',
+            'price',
+            'url',
+            'image',
+            'company',
+            'genres',
+            'features',
+            'platforms',
+            'languages'
+
+        )  
+
+
+# --------------------------------------------------------------------
+# Game Update serializer
+# --------------------------------------------------------------------
+class GameUpdateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Game
+        fields = (
+            'id', 
+            'title',
+            'year',
+            'rating',
+            'price',
+            'url',
+            'image',
+            'company',
+            'genres',
+            'features',
+            'platforms',
+            'languages',
+            'gallery'
+
+        )               
+
+# --------------------------------------------------------------------
 # Game details serializer
 # --------------------------------------------------------------------
 class GameDetailsSerializer(serializers.ModelSerializer):

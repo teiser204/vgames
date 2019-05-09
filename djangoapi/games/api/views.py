@@ -10,7 +10,7 @@ from .filters import LimitFilterBackend
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
     GenreSerializer, CompanySerializer, GameListSerializer, 
-    GameDetailsSerializer
+    GameDetailsSerializer, GameCreateSerializer, GameUpdateSerializer
 )
 from games.models import (
     Feature, Platform, Language, Genre, Company, Game
@@ -89,13 +89,25 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
 # --------------------------------------------------------------------
 class GameList(generics.ListCreateAPIView):
     queryset = Game.objects.all()
-    serializer_class = GameListSerializer
+    #serializer_class = GameListSerializer
     filterset_class = GameFilter
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return GameListSerializer
+        else:
+            return GameCreateSerializer
 
 
 class GameDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Game.objects.all()
-    serializer_class = GameDetailsSerializer
+    #serializer_class = GameDetailsSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "PUT" or self.request.method == "UPDATE":
+            return GameUpdateSerializer
+        else:
+            return GameDetailsSerializer
 
 
 #@api_view(['GET'])
