@@ -1,15 +1,16 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import APIView, api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from django_filters import rest_framework as filters
+from django.http import Http404
 from .filters import LimitFilterBackend
 
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
     GenreSerializer, CompanySerializer, GameListSerializer, 
-    GameDetailsSerializer
+    GameDetailsSerializer, GameCreateSerializer, GameUpdateSerializer
 )
 from games.models import (
     Feature, Platform, Language, Genre, Company, Game
@@ -19,68 +20,98 @@ from games.api.filters import GameFilter
 
 
 # --------------------------------------------------------------------
-# Feature view
+# Feature API views
 # --------------------------------------------------------------------
-class FeatureList(generics.ListAPIView):
+class FeatureList(generics.ListCreateAPIView):
     queryset = Feature.objects.all()
     serializer_class = FeatureSerializer
 
 
+class FeatureDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Feature.objects.all()
+    serializer_class = FeatureSerializer    
+
+
 # --------------------------------------------------------------------
-# Platform view
+# Platform API views
 # --------------------------------------------------------------------
-class PlatformList(generics.ListAPIView):
+class PlatformList(generics.ListCreateAPIView):
     queryset = Platform.objects.all()
-    serializer_class = PlatformSerializer    
+    serializer_class = PlatformSerializer
 
 
+class PlatformDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Platform.objects.all()
+    serializer_class = PlatformSerializer  
+
+    
 # --------------------------------------------------------------------
-# Language view
+# Language API views
 # --------------------------------------------------------------------
-class LanguageList(generics.ListAPIView):
+class LanguageList(generics.ListCreateAPIView):
     queryset = Language.objects.all()
-    serializer_class = LanguageSerializer    
+    serializer_class = LanguageSerializer
+
+
+class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer 
 
 
 # --------------------------------------------------------------------
-# Genre view
+# Genre API views
 # --------------------------------------------------------------------
-class GenreList(generics.ListAPIView):
+class GenreList(generics.ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
+
+class GenreDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
 # --------------------------------------------------------------------
-# Company view
+# Company API views
 # --------------------------------------------------------------------
-class CompanyList(generics.ListAPIView):
+class CompanyList(generics.ListCreateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
+
+class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+
 # --------------------------------------------------------------------
-# Game list
+# Game API views
 # --------------------------------------------------------------------
-class GameList(generics.ListAPIView):
+class GameList(generics.ListCreateAPIView):
     queryset = Game.objects.all()
-    serializer_class = GameListSerializer
+    #serializer_class = GameListSerializer
     filterset_class = GameFilter
-    #filter_backends = (filters.DjangoFilterBackend, LimitFilterBackend)
-    
-    # if request.method == 'GET':
-        
-    #     # Έλεγχος για τα υποστηριζόμενα κριτήρια αναζήτησης
-    #     games = Game.objects.all()
-    #     ser = GameListSerializer(games, many=True, context={"request": request})
-    #     return Response(ser.data)        
 
-    # else:
-    #     return Response(status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return GameListSerializer
+        else:
+            return GameCreateSerializer
 
 
-# --------------------------------------------------------------------
-# Game details
-# --------------------------------------------------------------------
-@api_view(['GET'])
-def game_details(request, game_id):
-    game = get_object_or_404(Game, pk=game_id)
-    ser = GameDetailsSerializer(game, many=False, context={"request": request})
-    return Response(ser.data)      
+class GameDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Game.objects.all()
+    #serializer_class = GameDetailsSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "PUT" or self.request.method == "UPDATE":
+            return GameUpdateSerializer
+        else:
+            return GameDetailsSerializer
+
+
+#@api_view(['GET'])
+#def game_details(request, game_id):
+#    game = get_object_or_404(Game, pk=game_id)
+#    ser = GameDetailsSerializer(game, many=False, context={"request": request})
+#    return Response(ser.data)      

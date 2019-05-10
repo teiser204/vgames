@@ -2,8 +2,10 @@ package gr.artibet.vgames;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,11 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 
@@ -37,6 +44,24 @@ public class GameFragment extends Fragment {
     // Class members
     // ---------------------------------------------------------------------------------------
     Game mGame = null;
+
+    // ---------------------------------------------------------------------------------------
+    // Views
+    // ---------------------------------------------------------------------------------------
+    ImageView ivImage;
+    TextView tvTitle;
+    TextView tvCompany;
+    TextView tvYear;
+    TextView tvRating;
+    RatingBar rbRating;
+    TextView tvDesc;
+    TextView tvPrice;
+    TextView tvGenres;
+    TextView tvFeatures;
+    TextView tvPlatforms;
+    TextView tvLanguages;
+    Button btVisitPage;
+    ProgressBar pbGameImage;
 
     // ---------------------------------------------------------------------------------------
     // Default constructor
@@ -74,24 +99,38 @@ public class GameFragment extends Fragment {
     private void updateUI(View view) {
 
         // Get views
-        ImageView ivImage = view.findViewById(R.id.ivImage);
-        TextView tvTitle = view.findViewById(R.id.tvTitle);
-        TextView tvCompany = view.findViewById(R.id.tvCompany);
-        TextView tvYear = view.findViewById(R.id.tvYear);
-        TextView tvRating = view.findViewById(R.id.tvRating);
-        RatingBar rbRating = view.findViewById(R.id.rbRating);
-        TextView tvDesc = view.findViewById(R.id.tvDesc);
-        TextView tvPrice = view.findViewById(R.id.tvPrice);
-        TextView tvGenres = view.findViewById(R.id.tvGenres);
-        TextView tvFeatures = view.findViewById(R.id.tvFeatures);
-        TextView tvPlatforms = view.findViewById(R.id.tvPlatforms);
-        TextView tvLanguages = view.findViewById(R.id.tvLanguages);
-        Button btVisitPage = view.findViewById(R.id.btVisitPage);
+        ivImage = view.findViewById(R.id.ivImage);
+        tvTitle = view.findViewById(R.id.tvTitle);
+        tvCompany = view.findViewById(R.id.tvCompany);
+        tvYear = view.findViewById(R.id.tvYear);
+        tvRating = view.findViewById(R.id.tvRating);
+        rbRating = view.findViewById(R.id.rbRating);
+        tvDesc = view.findViewById(R.id.tvDesc);
+        tvPrice = view.findViewById(R.id.tvPrice);
+        tvGenres = view.findViewById(R.id.tvGenres);
+        tvFeatures = view.findViewById(R.id.tvFeatures);
+        tvPlatforms = view.findViewById(R.id.tvPlatforms);
+        tvLanguages = view.findViewById(R.id.tvLanguages);
+        btVisitPage = view.findViewById(R.id.btVisitPage);
+        pbGameImage = view.findViewById(R.id.gameDetailsProgressBar);
 
         // Load image
         Glide.with(this)
                 .load(mGame.getImage())
                 .placeholder(R.drawable.ic_image_placeholder)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        GameFragment.this.pbGameImage.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        GameFragment.this.pbGameImage.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
                 .into(ivImage);
 
         // Set simple data

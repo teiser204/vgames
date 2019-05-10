@@ -2,6 +2,9 @@ from rest_framework import serializers
 from games.models import (
     Feature, Platform, Language, Genre, Company, Game, Gallery
 )
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+import pusher
 
 # --------------------------------------------------------------------
 # Feature serializer
@@ -103,6 +106,54 @@ class GameListSerializer(serializers.ModelSerializer):
 
 
 # --------------------------------------------------------------------
+# Game Create serializer
+# --------------------------------------------------------------------
+class GameCreateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Game
+        fields = (
+            'id', 
+            'title',
+            'year',
+            'rating',
+            'price',
+            'url',
+            'image',
+            'company',
+            'genres',
+            'features',
+            'platforms',
+            'languages'
+
+        )  
+
+
+# --------------------------------------------------------------------
+# Game Update serializer
+# --------------------------------------------------------------------
+class GameUpdateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Game
+        fields = (
+            'id', 
+            'title',
+            'year',
+            'rating',
+            'price',
+            'url',
+            'image',
+            'company',
+            'genres',
+            'features',
+            'platforms',
+            'languages',
+            'gallery'
+
+        )               
+
+# --------------------------------------------------------------------
 # Game details serializer
 # --------------------------------------------------------------------
 class GameDetailsSerializer(serializers.ModelSerializer):
@@ -131,4 +182,25 @@ class GameDetailsSerializer(serializers.ModelSerializer):
             'languages', 
             'gallery'
         )      
+
+
+# --------------------------------------------------------------------
+# Send game details to pusher
+# --------------------------------------------------------------------
+@receiver(post_save, sender=Game)
+def push_message(sender, instance, created, **kwargs):
+    if created:
+        pusher_client = pusher.Pusher(
+            app_id = '717665',
+            key = '18cfa0ad20752237d6c6',
+            secret = 'c85f2990b1f71b436f7a',
+            cluster = 'eu',
+            ssl = True
+        )
+        serializer = GameDetailsSerializer(instance)
+        pusher_client.trigger(
+            'vgames',
+            'new-game',
+            serializer.data
+        )         
 
