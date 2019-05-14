@@ -4,6 +4,7 @@ from games.models import (
 )
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 
 # --------------------------------------------------------------------
 # Feature serializer
@@ -183,4 +184,16 @@ class GameDetailsSerializer(serializers.ModelSerializer):
         )      
 
 
+# --------------------------------------------------------------------
+# User serializer
+# --------------------------------------------------------------------
+class UserSerializer(serializers.ModelSerializer):
+    games = GameListSerializer(read_only=True, many=True)
 
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'games'
+        )

@@ -1,5 +1,6 @@
 from django.db import models
 from vgames import settings
+from django.contrib.auth.models import User
 
 # --------------------------------------------------------------------
 # feature
@@ -104,6 +105,7 @@ class Game(models.Model):
     url             = models.CharField(max_length=255, verbose_name='Ιστότοπος παιχνιδιού')
     image           = models.ImageField(default="default.png", upload_to="game_images", verbose_name='Εικόνα παιχνιδιού')
 
+    user            = models.ForeignKey(User, related_name="games", verbose_name="Ιδιοκτήτης", on_delete=models.CASCADE, null=True)
     created_at      = models.DateTimeField(auto_now_add=True, null=True)
     updated_at      = models.DateTimeField(auto_now=True, null=True)
 

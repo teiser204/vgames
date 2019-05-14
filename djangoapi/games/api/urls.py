@@ -5,7 +5,8 @@ from games.api.views import (
     LanguageList, LanguageDetail,
     GenreList, GenreDetail,
     CompanyList, CompanyDetail,
-    GameList, GameDetail
+    GameList, GameDetail,
+    UserList, UserDetail
 ) 
 
 urlpatterns = [
@@ -32,5 +33,9 @@ urlpatterns = [
     
     # games
     path('games/', GameList.as_view(), name='api-game-list'),
-    path('games/<int:pk>/', GameDetail.as_view(), name='api-game-details')
+    path('games/<int:pk>/', GameDetail.as_view(), name='api-game-details'),
+
+    # users
+    path('users/', UserList.as_view(), name='api-user-list'),
+    path('users/<int:pk>/', UserDetail.as_view(), name='api-user-details'),
 ]

@@ -6,11 +6,13 @@ from rest_framework import generics
 from django_filters import rest_framework as filters
 from django.http import Http404
 from .filters import LimitFilterBackend
+from django.contrib.auth.models import User
 
 from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
     GenreSerializer, CompanySerializer, GameListSerializer, 
-    GameDetailsSerializer, GameCreateSerializer, GameUpdateSerializer
+    GameDetailsSerializer, GameCreateSerializer, GameUpdateSerializer,
+    UserSerializer
 )
 from games.models import (
     Feature, Platform, Language, Genre, Company, Game
@@ -110,8 +112,13 @@ class GameDetail(generics.RetrieveUpdateDestroyAPIView):
             return GameDetailsSerializer
 
 
-#@api_view(['GET'])
-#def game_details(request, game_id):
-#    game = get_object_or_404(Game, pk=game_id)
-#    ser = GameDetailsSerializer(game, many=False, context={"request": request})
-#    return Response(ser.data)      
+# --------------------------------------------------------------------
+# User API views
+# --------------------------------------------------------------------
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer    
