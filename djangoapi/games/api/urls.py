@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import include
 from games.api.views import (
     FeatureList, FeatureDetail, 
     PlatformList, PlatformDetail,
@@ -38,4 +39,9 @@ urlpatterns = [
     # users
     path('users/', UserList.as_view(), name='api-user-list'),
     path('users/<int:pk>/', UserDetail.as_view(), name='api-user-details'),
+]
+
+# login urls
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
 ]

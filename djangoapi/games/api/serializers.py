@@ -91,6 +91,7 @@ class GameGallerySerializer(serializers.ModelSerializer):
 # --------------------------------------------------------------------
 class GameListSerializer(serializers.ModelSerializer):
     company = CompanySerializer(read_only=True, many=False)
+    owner = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Game
@@ -101,7 +102,8 @@ class GameListSerializer(serializers.ModelSerializer):
             'rating',
             'price',
             'image',
-            'company'
+            'company',
+            'owner'
         )      
 
 
@@ -125,7 +127,6 @@ class GameCreateSerializer(serializers.ModelSerializer):
             'features',
             'platforms',
             'languages'
-
         )  
 
 
@@ -163,6 +164,7 @@ class GameDetailsSerializer(serializers.ModelSerializer):
     platforms = PlatformSerializer(read_only=True, many=True)
     languages = LanguageSerializer(read_only=True, many=True)
     gallery = GameGallerySerializer(read_only=True, many=True)
+    owner = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Game
@@ -180,7 +182,8 @@ class GameDetailsSerializer(serializers.ModelSerializer):
             'genres',
             'platforms',
             'languages', 
-            'gallery'
+            'gallery',
+            'owner'
         )      
 
 
