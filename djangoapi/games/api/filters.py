@@ -42,7 +42,6 @@ class GameFilter(filters.FilterSet):
         )
     )
 
-    
     class Meta:
         model = Game
         fields = [
