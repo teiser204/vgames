@@ -296,7 +296,7 @@ public class ApiSettings {
     }
 
     // ---------------------------------------------------------------------------------------
-    // Language list URL
+    // Game details URL
     // ---------------------------------------------------------------------------------------
     public String getGameDetailsUrl(int gameId) {
         Uri.Builder builder = Uri.parse(getBaseUrl()).buildUpon();
