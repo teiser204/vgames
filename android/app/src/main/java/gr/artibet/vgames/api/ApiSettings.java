@@ -42,7 +42,7 @@ public class ApiSettings {
     // ---------------------------------------------------------------------------------------
     // Default values
     // ---------------------------------------------------------------------------------------
-    private static final String mBaseUrlDefault = "http://vgames.pythonanywhere.com/api/";
+    private static final String mBaseUrlDefault = "https://vgames.pythonanywhere.com/api/";
     private static final String mGamesDefault = "games";
     private static final int mRecentGamesLimitDefault = 10;
     private static final float mTopGamesRatingDefault = 4.5f;

@@ -83,7 +83,7 @@ class GameGallerySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Gallery
-        fields = ['image']
+        fields = ['game', 'image']
 
 
 # --------------------------------------------------------------------
@@ -117,6 +117,7 @@ class GameCreateSerializer(serializers.ModelSerializer):
         fields = (
             'id', 
             'title',
+            'desc',
             'year',
             'rating',
             'price',
@@ -140,6 +141,7 @@ class GameUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'id', 
             'title',
+            'desc',
             'year',
             'rating',
             'price',

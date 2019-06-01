@@ -7,7 +7,8 @@ from games.api.views import (
     GenreList, GenreDetail,
     CompanyList, CompanyDetail,
     GameList, GameDetail,
-    UserList, UserDetail
+    UserList, UserDetail,
+    GalleryList, GalleryDetail
 ) 
 
 urlpatterns = [
@@ -31,6 +32,10 @@ urlpatterns = [
     # company
     path('companies/', CompanyList.as_view(), name='api-company-list'),
     path('companies/<int:pk>/', CompanyDetail.as_view(), name='api-company-details'),
+
+    # gallery
+    path('gallery/', GalleryList.as_view(), name='api-gallery-list'),
+    path('gallery/<int:pk>/', GalleryDetail.as_view(), name='api-gallery-details'),
     
     # games
     path('games/', GameList.as_view(), name='api-game-list'),

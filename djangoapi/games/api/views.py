@@ -16,10 +16,10 @@ from .serializers import (
     FeatureSerializer, PlatformSerializer, LanguageSerializer, 
     GenreSerializer, CompanySerializer, GameListSerializer, 
     GameDetailsSerializer, GameCreateSerializer, GameUpdateSerializer,
-    UserSerializer
+    UserSerializer, GameGallerySerializer
 )
 from games.models import (
-    Feature, Platform, Language, Genre, Company, Game
+    Feature, Platform, Language, Genre, Company, Game, Gallery
 )
 from games.api.filters import GameFilter
 
@@ -97,6 +97,21 @@ class CompanyList(generics.ListCreateAPIView):
 class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsSuperuserOrReadOnly,)
+
+
+# --------------------------------------------------------------------
+# Gallery API views
+# --------------------------------------------------------------------
+class GalleryList(generics.ListCreateAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GameGallerySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+
+class GalleryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GameGallerySerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsSuperuserOrReadOnly,)
 
 
