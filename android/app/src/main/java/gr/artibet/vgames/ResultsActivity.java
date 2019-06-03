@@ -136,6 +136,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                         if (mGameList == null || mGameList.size() == 0) {
                             fragment = new MessageFragment();
+                            ((MessageFragment)fragment).setMessage(getString(R.string.no_results_text));
                             getSupportActionBar().setTitle(mTitle + " (0)");
                         } else {
                             fragment = new ResultsFragment();
